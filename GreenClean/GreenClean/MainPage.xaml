@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:GreenClean"
+             x:Class="GreenClean.MainPage"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" VerticalOptions="Center">
+            <Label x:Name="Message" HorizontalTextAlignment="Center" />
+            <Entry WidthRequest="300" x:Name="Username" Placeholder="Username" HorizontalTextAlignment="Center" HorizontalOptions="Center"></Entry>
+            <Entry WidthRequest="300" x:Name="Password" Placeholder="Password" HorizontalTextAlignment="Center" HorizontalOptions="Center" IsPassword="True"></Entry>
+            <Button Text="Login" HorizontalOptions="Center" WidthRequest="300" Clicked="OnLogin"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
