@@ -11,6 +11,7 @@
             <Entry WidthRequest="300" x:Name="Username" Placeholder="Username" HorizontalTextAlignment="Center" HorizontalOptions="Center"></Entry>
             <Entry WidthRequest="300" x:Name="Password" Placeholder="Password" HorizontalTextAlignment="Center" HorizontalOptions="Center" IsPassword="True"></Entry>
             <Button Text="Login" HorizontalOptions="Center" WidthRequest="300" Clicked="OnLogin"></Button>
+            <Button Text="Sign up" HorizontalOptions="Center" WidthRequest="300" Clicked="ToSignUp"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

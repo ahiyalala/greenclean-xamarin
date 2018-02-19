@@ -27,5 +27,10 @@ namespace GreenClean
 
             this.FindByName<Label>("Message").Text = "Wrong credentials!";
         }
+
+        async void ToSignUp(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SignupPageSecurity());
+        }
 	}
 }

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GreenClean.SignupPageSecurity">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label FontSize="Medium" Text="Let's get started"/>
+            <Label FontSize="Small">
+                Kindly fill out these sign-up form
+            </Label>
+            <StackLayout Orientation="Horizontal">
+                <Entry Placeholder="First Name" HorizontalOptions="FillAndExpand" x:Name="FirstName"/>
+                <Entry Placeholder="Last Name" HorizontalOptions="FillAndExpand" x:Name="LastName"/>
+            </StackLayout>
+            <Entry Placeholder="(+63) 9 123-4567" x:Name="Mobile"/>
+            <Label Margin="5,0,0,-15">Birthday</Label>
+            <DatePicker />
+            <Entry Placeholder="your_email@example.com" x:Name="Email"/>
+            <Entry Placeholder="Password" x:Name="Password" IsPassword="True" />
+            <Entry Placeholder="Re-type password" x:Name="RetypePassword" IsPassword="True" />
+            <Button Text="Submit" Clicked="SubmitForm"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
