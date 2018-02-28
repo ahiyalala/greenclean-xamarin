@@ -1,6 +1,9 @@
-﻿using System;
+﻿using GreenClean.Model;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -9,28 +12,48 @@ namespace GreenClean
 {
 	public partial class MainPage : ContentPage
 	{
-		public MainPage()
+        const string UriUsers = "http://greenclean-cb.southeastasia.cloudapp.azure.com/api/users/login";
+        HttpClient client;
+        public MainPage()
 		{
 			InitializeComponent();
-            
+            client = new HttpClient();
+
 		}
         
         async void OnLogin(object sender, EventArgs e)
         {
-            string username = this.FindByName<Entry>("Username").Text;
-            string password = this.FindByName<Entry>("Password").Text;
-
-            if ( username == "ahiyalala" && password == "thisisatest" )
+            LoginButton.IsEnabled = false;
+            SignUpButton.IsEnabled = false;
+            
+            var customer = new Customer
             {
-                await Navigation.PushAsync(new Dashboard());
-            }
+                EmailAddress = Username.Text,
+                Password = Password.Text
+            };
 
-            this.FindByName<Label>("Message").Text = "Wrong credentials!";
+            var item = JsonConvert.SerializeObject(customer);
+            var content = new StringContent(item, Encoding.UTF8, "application/json");
+
+
+            var response = await client.PostAsync(UriUsers,content);
+            var result = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                await Navigation.PushAsync(new Dashboard(),true);
+            }
+            else
+            {
+                await DisplayAlert("Login failed", result, "Try again");
+                LoginButton.IsEnabled = true;
+                SignUpButton.IsEnabled = true;
+            }
+            
         }
 
         async void ToSignUp(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SignupPageSecurity());
+            await Navigation.PushAsync(new SignupPageSecurity(),true);
         }
 	}
 }

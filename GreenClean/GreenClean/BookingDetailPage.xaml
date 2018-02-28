@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GreenClean.BookingDetailPage"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="We got you an appointment"
+                HorizontalOptions="CenterAndExpand" FontSize="Medium" Margin="0,20,0,0"/>
+            <Frame HorizontalOptions="Center" CornerRadius="50" WidthRequest="100" Margin="0,20,0,0" HeightRequest="100" Padding="0,0,0,0">
+                <Image Source="http://via.placeholder.com/100x100" Aspect="AspectFill" Margin="0,0,0,0" />
+            </Frame>
+            <Label Text="Juan dela Cruz" HorizontalOptions="Center" FontSize="Medium" Margin="0,10,20,0"  />
+            <Frame BackgroundColor="Black" Margin="0,10,0,0" Padding="10,10,10,10">
+                <Label TextColor="White" VerticalTextAlignment="Center" Text="Booking Details"/>
+            </Frame>
+
+            <Label Text="Date" />
+            <Label Text="April 13, 2018 2:00PM" FontSize="Medium" Margin="0,0,0,20" />
+
+            <Label Text="Service type" />
+            <Label Text="Cleaning service A" FontSize="Medium" Margin="0,0,0,20" />
+
+            <Label Text="Place" />
+            <Label Text="B1 L1 Imaginary St. Brgy. Example Quezon City" FontSize="Medium" Margin="0,0,0,20" />
+
+            <Label Text="Payment" />
+            <Label Text="Cash" FontSize="Medium" Margin="0,0,0,20" />
+
+            <Label Text="Amount due" />
+            <Label Text="Php 900" FontSize="Medium" Margin="0,0,0,20" />
+
+            <Button Text="Go back" Margin="10,10,10,10" VerticalOptions="End" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

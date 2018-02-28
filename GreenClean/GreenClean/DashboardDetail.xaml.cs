@@ -10,11 +10,17 @@ using Xamarin.Forms.Xaml;
 namespace GreenClean
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class DashboardDetail : ContentPage
+    public partial class DashboardDetail : CarouselPage
     {
         public DashboardDetail()
         {
             InitializeComponent();
+        }
+
+        async void BookService(object sender, EventArgs a)
+        {
+
+            await Navigation.PushAsync(new BookMeUp());
         }
     }
 }
