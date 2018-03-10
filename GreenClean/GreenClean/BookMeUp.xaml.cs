@@ -1,8 +1,5 @@
-﻿using GreenClean.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using GreenClean.ViewModel;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -10,10 +7,10 @@ using Xamarin.Forms.Xaml;
 
 namespace GreenClean
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class BookMeUp : ContentPage
 	{
-		public BookMeUp ()
+		public BookMeUp (object collection)
 		{
 			InitializeComponent ();
             FindServiceAsync();

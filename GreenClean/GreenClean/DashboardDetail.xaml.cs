@@ -16,11 +16,5 @@ namespace GreenClean
         {
             InitializeComponent();
         }
-
-        async void BookService(object sender, EventArgs a)
-        {
-
-            await Navigation.PushAsync(new BookMeUp());
-        }
     }
 }

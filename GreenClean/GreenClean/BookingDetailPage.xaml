@@ -30,7 +30,7 @@
             <Label Text="Amount due" />
             <Label Text="Php 900" FontSize="Medium" Margin="0,0,0,20" />
 
-            <Button Text="Go back" Margin="10,10,10,10" VerticalOptions="End" />
+            <Button Text="Go back" Margin="10,10,10,10" VerticalOptions="End" Clicked="GoToHome"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

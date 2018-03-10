@@ -1,69 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <CarouselPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:GreenClean.ViewModel"
              x:Class="GreenClean.DashboardDetail"
-             Title="Detail">
-    <ContentPage>
-        <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="400" BackgroundColor="White" HeightRequest="400" Padding="0,0,0,0">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Image Source="http://www.salayapavilion.com/websph/images/stories/Interns/Housekeeping.JPG" HeightRequest="100" Aspect="AspectFill" Grid.Row="0"/>
-                <StackLayout Grid.Row="1" Padding="10,10,10,10">
-                    <Label Text="Cleaning Service A" FontSize="Large"/>
-                    <Label>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non nisl ac erat blandit faucibus eu quis lacus. Nullam et interdum sapien.
-                    </Label>
-                    <Label Text="Php 300/hr" FontAttributes="Bold" HorizontalTextAlignment="End"/>
-                </StackLayout>
-                <Button Text="Book now" Clicked="BookService"  Grid.Row="2"/>
+             Title="Detail"
+             ItemsSource="{x:Static local:DashboardViewModel.All}">
+    <CarouselPage.ItemTemplate>
+        <DataTemplate>
+            <ContentPage>
+                <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="400" BackgroundColor="White" HeightRequest="400" Padding="0,0,0,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="3*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image Source="http://www.salayapavilion.com/websph/images/stories/Interns/Housekeeping.JPG" HeightRequest="100" Aspect="AspectFill" Grid.Row="0"/>
+                        <StackLayout Grid.Row="1" Padding="10,10,10,10">
+                            <Label Text="{Binding ServiceName}" FontSize="Large"/>
+                            <Label Text="{Binding Description}" />
+                            <Label Text="{Binding Price}" FontAttributes="Bold" HorizontalTextAlignment="End"/>
+                        </StackLayout>
+                        <Button Text="Book now" Command="{Binding SelectBooking}" Grid.Row="2"/>
 
-            </Grid>
-        </Frame>
-    </ContentPage>
-    <ContentPage>
-        <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="400" BackgroundColor="White" HeightRequest="400" Padding="0,0,0,0">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Image Source="http://www.salayapavilion.com/websph/images/stories/Interns/Housekeeping.JPG" HeightRequest="100" Aspect="AspectFill" Grid.Row="0"/>
-                <StackLayout Grid.Row="1" Padding="10,10,10,10">
-                    <Label Text="Cleaning Service B" FontSize="Large"/>
-                    <Label>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non nisl ac erat blandit faucibus eu quis lacus. Nullam et interdum sapien.
-                    </Label>
-                    <Label Text="Php 500/hr" FontAttributes="Bold" HorizontalTextAlignment="End"/>
-                </StackLayout>
-                <Button Text="Book now" Grid.Row="2"/>
-
-            </Grid>
-        </Frame>
-    </ContentPage>
-    <ContentPage>
-        <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="400" BackgroundColor="White" HeightRequest="400" Padding="0,0,0,0">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Image Source="http://www.salayapavilion.com/websph/images/stories/Interns/Housekeeping.JPG" HeightRequest="100" Aspect="AspectFill" Grid.Row="0"/>
-                <StackLayout Grid.Row="1" Padding="10,10,10,10">
-                    <Label Text="Cleaning Service C" FontSize="Large"/>
-                    <Label>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non nisl ac erat blandit faucibus eu quis lacus. Nullam et interdum sapien.
-                    </Label>
-                    <Label Text="Php 700/hr" FontAttributes="Bold" HorizontalTextAlignment="End"/>
-                </StackLayout>
-                <Button Text="Book now" Grid.Row="2"/>
-
-            </Grid>
-        </Frame>
-    </ContentPage>
+                    </Grid>
+                </Frame>
+            </ContentPage>
+        </DataTemplate>
+    </CarouselPage.ItemTemplate>
 </CarouselPage>

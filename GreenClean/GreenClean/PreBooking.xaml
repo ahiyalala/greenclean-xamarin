@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GreenClean.PreBooking"
+             x:Name="PreBookingPage">
+    <StackLayout>
+        <DatePicker x:Name="InvisibleDatePicker" IsVisible="False" />
+        <Picker x:Name="InvisiblePicker" IsVisible="False" >
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>7:00 AM</x:String>
+                    <x:String>8:00 AM</x:String>
+                    <x:String>9:00 AM</x:String>
+                    <x:String>10:00 AM</x:String>
+                    <x:String>11:00 AM</x:String>
+                    <x:String>12:00 PM</x:String>
+                    <x:String>1:00 PM</x:String>
+                    <x:String>2:00 PM</x:String>
+                    <x:String>3:00 PM</x:String>
+                    <x:String>4:00 PM</x:String>
+                    <x:String>5:00 PM</x:String>
+                    <x:String>6:00 PM</x:String>
+                    <x:String>7:00 PM</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+        <ListView x:Name="Options"
+                      ItemSelected="OnItemSelect">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell x:Name="{Binding OptionName}" Text="{Binding OptionName}"
+                                  Detail="{Binding OptionValue}" IsEnabled="{Binding IsEnabled}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Text="Set appointment" Clicked="FindAnAppointment"/>
+    </StackLayout>
+    
+</ContentPage>

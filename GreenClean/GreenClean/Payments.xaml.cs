@@ -10,16 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace GreenClean
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class BookingDetailPage : ContentPage
+	public partial class Payments : ContentPage
 	{
-		public BookingDetailPage ()
+		public Payments ()
 		{
 			InitializeComponent ();
-        }
-        
-        async void GoToHome(object sender, EventArgs e)
-        {
-            await Navigation.PopAsync();
-        }
+		}
 	}
 }
