@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GreenClean.PlacesForm">
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry x:Name="PlaceName" Placeholder="Name"/>
+            <Entry x:Name="StreetAddress" Placeholder="Street Address"/>
+            <Entry x:Name="Barangay" Placeholder="Barangay"/>
+            <Entry x:Name="City" Placeholder="City"/>
+            <Button x:Name="Send" Clicked="OnClick" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

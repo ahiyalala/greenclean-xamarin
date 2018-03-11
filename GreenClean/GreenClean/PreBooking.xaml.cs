@@ -31,13 +31,13 @@ namespace GreenClean
         public void ListOptions()
         {
             prebooking.Add(new PreBookingViewModel("Service", ServiceName, -1,false));
-            prebooking.Add(new PreBookingViewModel("Place", "B1 L1 Example Street, Quezon City",0));
+            prebooking.Add(new PreBookingViewModel("Place", new PlacesModel(0, "Home", "B1 L1 Imaginary Street", "Barangay Example", "Quezon City").PlaceDetail, 0));
             prebooking.Add(new PreBookingViewModel("Price", "Cash", 1));
             prebooking.Add(new PreBookingViewModel("Date", DateTime.Now.ToShortDateString(), 2));
             prebooking.Add(new PreBookingViewModel("Time", DateTime.Now.ToString("hh:00 tt"), 3));
         }
 
-        public async void UpdateOptions(object sender, SelectedItemChangedEventArgs a)
+        public async void UpdatePlace(object sender, SelectedItemChangedEventArgs a)
         {
             (sender as ListView).SelectedItem = null;
             if (a.SelectedItem != null)
@@ -48,7 +48,19 @@ namespace GreenClean
             }
                 
         }
-        
+
+        public async void UpdatePaymentType(object sender, SelectedItemChangedEventArgs a)
+        {
+            (sender as ListView).SelectedItem = null;
+            if (a.SelectedItem != null)
+            {
+                PaymentModel subpageData = a.SelectedItem as PaymentModel;
+                preBookingViewModel.OptionValue = subpageData.PaymentDetail;
+                await Navigation.PopAsync();
+            }
+
+        }
+
         private async void OnItemSelect(object sender, SelectedItemChangedEventArgs args)
         {
             (sender as ListView).SelectedItem = null;
@@ -59,12 +71,14 @@ namespace GreenClean
                 switch (preBookingViewModel.OptionType)
                 {
                     case 0:
-                        var places = new Places(preBookingViewModel);
-                        places.DataSender += UpdateOptions;
+                        var places = new Places();
+                        places.DataSender += UpdatePlace;
                         await Navigation.PushAsync(places);
                         break;
                     case 1:
-                        await Navigation.PushAsync(new Payments());
+                        var payments = new Payments();
+                        payments.DataSender += UpdatePaymentType;
+                        await Navigation.PushAsync(payments);
                         break;
                     case 2:
                         InvisibleDatePicker.Focus();

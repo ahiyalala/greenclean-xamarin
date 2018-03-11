@@ -19,7 +19,7 @@ namespace GreenClean
 
         ObservableCollection<PlacesModel> places = new ObservableCollection<PlacesModel>();
 
-        public Places(object placeObservable)
+        public Places()
         {
             InitializeComponent();
             ListPlaces();
@@ -38,8 +38,8 @@ namespace GreenClean
 
         public void ListPlaces()
         {
-            places.Add(new PlacesModel(0, "Home", "B1 L1 Imaginary Street, Quezon City"));
-            places.Add(new PlacesModel(2, "Work", "20th flr. 1650 Imaginary Tower Opal Rd, Ortigas"));
+            places.Add(new PlacesModel(0, "Home", "B1 L1 Imaginary Street", "Barangay Example", "Quezon City"));
+            places.Add(new PlacesModel(2, "Work", "20th flr. 1650 Imaginary Tower Opal Rd", "Barangay Test", "Ortigas City"));
         }
 
     }

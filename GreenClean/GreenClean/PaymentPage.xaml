@@ -1,14 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GreenClean.Payments">
+             x:Class="GreenClean.PaymentPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="Add" Clicked="AddNewPayment"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <ListView x:Name="Options"
+        <ListView x:Name="PaymentList"
                     ItemSelected="OnItemSelect">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding PaymentName}"
-                                  Detail="{Binding PaymentDetail}" />
+                    <TextCell Text="{Binding Payment.PaymentName}"
+                                  Detail="{Binding Payment.PaymentDetail}" IsEnabled="{Binding IsEnabled}" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

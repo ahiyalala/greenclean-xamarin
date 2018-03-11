@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GreenClean.ViewModel
 {
-    class ViewBaseModel : INotifyPropertyChanged
+    public class ViewBaseModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
