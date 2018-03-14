@@ -38,7 +38,6 @@ namespace GreenClean
 
         public void ListPayments()
         {
-            payments.Add(new PaymentViewModel(new PaymentModel(),false));
             payments.Add(new PaymentViewModel(new PaymentModel("Personal", "1234123412341234", "11/11", "644")));
         }
 

@@ -16,16 +16,44 @@ namespace GreenClean
 	{
         public event EventHandler<FormEvent> DataSender;
 
+        PaymentModel payment;
+
         public PaymentForm()
         {
             InitializeComponent();
+            CardNumberText.IsVisible = false;
+            SubmitButton.Text = "Add";
         }
 
 		public PaymentForm (PaymentModel obj)
 		{
 			InitializeComponent ();
+            CardNumber.IsVisible = false;
+            CardNumberText.Text = obj.PaymentDetail;
+            ExpiryDate.Text = obj.CardExpiry;
+            SubmitButton.Text = "Update";
+            payment = obj;
 		}
 
+        public void OnExecute(object sender, EventArgs args)
+        {
+
+            if(payment != null)
+            {
+                payment.CardExpiry = ExpiryDate.Text;
+                payment.CardCvv = CVV.Text;
+
+            }
+            else
+            {
+                var cardexp = ExpiryDate.Text;
+                var cvv = CVV.Text;
+                var cardnumber = CardNumber.Text;
+                payment = new PaymentModel(String.Empty, cardnumber, cardexp, cvv);
+            }
+
+            DataSender(sender, new FormEvent() { Object = payment });
+        }
         
 	}
 }

@@ -25,7 +25,7 @@ namespace GreenClean
         private void ListOptions()
         {
             payments.Add(new PaymentModel());
-            payments.Add(new PaymentModel("Personal", "1234-1234-1234-1234","11/11","644"));
+            payments.Add(new PaymentModel("Personal", "1234123412341234","11/11","644"));
         }
 
         public void OnItemSelect(object sender, SelectedItemChangedEventArgs args)

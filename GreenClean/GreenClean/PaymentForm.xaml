@@ -4,9 +4,13 @@
              x:Class="GreenClean.PaymentForm">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label x:Name="CardNumberText" HorizontalOptions="FillAndExpand" FontSize="Medium" />
+            <Entry x:Name="CardNumber" HorizontalOptions="FillAndExpand" Placeholder="Card number"/>
+            <StackLayout Orientation="Horizontal">
+                <Entry x:Name="ExpiryDate" HorizontalOptions="FillAndExpand" Placeholder="MM/YY"/>
+                <Entry x:Name="CVV" HorizontalOptions="FillAndExpand" Placeholder="CVV"/>
+            </StackLayout>
+            <Button x:Name="SubmitButton" VerticalOptions="End" Clicked="OnExecute"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -7,8 +7,9 @@
                     ItemSelected="OnItemSelect">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding PaymentName}"
-                                  Detail="{Binding PaymentDetail}" />
+                    <ViewCell>
+                        <Label Text="{Binding PaymentDetail}" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" FontSize="Medium" />
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

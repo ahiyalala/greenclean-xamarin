@@ -10,8 +10,9 @@
                     ItemSelected="OnItemSelect">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Payment.PaymentName}"
-                                  Detail="{Binding Payment.PaymentDetail}" IsEnabled="{Binding IsEnabled}" />
+                    <ViewCell IsEnabled="{Binding IsEnabled}">
+                        <Label Text="{Binding Payment.PaymentDetail}" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" FontSize="Medium"  />
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
