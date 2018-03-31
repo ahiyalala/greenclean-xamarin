@@ -40,7 +40,9 @@ namespace GreenClean
             var result = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
             {
-                await Navigation.PushAsync(new Dashboard(),true);
+                Application.Current.Properties["token"] = result;
+                Navigation.InsertPageBefore(new Dashboard(), this);
+                await Navigation.PopAsync();
             }
             else
             {

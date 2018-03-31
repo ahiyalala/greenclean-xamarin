@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GreenClean.Model;
+using GreenClean.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,19 @@ namespace GreenClean
         public DashboardDetail()
         {
             InitializeComponent();
+            Task.Run(async () =>
+            {
+                if(DashboardViewModel.All.Count == 0){ await DashboardViewModel.GetList(); };
+
+                await PlacesModel.GetList();
+            });
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            ItemsSource = DashboardViewModel.All;
         }
     }
 }

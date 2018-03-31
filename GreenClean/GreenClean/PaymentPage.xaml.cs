@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using GreenClean.Utilities;
 using System;
+using System.Threading.Tasks;
 
 namespace GreenClean
 {
@@ -18,9 +19,17 @@ namespace GreenClean
 		public PaymentPage ()
 		{
 			InitializeComponent ();
-            ListPayments();
+            Task.Run(async () => await PaymentModel.GetList());
             PaymentList.ItemsSource = payments;
 		}
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            ListPayments();
+
+        }
 
         public async void OnItemSelect(object sender, SelectedItemChangedEventArgs args)
         {
@@ -38,7 +47,12 @@ namespace GreenClean
 
         public void ListPayments()
         {
-            payments.Add(new PaymentViewModel(new PaymentModel("Personal", "1234123412341234", "11/11", "644")));
+            payments.Clear();
+            foreach(var x in PaymentModel.PaymentList)
+            {
+                bool flag = (x.PaymentDetail != "Cash") ? true : false;
+                payments.Add(new PaymentViewModel(x,flag));
+            }
         }
 
         public async void AddList(object sender, FormEvent args)

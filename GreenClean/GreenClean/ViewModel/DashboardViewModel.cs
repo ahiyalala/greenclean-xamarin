@@ -3,37 +3,59 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
+using GreenClean.Model;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace GreenClean.ViewModel
 {
-    class DashboardViewModel
+    class DashboardViewModel:ViewBaseModel
     {
-        public DashboardViewModel(string servicename, string description, string price)
+        static string serviceUri = "http://greenclean-cb.southeastasia.cloudapp.azure.com/api/services";
+
+        public DashboardViewModel(Services serviceargs)
         {
-            ServiceName = servicename;
-            Description = description;
-            Price = price;
+            service = serviceargs;
             SelectBooking = new Command(async () =>
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new PreBooking(ServiceName));
+                var appointmentRequest = new AppointmentRequest()
+                {
+                    Service = service,
+                    Place = PlacesModel.PlacesList.FirstOrDefault(),
+                    Payment = PaymentModel.GetFirstPaymentData(),
+                    Date = DateTime.Now.ToShortDateString(),
+                    Time = DateTime.Now.ToString("hh:00 tt")
+                };
+                await Application.Current.MainPage.Navigation.PushAsync(new PreBooking(appointmentRequest));
             });
         }
 
-        public string ServiceName { get; set; }
-        public string Description { get; set; }
-        public string Price { get; set; }
+        public Services service { get; set; }
 
         public ICommand SelectBooking { protected set; get; }
 
-        public static IList<DashboardViewModel> All { private set; get; }
+        public static ObservableCollection<DashboardViewModel> All = new ObservableCollection<DashboardViewModel>();
 
-        static DashboardViewModel()
+        public async static Task GetList()
         {
-            All = new List<DashboardViewModel>{
-                new DashboardViewModel("Service Cleaning A", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non nisl ac erat blandit faucibus eu quis lacus. Nullam et interdum sapien.", "Php 300"),
-                new DashboardViewModel("Service Cleaning B", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non nisl ac erat blandit faucibus eu quis lacus. Nullam et interdum sapien.", "Php 500"),
-                new DashboardViewModel("Service Cleaning C", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non nisl ac erat blandit faucibus eu quis lacus. Nullam et interdum sapien.", "Php 800")
-            };
+            HttpClient client = new HttpClient();
+
+            var request = await client.GetAsync(serviceUri).ConfigureAwait(false);
+
+            if (request.IsSuccessStatusCode)
+            {
+                var content = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
+                var model = JsonConvert.DeserializeObject<IList<Services>>(content);
+                All.Clear();
+                foreach( var x in model)
+                {
+                    All.Add(new DashboardViewModel(x));
+                }
+            }
+            
         }
     }
 }

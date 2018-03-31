@@ -1,4 +1,5 @@
-﻿using GreenClean.ViewModel;
+﻿using GreenClean.Model;
+using GreenClean.ViewModel;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -10,7 +11,7 @@ namespace GreenClean
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class BookMeUp : ContentPage
 	{
-		public BookMeUp (object collection)
+		public BookMeUp (AppointmentRequest obj)
 		{
 			InitializeComponent ();
             FindServiceAsync();

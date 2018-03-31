@@ -12,7 +12,15 @@ namespace GreenClean
 		public App ()
 		{
 			InitializeComponent();
-            MainPage = new NavigationPage(new Dashboard());
+            if (!Application.Current.Properties.ContainsKey("token"))
+            {
+                MainPage = new NavigationPage(new MainPage());
+            }
+            else
+            {
+                MainPage = new NavigationPage(new Dashboard());
+            }
+            
             
         }
 

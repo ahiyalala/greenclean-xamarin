@@ -24,7 +24,7 @@ namespace GreenClean.ViewModel
             }
         }
 
-        public bool IsEnabled;
+        public bool IsEnabled { get; set; }
 
         public PaymentViewModel(PaymentModel obj,bool enabled = true){
             Payment = obj;

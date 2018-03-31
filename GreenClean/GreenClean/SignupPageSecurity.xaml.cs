@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Bcr = BCrypt.Net;
 
 namespace GreenClean
 {
@@ -34,7 +35,7 @@ namespace GreenClean
                 LastName = LastName.Text,
                 BirthDate = BirthDate.Date.ToString("yyyy-MM-dd"),
                 EmailAddress = Email.Text,
-                Password = Password.Text,
+                Password = Bcr.BCrypt.HashPassword(Password.Text),
                 ContactNumber = Mobile.Text
             };
 

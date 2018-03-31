@@ -1,7 +1,7 @@
 ﻿using GreenClean.Model;
 using System;
 using System.Collections.ObjectModel;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,22 +12,13 @@ namespace GreenClean
 	{
 
         public event EventHandler<SelectedItemChangedEventArgs> DataSender;
-
-        ObservableCollection<PaymentModel> payments = new ObservableCollection<PaymentModel>();
-
+        
 		public Payments ()
 		{
 			InitializeComponent ();
-            ListOptions();
-            Options.ItemsSource = payments;
-		}
-
-        private void ListOptions()
-        {
-            payments.Add(new PaymentModel());
-            payments.Add(new PaymentModel("Personal", "1234123412341234","11/11","644"));
+            Options.ItemsSource = PaymentModel.PaymentList;
         }
-
+        
         public void OnItemSelect(object sender, SelectedItemChangedEventArgs args)
         {
             (sender as ListView).SelectedItem = null;

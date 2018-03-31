@@ -22,9 +22,16 @@ namespace GreenClean
         public PlacesPage ()
 		{
 			InitializeComponent ();
-            ListPlaces();
+            
             PlacesList.ItemsSource = places;
-		}
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            ListPlaces();
+        }
 
         public async void OnItemSelect(object sender, SelectedItemChangedEventArgs args)
         {
@@ -62,8 +69,11 @@ namespace GreenClean
 
         public void ListPlaces()
         {
-            places.Add(new PlacesViewModel(0, "Home", "B1 L1 Imaginary Street", "Barangay Example", "Quezon City"));
-            places.Add(new PlacesViewModel(2, "Work", "20th flr. 1650 Imaginary Tower Opal Rd", "Barangay Test", "Ortigas City"));
+            places.Clear();
+            foreach(var x in PlacesModel.PlacesList)
+            {
+                places.Add(new PlacesViewModel(x));
+            }
         }
     }
 }
