@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace GreenClean.Model
 {
@@ -54,12 +56,13 @@ namespace GreenClean.Model
         public async static Task GetList()
         {
             HttpClient client = new HttpClient();
+            var properties = Application.Current.Properties;
+            client.DefaultRequestHeaders.Add("Authentication", string.Format("{0} {1}", properties["email"], properties["token"]));
 
             var request = await client.GetAsync(placesUri).ConfigureAwait(false);
-
+            var content = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (request.IsSuccessStatusCode)
             {
-                var content = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
                 var model = JsonConvert.DeserializeObject<IList<PlacesModel>>(content);
 
                 PlacesList = new ObservableCollection<PlacesModel>(model);

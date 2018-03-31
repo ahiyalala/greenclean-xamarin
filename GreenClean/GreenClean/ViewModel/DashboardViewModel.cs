@@ -45,12 +45,11 @@ namespace GreenClean.ViewModel
 
             var request = await client.GetAsync(serviceUri).ConfigureAwait(false);
 
-            if (request.IsSuccessStatusCode)
+            if (request.IsSuccessStatusCode && All.Count == 0)
             {
                 var content = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
                 var model = JsonConvert.DeserializeObject<IList<Services>>(content);
-                All.Clear();
-                foreach( var x in model)
+                foreach(var x in model)
                 {
                     All.Add(new DashboardViewModel(x));
                 }

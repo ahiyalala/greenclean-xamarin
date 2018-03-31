@@ -19,8 +19,7 @@ namespace GreenClean
             InitializeComponent();
             Task.Run(async () =>
             {
-                if(DashboardViewModel.All.Count == 0){ await DashboardViewModel.GetList(); };
-
+                await DashboardViewModel.GetList();
                 await PlacesModel.GetList();
             });
         }

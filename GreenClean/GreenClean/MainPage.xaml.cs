@@ -25,7 +25,7 @@ namespace GreenClean
         {
             LoginButton.IsEnabled = false;
             SignUpButton.IsEnabled = false;
-            
+
             var customer = new Customer
             {
                 EmailAddress = Username.Text,
@@ -40,7 +40,9 @@ namespace GreenClean
             var result = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
             {
-                Application.Current.Properties["token"] = result;
+                Customer.Current = JsonConvert.DeserializeObject<Customer>(result);
+                Application.Current.Properties.Add("token",Customer.Current.UserToken);
+                Application.Current.Properties.Add("email",Customer.Current.EmailAddress);
                 Navigation.InsertPageBefore(new Dashboard(), this);
                 await Navigation.PopAsync();
             }

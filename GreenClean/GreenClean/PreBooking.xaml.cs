@@ -17,7 +17,7 @@ namespace GreenClean
         ObservableCollection<PreBookingViewModel> prebooking = new ObservableCollection<PreBookingViewModel>();
         PreBookingViewModel preBookingViewModel;
         
-        public AppointmentRequest appointmentRequest;
+        private AppointmentRequest appointmentRequest;
 
         public PreBooking(AppointmentRequest appointmentargs)
         {

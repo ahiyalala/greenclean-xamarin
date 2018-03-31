@@ -10,10 +10,12 @@ namespace GreenClean
 
     public class DashboardMenuItem
     {
-        
+
         public int Id { get; set; }
         public string Title { get; set; }
 
         public Page TargetType { get; set; }
+
+        public string VerticalLayout { get; set; }
     }
 }

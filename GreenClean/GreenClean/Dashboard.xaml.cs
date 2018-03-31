@@ -28,8 +28,17 @@ namespace GreenClean
 
             MasterPage.ListView.SelectedItem = null;
 
-
-            await Application.Current.MainPage.Navigation.PushAsync(item.TargetType);
+            if(item.Id == 2)
+            {
+                Application.Current.Properties.Clear();
+                Navigation.InsertPageBefore(new MainPage(), this);
+                await Navigation.PopAsync();
+            }
+            else
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(item.TargetType);
+            }
+            
         }
     }
 }
