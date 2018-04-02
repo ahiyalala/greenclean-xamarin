@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace GreenClean.Model
 {
+    [JsonObject("payment")]
     public class PaymentModel
     {
 

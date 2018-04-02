@@ -11,12 +11,15 @@ using Xamarin.Forms;
 
 namespace GreenClean.Model
 {
+    [JsonObject("location")]
     public class PlacesModel
     {
         const string placesUri = "http://greenclean-cb.southeastasia.cloudapp.azure.com/api/places";
 
         [JsonProperty("location_id")]
         public int PlaceId { get; set; }
+        [JsonProperty("customer_id")]
+        public int CustomerId { get; set; }
         [JsonProperty("name")]
         public string PlaceName { get; set; }
         [JsonProperty("street_address")]
@@ -51,12 +54,16 @@ namespace GreenClean.Model
 
         }
 
+        
+
         public static ObservableCollection<PlacesModel> PlacesList = new ObservableCollection<PlacesModel>();
 
         public async static Task GetList()
         {
             HttpClient client = new HttpClient();
+
             var properties = Application.Current.Properties;
+
             client.DefaultRequestHeaders.Add("Authentication", string.Format("{0} {1}", properties["email"], properties["token"]));
 
             var request = await client.GetAsync(placesUri).ConfigureAwait(false);
@@ -67,6 +74,18 @@ namespace GreenClean.Model
 
                 PlacesList = new ObservableCollection<PlacesModel>(model);
             }
+        }
+
+        public async static Task AddToList(PlacesModel places)
+        { 
+            HttpClient client = new HttpClient();
+            var properties = Application.Current.Properties;
+            client.DefaultRequestHeaders.Add("Authentication", string.Format("{0} {1}", properties["email"], properties["token"]));
+
+            places.CustomerId = Customer.Current.CustomerId;
+
+            var request = await client.PostAsync(placesUri,places).ConfigureAwait(false);
+            var content = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
         }
 
     }

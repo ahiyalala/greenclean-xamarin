@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GreenClean.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,15 +12,10 @@ namespace GreenClean
 	{
 		public App ()
 		{
+            
 			InitializeComponent();
-            if (!Application.Current.Properties.ContainsKey("token"))
-            {
-                MainPage = new NavigationPage(new MainPage());
-            }
-            else
-            {
-                MainPage = new NavigationPage(new Dashboard());
-            }
+            MainPage = new NavigationPage(new SplashScreen());
+            
             
             
         }

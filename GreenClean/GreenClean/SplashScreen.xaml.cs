@@ -16,14 +16,25 @@ namespace GreenClean
 		{
 			InitializeComponent ();
 
-            StartActivity();
+            if (!Application.Current.Properties.ContainsKey("token"))
+            {
+                
+                Task.Run( async () =>
+                {
+                    Navigation.InsertPageBefore(new MainPage(), this);
+                    await Navigation.PopAsync();
+                });
+            }
+            else
+            {
+                Task.Run(async () =>
+                {
+                    await Customer.GetProfile();
+                    Navigation.InsertPageBefore(new Dashboard(), this);
+                    await Navigation.PopAsync();
+                });
+            }
 
-		}
-
-        async void StartActivity()
-        {
-            await Task.Delay(3000);
-            await Navigation.PushAsync(new MainPage());
         }
 	}
 }
