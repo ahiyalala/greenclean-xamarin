@@ -28,6 +28,7 @@ namespace GreenClean.Model
         public string Barangay { get; set; }
         [JsonProperty("city_address")]
         public string City { get; set; }
+        [JsonIgnore]
         public string PlaceDetail
         {
             get
@@ -43,6 +44,14 @@ namespace GreenClean.Model
         public PlacesModel(int id, string name, string street, string barangay, string city)
         {
             PlaceId = id;
+            PlaceName = name;
+            StreetName = street;
+            Barangay = barangay;
+            City = city;
+        }
+
+        public PlacesModel(string name, string street, string barangay, string city)
+        {
             PlaceName = name;
             StreetName = street;
             Barangay = barangay;
@@ -76,16 +85,28 @@ namespace GreenClean.Model
             }
         }
 
-        public async static Task AddToList(PlacesModel places)
+        public async static Task<bool> AddToList(PlacesModel places)
         { 
             HttpClient client = new HttpClient();
             var properties = Application.Current.Properties;
             client.DefaultRequestHeaders.Add("Authentication", string.Format("{0} {1}", properties["email"], properties["token"]));
 
             places.CustomerId = Customer.Current.CustomerId;
+            var placeJson = JsonConvert.SerializeObject(places);
+            var postRequest = new StringContent(placeJson, Encoding.UTF8, "application/json");
 
-            var request = await client.PostAsync(placesUri,places).ConfigureAwait(false);
-            var content = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
+            var request = await client.PostAsync(placesUri,postRequest);
+            
+            var content = await request.Content.ReadAsStringAsync();
+            if (request.IsSuccessStatusCode)
+            {
+                var place = JsonConvert.DeserializeObject<PlacesModel>(content);
+                PlacesList.Add(places);
+
+                return true;
+            }
+
+            return false;
         }
 
     }

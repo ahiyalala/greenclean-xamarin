@@ -5,6 +5,7 @@ using System.Text;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace GreenClean.Model
 {
@@ -39,7 +40,8 @@ namespace GreenClean.Model
 
         public static Customer Current { get; set; }
 
-        const string UriUsers = "http://greenclean-cb.southeastasia.cloudapp.azure.com/api/users/login";
+        const string loginUri = "http://greenclean-cb.southeastasia.cloudapp.azure.com/api/users/login";
+        const string UriUsers = "http://greenclean-cb.southeastasia.cloudapp.azure.com/api/users";
 
         public async static Task GetProfile()
         {
@@ -47,11 +49,11 @@ namespace GreenClean.Model
             var properties = Application.Current.Properties;
             client.DefaultRequestHeaders.Add("Authentication", string.Format("{0} {1}", properties["email"], properties["token"]));
 
-            var request = await client.GetAsync(UriUsers).ConfigureAwait(false) ;
-            var content = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
+            var request = await client.GetAsync(UriUsers);
+            var content = await request.Content.ReadAsStringAsync();
             if (request.IsSuccessStatusCode)
             {
-                Current = JsonConvert.DeserializeObject<Customer>(content);
+                Customer.Current = JsonConvert.DeserializeObject<Customer>(content);
             }
         }
 

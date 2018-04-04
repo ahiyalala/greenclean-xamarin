@@ -51,7 +51,7 @@ namespace GreenClean
             }
             else
             {
-                places = new PlacesModel(0, placename, streetaddress, barangay, city);
+                places = new PlacesModel(placename, streetaddress, barangay, city);
             }
             var args = new FormEvent()
             {

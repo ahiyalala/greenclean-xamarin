@@ -14,7 +14,15 @@ namespace GreenClean
 		{
             
 			InitializeComponent();
-            MainPage = new NavigationPage(new SplashScreen());
+
+            if (!Application.Current.Properties.ContainsKey("token"))
+            {
+                MainPage = new NavigationPage(new MainPage());
+            }
+            else
+            {
+                MainPage = new NavigationPage(new Dashboard());
+            }
             
             
             

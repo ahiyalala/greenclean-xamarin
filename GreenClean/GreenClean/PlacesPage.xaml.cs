@@ -13,23 +13,23 @@ using Xamarin.Forms.Xaml;
 
 namespace GreenClean
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class PlacesPage : ContentPage
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class PlacesPage : ContentPage
+    {
         ObservableCollection<PlacesViewModel> places = new ObservableCollection<PlacesViewModel>();
         PlacesViewModel placesViewModel;
         PlacesForm placeform;
         public PlacesPage ()
 		{
 			InitializeComponent ();
-            
+            ListPlaces();
             PlacesList.ItemsSource = places;
+            
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
             ListPlaces();
         }
 
@@ -56,7 +56,15 @@ namespace GreenClean
         public async void AddList(object sender, FormEvent args)
         {
             var obj = args.Object as PlacesModel;
-            places.Add(new PlacesViewModel(obj));
+            var isSuccessful = await PlacesModel.AddToList(obj);
+            if (isSuccessful)
+            {
+                places.Add(new PlacesViewModel(obj));
+            }
+            else
+            {
+                await DisplayAlert("Oops", "Something went wrong", "Try again");
+            }
             await Navigation.PopAsync();
         }
 
@@ -69,11 +77,11 @@ namespace GreenClean
 
         public void ListPlaces()
         {
-            places.Clear();
             foreach(var x in PlacesModel.PlacesList)
             {
                 places.Add(new PlacesViewModel(x));
             }
+            
         }
     }
 }
