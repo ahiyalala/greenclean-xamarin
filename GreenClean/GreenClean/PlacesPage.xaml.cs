@@ -16,23 +16,15 @@ namespace GreenClean
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PlacesPage : ContentPage
     {
-        ObservableCollection<PlacesViewModel> places = new ObservableCollection<PlacesViewModel>();
+        ObservableCollection<PlacesViewModel> places = new ObservableCollection<PlacesViewModel>(PlacesViewModel.GetCollectionList(PlacesModel.PlacesList));
         PlacesViewModel placesViewModel;
         PlacesForm placeform;
         public PlacesPage ()
 		{
 			InitializeComponent ();
-            ListPlaces();
             PlacesList.ItemsSource = places;
-            
         }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            ListPlaces();
-        }
-
+        
         public async void OnItemSelect(object sender, SelectedItemChangedEventArgs args)
         {
             (sender as ListView).SelectedItem = null;
@@ -73,15 +65,6 @@ namespace GreenClean
             var placeform = new PlacesForm();
             placeform.DataSender += AddList;
             await Navigation.PushAsync(placeform);
-        }
-
-        public void ListPlaces()
-        {
-            foreach(var x in PlacesModel.PlacesList)
-            {
-                places.Add(new PlacesViewModel(x));
-            }
-            
         }
     }
 }

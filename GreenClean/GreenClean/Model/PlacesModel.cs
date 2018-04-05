@@ -65,7 +65,7 @@ namespace GreenClean.Model
 
         
 
-        public static ObservableCollection<PlacesModel> PlacesList = new ObservableCollection<PlacesModel>();
+        public static List<PlacesModel> PlacesList = new List<PlacesModel>();
 
         public async static Task GetList()
         {
@@ -77,11 +77,11 @@ namespace GreenClean.Model
 
             var request = await client.GetAsync(placesUri).ConfigureAwait(false);
             var content = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
-            if (request.IsSuccessStatusCode)
+            if (request.IsSuccessStatusCode && PlacesList.Count == 0)
             {
-                var model = JsonConvert.DeserializeObject<IList<PlacesModel>>(content);
+                var model = JsonConvert.DeserializeObject<List<PlacesModel>>(content);
 
-                PlacesList = new ObservableCollection<PlacesModel>(model);
+                PlacesList = model;
             }
         }
 

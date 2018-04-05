@@ -32,5 +32,16 @@ namespace GreenClean.ViewModel
         {
             Places = model;
         }
+
+        public static List<PlacesViewModel> GetCollectionList(List<PlacesModel> model)
+        {
+            List<PlacesViewModel> modelList = new List<PlacesViewModel>();
+            foreach(var x in model)
+            {
+                modelList.Add(new PlacesViewModel(x));
+            }
+
+            return modelList;
+        }
     }
 }

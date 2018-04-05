@@ -25,6 +25,7 @@ namespace GreenClean.ViewModel
                 {
                     Service = service,
                     Place = PlacesModel.PlacesList.FirstOrDefault(),
+                    Customer = Customer.Current,
                     Payment = PaymentModel.GetFirstPaymentData(),
                     Date = DateTime.Now.ToShortDateString(),
                     Time = DateTime.Now.ToString("hh:00 tt")

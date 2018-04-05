@@ -14,16 +14,13 @@ namespace GreenClean
 		public BookMeUp (AppointmentRequest obj)
 		{
 			InitializeComponent ();
-            FindServiceAsync();
-
-            
 		}
 
-        async void FindServiceAsync()
+        protected override async void OnAppearing()
         {
+            base.OnAppearing();
             await Task.Delay(3000);
             
-
             Navigation.InsertPageBefore(new BookingDetailPage(), this);
             await Navigation.PopAsync();
         }
