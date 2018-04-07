@@ -6,16 +6,17 @@ namespace GreenClean.Model
 {
     public class Appointment
     {
-        public int BookingId { get; set; }
-        public int ServiceTypeId { get; set; }
 
-        public int HousekeeperId { get; set; }
-        public string Housekeeper { get; set; }
+        public Customer Customer { get; set; }
+        public Services Service { get; set; }
+        public PlacesModel Places { get; set; }
+        public Housekeeper Housekeeper { get; set; }
 
-        public string Place { get; set; }
-        public DateTime Schedule { get; set; }
+        public string ScheduleDate { get; set; }
+        public string ScheduleTimeStart { get; set; }
+        public string ScheduleTimeEnd { get; set; }
 
-        public int PaymentTypeId { get; set; }
+        public string PaymentType { get; set; }
 
         public bool IsPaid { get; set; }
         public bool IsFinished { get; set; }

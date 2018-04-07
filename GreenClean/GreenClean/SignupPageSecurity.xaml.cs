@@ -14,13 +14,9 @@ namespace GreenClean
 	public partial class SignupPageSecurity : ContentPage
 	{
         Regex alphabetOnly = new Regex("/^[A-z]+$/");
-
-        HttpClient client;
-        const string UriUsers = "http://greenclean-cb.southeastasia.cloudapp.azure.com/api/users";
+        
 		public SignupPageSecurity ()
 		{
-            
-            client = new HttpClient();
             InitializeComponent ();
             BirthDate.SetValue(DatePicker.MaximumDateProperty, DateTime.Now);
         }
@@ -39,19 +35,18 @@ namespace GreenClean
                 ContactNumber = Mobile.Text
             };
 
+            var isSuccessful = await Customer.SignUpAsync(customer);
 
-            var item = JsonConvert.SerializeObject(customer);
-            var content = new StringContent(item, Encoding.UTF8, "application/json");
-            
-            var response = await client.PostAsync(UriUsers, content);
-            var result = await response.Content.ReadAsStringAsync();
-            if (response.IsSuccessStatusCode)
+            if (isSuccessful)
             {
-                
                 await DisplayAlert("Yay", "Successful", "Oki");
+                await Navigation.PopAsync();
             }
-            
-            await Navigation.PopAsync();
+            else
+            {
+                await DisplayAlert("Oops", "Something went wrong with your sign up :(", "Try again");
+            }
+
         }
 
 

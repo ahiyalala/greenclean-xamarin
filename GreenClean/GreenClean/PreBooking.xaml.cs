@@ -27,9 +27,13 @@ namespace GreenClean
             ListOptions();
             Title = "Set your booking details";
             Options.ItemsSource = prebooking;
+        }
 
-            Task.Run(async () => await PaymentModel.GetList());
-            
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            await PaymentModel.GetList();
         }
                 
 

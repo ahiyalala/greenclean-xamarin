@@ -38,6 +38,7 @@ namespace GreenClean.Model
         [JsonProperty("user_token")]
         public string UserToken { get; set; }
 
+        [JsonIgnore]
         public static Customer Current { get; set; }
 
         const string loginUri = "http://greenclean-cb.southeastasia.cloudapp.azure.com/api/users/login";
@@ -53,7 +54,27 @@ namespace GreenClean.Model
             var content = await request.Content.ReadAsStringAsync();
             if (request.IsSuccessStatusCode)
             {
-                Customer.Current = JsonConvert.DeserializeObject<Customer>(content);
+                Current = JsonConvert.DeserializeObject<Customer>(content);
+            }
+        }
+
+        public static async Task<bool> SignUpAsync(Customer customer)
+        {
+            HttpClient client = new HttpClient();
+
+            var item = JsonConvert.SerializeObject(customer);
+            var content = new StringContent(item, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync(UriUsers, content);
+            var result = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 

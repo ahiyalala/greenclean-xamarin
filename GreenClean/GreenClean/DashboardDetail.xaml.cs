@@ -14,21 +14,23 @@ namespace GreenClean
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DashboardDetail : CarouselPage
     {
+        private static bool HasAppeared;
         public DashboardDetail()
         {
             InitializeComponent();
-            Task.Run(async () =>
+            HasAppeared = false;
+            ItemsSource = DashboardViewModel.All;
+        }
+
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+            if (!HasAppeared)
             {
                 await DashboardViewModel.GetList();
                 await PlacesModel.GetList();
-            });
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
-            ItemsSource = DashboardViewModel.All;
+                HasAppeared = true;
+            }
         }
     }
 }

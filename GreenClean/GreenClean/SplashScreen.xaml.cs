@@ -16,26 +16,23 @@ namespace GreenClean
 		public SplashScreen ()
 		{
 			InitializeComponent ();
+        }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
 
             if (!Application.Current.Properties.ContainsKey("token"))
             {
-                
-                Task.Run( async () =>
-                {
-                    Navigation.InsertPageBefore(new MainPage(), this);
-                    await Navigation.PopAsync();
-                });
+                Navigation.InsertPageBefore(new MainPage(), this);
+                await Navigation.PopAsync();
             }
             else
             {
-                Task.Run(async () =>
-                {
-                    await Customer.GetProfile();
-                    Navigation.InsertPageBefore(new Dashboard(), this);
-                    await Navigation.PopAsync();
-                });
+                await Customer.GetProfile();
+                Navigation.InsertPageBefore(new Dashboard(), this);
+                await Navigation.PopAsync();
             }
-
         }
-	}
+    }
 }
