@@ -9,17 +9,24 @@ using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Linq;
+using GreenClean.Utilities;
 
 namespace GreenClean.ViewModel
 {
     class DashboardViewModel:ViewBaseModel
     {
-        static string serviceUri = "http://greenclean-cb.southeastasia.cloudapp.azure.com/api/services";
+        static string serviceUri = Constants.BaseUri + "/api/services";
+
+        
 
         public DashboardViewModel(Services serviceargs)
         {
             service = serviceargs;
-            SelectBooking = new Command(async () =>
+            Header = service.ServiceName;
+            Definition = service.Description;
+            MicroText = service.Price;
+            ButtonLabel = "Book now";
+            SelectTile = new Command(async () =>
             {
                 var appointmentRequest = new AppointmentRequest()
                 {
@@ -27,16 +34,37 @@ namespace GreenClean.ViewModel
                     Place = PlacesModel.PlacesList.FirstOrDefault(),
                     Customer = Customer.Current,
                     Payment = PaymentModel.GetFirstPaymentData(),
-                    Date = DateTime.Now.ToShortDateString(),
+                    Date = DateTime.Now.ToString("yyyy-MM-dd"),
                     Time = DateTime.Now.ToString("hh:00 tt")
                 };
                 await Application.Current.MainPage.Navigation.PushAsync(new PreBooking(appointmentRequest));
             });
         }
 
-        public Services service { get; set; }
+        public DashboardViewModel(Appointment appointmentargs)
+        {
+            appointment = appointmentargs;
+            Header = "[BOOKED] " + appointment.Service.ServiceName;
+            Definition = string.Format("Household keeper: {0} \nLocation: {1} \nPrice: {2}", appointment.Housekeeper.FullName,appointment.Places.PlaceDetail,appointment.Service.Price);
+            MicroText = string.Format("{0} {1}-{2}", appointment.ScheduleDate.ToString("yyyy-MM-dd"), appointment.ScheduleTimeEnd.ToString("hh:00 tt"), appointment.ScheduleTimeStart.ToString("hh:00 tt"));
+            ButtonLabel = "View booking";
+            SelectTile = new Command(async () =>
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new BookingDetailPage(appointment));
+            });
+        }
 
-        public ICommand SelectBooking { protected set; get; }
+        
+
+        public string Header { get; set; }
+        public string Definition { get; set; }
+        public string MicroText { get; set; }
+        public string ButtonLabel { get; set; }
+
+        public Services service { get; set; }
+        public Appointment appointment { get; set; }
+
+        public ICommand SelectTile { protected set; get; }
 
         public static ObservableCollection<DashboardViewModel> All = new ObservableCollection<DashboardViewModel>();
 

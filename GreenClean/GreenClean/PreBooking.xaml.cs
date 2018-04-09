@@ -28,13 +28,6 @@ namespace GreenClean
             Title = "Set your booking details";
             Options.ItemsSource = prebooking;
         }
-
-        protected override async void OnAppearing()
-        {
-            base.OnAppearing();
-
-            await PaymentModel.GetList();
-        }
                 
 
         public void ListOptions()
@@ -95,7 +88,7 @@ namespace GreenClean
                         InvisibleDatePicker.Focus();
                         InvisibleDatePicker.DateSelected += (sen, e) =>
                         {
-                            appointmentRequest.Date = e.NewDate.ToShortDateString();
+                            appointmentRequest.Date = e.NewDate.ToString("yyyy-MM-dd");
                             preBookingViewModel.OptionValue = appointmentRequest.Date;
                         };
                         break;

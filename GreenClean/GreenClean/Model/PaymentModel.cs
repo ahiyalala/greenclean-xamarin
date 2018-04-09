@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using GreenClean.Utilities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,15 +13,21 @@ namespace GreenClean.Model
     public class PaymentModel
     {
 
-        const string paymentUri = "http://greenclean-cb.southeastasia.cloudapp.azure.com/api/payments";
+        static string paymentUri = Constants.BaseUri + "/api/payments";
 
-        [JsonProperty("payment_id")]
+        [JsonIgnore]
         public int PaymentId { get; set; }
+
+        [JsonIgnore]
         public string PaymentName { get; set; }
-        [JsonProperty("credit_card_number")]
+        
+        [JsonIgnore]
         public string CardDigit { get; set; }
+        [JsonIgnore]
         public string CardExpiry { get; set; }
+        [JsonIgnore]
         public string CardCvv { get; set; }
+        [JsonProperty("payment_type")]
         public string PaymentDetail {
             get
             {

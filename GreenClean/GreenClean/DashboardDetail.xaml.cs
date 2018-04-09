@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
 namespace GreenClean
@@ -19,6 +20,7 @@ namespace GreenClean
         {
             InitializeComponent();
             HasAppeared = false;
+            Task.Run(() => DashboardViewModel.GetList()).Wait();
             ItemsSource = DashboardViewModel.All;
         }
 
@@ -27,10 +29,19 @@ namespace GreenClean
             base.OnAppearing();
             if (!HasAppeared)
             {
-                await DashboardViewModel.GetList();
                 await PlacesModel.GetList();
                 HasAppeared = true;
             }
+        }
+
+        protected override void OnChildAdded(Element child)
+        {
+            base.OnChildAdded(child);
+            if (DashboardViewModel.All[0].appointment != null)
+            {
+                CurrentPage = Children.FirstOrDefault();
+            }
+            
         }
     }
 }

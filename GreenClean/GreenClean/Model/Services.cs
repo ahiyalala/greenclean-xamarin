@@ -8,8 +8,9 @@ namespace GreenClean.Model
     [JsonObject("services")]
     public class Services
     {
+        [JsonIgnore]
+        public static bool HasInitialized = false;
 
-        public int Id { get; set; }
         [JsonProperty("service_type_key")]
         public string ServiceName { get; set; }
         [JsonProperty("service_description")]

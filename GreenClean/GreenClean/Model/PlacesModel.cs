@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using GreenClean.Utilities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,7 +15,7 @@ namespace GreenClean.Model
     [JsonObject("location")]
     public class PlacesModel
     {
-        const string placesUri = "http://greenclean-cb.southeastasia.cloudapp.azure.com/api/places";
+        static string placesUri = Constants.BaseUri + "/api/places";
 
         [JsonProperty("location_id")]
         public int PlaceId { get; set; }

@@ -25,7 +25,7 @@ namespace GreenClean.Model
         [JsonProperty("gender")]
         public string Gender { get; set; }
         
-        public string GetFullName()
+        private string GetFullName()
         {
             return string.Format("{0} {1} {2}", FirstName, MiddleName, LastName);
         }

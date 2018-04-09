@@ -1,4 +1,5 @@
 ﻿using GreenClean.Model;
+using GreenClean.Utilities;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace GreenClean
 {
 	public partial class MainPage : ContentPage
 	{
-        const string UriUsers = "http://greenclean-cb.southeastasia.cloudapp.azure.com/api/users/login";
+        string UriUsers = Constants.BaseUri + "/api/users/login";
         HttpClient client;
         public MainPage()
 		{

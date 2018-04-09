@@ -4,7 +4,7 @@
              x:Class="GreenClean.PreBooking"
              x:Name="PreBookingPage">
     <StackLayout>
-        <DatePicker x:Name="InvisibleDatePicker" IsVisible="False" />
+        <DatePicker x:Name="InvisibleDatePicker" IsVisible="False"/>
         <Picker x:Name="InvisiblePicker" IsVisible="False" >
             <Picker.ItemsSource>
                 <x:Array Type="{x:Type x:String}">

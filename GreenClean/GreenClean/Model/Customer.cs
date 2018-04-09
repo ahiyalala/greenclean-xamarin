@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using GreenClean.Utilities;
 
 namespace GreenClean.Model
 {
@@ -41,8 +42,8 @@ namespace GreenClean.Model
         [JsonIgnore]
         public static Customer Current { get; set; }
 
-        const string loginUri = "http://greenclean-cb.southeastasia.cloudapp.azure.com/api/users/login";
-        const string UriUsers = "http://greenclean-cb.southeastasia.cloudapp.azure.com/api/users";
+        static string loginUri = Constants.BaseUri+"/api/users/login";
+        static string UriUsers = Constants.BaseUri + "/api/users";
 
         public async static Task GetProfile()
         {

@@ -7,17 +7,51 @@ namespace GreenClean.Model
 {
     public class AppointmentRequest
     {
-        [JsonProperty("service")]
+        [JsonIgnore]
         public Services Service { get; set; }
-        [JsonProperty("location")]
+
+        [JsonProperty("service_type_key")]
+        public string ServiceTypeKey => GetServiceKey();
+
+        [JsonIgnore]
         public PlacesModel Place { get; set; }
-        [JsonProperty("customer")]
+
+        [JsonProperty("location_id")]
+        public int PlaceId => Place.PlaceId;
+
+        [JsonIgnore]
         public Customer Customer { get; set; }
-        [JsonProperty("payment")]
+
+        [JsonProperty("customer_id")]
+        public int CustomerId => Customer.CustomerId;
+
+        [JsonIgnore]
         public PaymentModel Payment { get; set; }
+
+        [JsonProperty("payment_type")]
+        public string PaymentType => GetType();
+
         [JsonProperty("date")]
         public string Date { get; set; }
+
         [JsonProperty("start_time")]
         public string Time { get; set; }
+
+        private string GetServiceKey()
+        {
+            return Service.ServiceName;
+        }
+
+        private new string GetType()
+        {
+            if(Payment.PaymentDetail == "Cash")
+            {
+                return "Cash";
+            }
+            else
+            {
+                return "Credit";
+            }
+        }
     }
 }
