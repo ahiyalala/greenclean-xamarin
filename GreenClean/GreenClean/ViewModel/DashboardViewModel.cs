@@ -41,19 +41,6 @@ namespace GreenClean.ViewModel
             });
         }
 
-        public DashboardViewModel(Appointment appointmentargs)
-        {
-            appointment = appointmentargs;
-            Header = "[BOOKED] " + appointment.Service.ServiceName;
-            Definition = string.Format("Household keeper: {0} \nLocation: {1} \nPrice: {2}", appointment.Housekeeper.FullName,appointment.Places.PlaceDetail,appointment.Service.Price);
-            MicroText = string.Format("{0} {1}-{2}", appointment.ScheduleDate.ToString("yyyy-MM-dd"), appointment.ScheduleTimeEnd.ToString("hh:00 tt"), appointment.ScheduleTimeStart.ToString("hh:00 tt"));
-            ButtonLabel = "View booking";
-            SelectTile = new Command(async () =>
-            {
-                await Application.Current.MainPage.Navigation.PushAsync(new BookingDetailPage(appointment));
-            });
-        }
-
         
 
         public string Header { get; set; }
@@ -62,7 +49,6 @@ namespace GreenClean.ViewModel
         public string ButtonLabel { get; set; }
 
         public Services service { get; set; }
-        public Appointment appointment { get; set; }
 
         public ICommand SelectTile { protected set; get; }
 

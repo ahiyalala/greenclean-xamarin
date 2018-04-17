@@ -15,17 +15,17 @@ namespace GreenClean
             
 			InitializeComponent();
 
-            //if (!Application.Current.Properties.ContainsKey("token"))
-            //{
-            //    MainPage = new NavigationPage(new MainPage());
-            //}
-            //else
-            //{
-            //    MainPage = new NavigationPage(new Dashboard());
-            //}
+            if (!Application.Current.Properties.ContainsKey("token"))
+            {
+                MainPage = new NavigationPage(new MainPage());
+            }
+            else
+            {
+                MainPage = new NavigationPage(new Dashboard());
+            }
 
-            MainPage = new NavigationPage(new SplashScreen());
-            
+            //MainPage = new NavigationPage(new SplashScreen());
+
         }
 
 		protected override void OnStart ()

@@ -13,35 +13,37 @@ using Xamarin.Forms.Xaml;
 namespace GreenClean
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class DashboardDetail : CarouselPage
+    public partial class DashboardDetail : TabbedPage
     {
         private static bool HasAppeared;
         public DashboardDetail()
         {
             InitializeComponent();
             HasAppeared = false;
-            Task.Run(() => DashboardViewModel.GetList()).Wait();
-            ItemsSource = DashboardViewModel.All;
+            
         }
 
-        protected async override void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
-            if (!HasAppeared)
+            if(AppointmentDashboardViewmodel.All.Count == 0)
             {
-                await PlacesModel.GetList();
-                HasAppeared = true;
+                CurrentPage = Children[1];
             }
-        }
-
-        protected override void OnChildAdded(Element child)
-        {
-            base.OnChildAdded(child);
-            if (DashboardViewModel.All[0].appointment != null)
+            else
             {
-                CurrentPage = Children.FirstOrDefault();
+                CurrentPage = Children[0];
             }
             
+            if (!HasAppeared)
+            {
+                Task.Run(async () => {
+                    await PlacesModel.GetList();
+                    await DashboardViewModel.GetList();
+                    await AppointmentDashboardViewmodel.GetList();
+                });
+                HasAppeared = true;
+            }
         }
     }
 }

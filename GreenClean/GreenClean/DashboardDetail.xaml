@@ -1,30 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<CarouselPage xmlns="http://xamarin.com/schemas/2014/forms"
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:GreenClean.ViewModel"
+             xmlns:local="clr-namespace:GreenClean"
              x:Class="GreenClean.DashboardDetail"
              Title="Detail">
-    <CarouselPage.ItemTemplate>
-        <DataTemplate>
-            <ContentPage>
-                <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="400" BackgroundColor="White" HeightRequest="400" Padding="0,0,0,0">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="3*"/>
-                            <RowDefinition Height="2*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Image Source="http://www.salayapavilion.com/websph/images/stories/Interns/Housekeeping.JPG" HeightRequest="100" Aspect="AspectFill" Grid.Row="0"/>
-                        <StackLayout Grid.Row="1" Padding="10,10,10,10">
-                            <Label Text="{Binding Header}" FontSize="Large"/>
-                            <Label Text="{Binding Definition}" />
-                            <Label Text="{Binding MicroText}" FontAttributes="Bold" HorizontalOptions="End" HorizontalTextAlignment="End"/>
-                        </StackLayout>
-                        <Button Text="{Binding ButtonLabel}" Command="{Binding SelectTile}" Grid.Row="2"/>
-
-                    </Grid>
-                </Frame>
-            </ContentPage>
-        </DataTemplate>
-    </CarouselPage.ItemTemplate>
-</CarouselPage>
+    <local:AppointmentsDashboard/>
+    <local:ServicesDashboard/>
+</TabbedPage>

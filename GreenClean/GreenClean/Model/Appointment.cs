@@ -49,7 +49,7 @@ namespace GreenClean.Model
             if (response.IsSuccessStatusCode)
             {
                 var appointmentResult = JsonConvert.DeserializeObject<Appointment>(result);
-                DashboardViewModel.All.Insert(0,new DashboardViewModel(appointmentResult));
+                AppointmentDashboardViewmodel.All.Add(new AppointmentDashboardViewmodel(appointmentResult));
                 return appointmentResult;
             }
             return null;

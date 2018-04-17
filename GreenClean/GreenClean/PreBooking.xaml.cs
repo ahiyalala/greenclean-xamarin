@@ -1,8 +1,10 @@
 ﻿using GreenClean.Model;
+using GreenClean.Utilities;
 using GreenClean.ViewModel;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -18,17 +20,50 @@ namespace GreenClean
         PreBookingViewModel preBookingViewModel;
         
         private AppointmentRequest appointmentRequest;
+        private bool hasAppeared;
 
         public PreBooking(AppointmentRequest appointmentargs)
         {
             InitializeComponent();
             InvisibleDatePicker.SetValue(DatePicker.MinimumDateProperty, System.DateTime.Now);
             appointmentRequest = appointmentargs;
-            ListOptions();
+            hasAppeared = false;
             Title = "Set your booking details";
             Options.ItemsSource = prebooking;
         }
-                
+
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+            if(PlacesModel.PlacesList.Count > 0 && !hasAppeared)
+            {
+                ListOptions();
+                hasAppeared = true;
+            }
+            else if (PlacesModel.PlacesList.Count == 0)
+            {
+                await DisplayAlert("No places available", "Go to Places and add a place", "Take me");
+                var placeform = new PlacesForm();
+                placeform.DataSender += AddList;
+                await Navigation.PushAsync(placeform);
+            }
+        }
+
+        public async void AddList(object sender, FormEvent args)
+        {
+            var obj = args.Object as PlacesModel;
+            var isSuccessful = await PlacesModel.AddToList(obj);
+            if (isSuccessful)
+            {
+                appointmentRequest.Place = PlacesModel.PlacesList.FirstOrDefault();
+            }
+            else
+            {
+                await DisplayAlert("Oops", "Something went wrong", "Try again");
+            }
+            await Navigation.PopAsync();
+        }
+
 
         public void ListOptions()
         {

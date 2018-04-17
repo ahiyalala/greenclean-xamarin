@@ -45,6 +45,7 @@ namespace GreenClean
             else
             {
                 await DisplayAlert("Oops", "Something went wrong with your sign up :(", "Try again");
+                SubmitButton.IsEnabled = true;
             }
 
         }
