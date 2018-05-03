@@ -1,0 +1,44 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:local="clr-namespace:GreenClean"
+             x:Class="GreenClean.PostJobPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="We got you an appointment"
+                HorizontalOptions="CenterAndExpand" FontSize="Medium" Margin="0,20,0,0"/>
+            <Frame HorizontalOptions="Center" CornerRadius="50" WidthRequest="100" Margin="0,20,0,0" HeightRequest="100" Padding="0,0,0,0">
+                <Image Source="http://via.placeholder.com/100x100" Aspect="AspectFill" Margin="0,0,0,0" />
+            </Frame>
+            <Label Text="Juan dela Cruz" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
+            <StackLayout Orientation="Horizontal">
+                <Image Source="{Binding Stars[0].Image, Mode=TwoWay}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Rate}" CommandParameter="0" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image Source="{Binding Stars[1].Image, Mode=TwoWay}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Rate}" CommandParameter="1" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image Source="{Binding Stars[2].Image, Mode=TwoWay}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Rate}" CommandParameter="2" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image Source="{Binding Stars[3].Image, Mode=TwoWay}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Rate}" CommandParameter="3" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image Source="{Binding Stars[4].Image, Mode=TwoWay}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Rate}" CommandParameter="4" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+            <Entry Placeholder="Tell us about our service" />
+            <Button Text="Submit" HorizontalOptions="FillAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
