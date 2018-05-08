@@ -15,19 +15,24 @@ namespace GreenClean
         ObservableCollection<PaymentViewModel> payments = new ObservableCollection<PaymentViewModel>();
         PaymentViewModel paymentViewModel;
         PaymentForm paymentForm;
-
+        public static bool hasAppeared;
 		public PaymentPage ()
 		{
 			InitializeComponent ();
             Task.Run(async () => await PaymentModel.GetList());
             PaymentList.ItemsSource = payments;
+            hasAppeared = false;
 		}
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            ListPayments();
+            if (!hasAppeared)
+            {
+                ListPayments();
+                hasAppeared = true;
+            }
+            
 
         }
 
@@ -47,7 +52,6 @@ namespace GreenClean
 
         public void ListPayments()
         {
-            payments.Clear();
             foreach(var x in PaymentModel.PaymentList)
             {
                 bool flag = (x.PaymentDetail != "Cash") ? true : false;

@@ -25,7 +25,15 @@ namespace GreenClean.ViewModel
             ButtonLabel = "View booking";
             SelectTile = new Command(async () =>
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new BookingDetailPage(appointment));
+                if (!appointmentargs.IsFinished)
+                {
+                    await Application.Current.MainPage.Navigation.PushAsync(new BookingDetailPage(appointment));
+                }
+                else
+                {
+                    await Application.Current.MainPage.Navigation.PushAsync(new PostJobPage(appointment.BookingRequestId));
+                }
+                    
             });
         }
 
@@ -40,12 +48,11 @@ namespace GreenClean.ViewModel
 
         public ICommand SelectTile { protected set; get; }
 
-        public static ObservableCollection<AppointmentDashboardViewmodel> All = new ObservableCollection<AppointmentDashboardViewmodel>();
-
+        public static ObservableCollection<AppointmentDashboardViewmodel> Pending = new ObservableCollection<AppointmentDashboardViewmodel>();
+        public static ObservableCollection<AppointmentDashboardViewmodel> Finished = new ObservableCollection<AppointmentDashboardViewmodel>();
         public async static Task GetList()
         {
-            await Task.Delay(1000);
-
+            await Appointment.GetAppointmentsAsync();
         }
     }
 }

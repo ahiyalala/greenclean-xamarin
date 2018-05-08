@@ -13,11 +13,10 @@ namespace GreenClean
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AppointmentsDashboard : ContentPage
 	{
-
 		public AppointmentsDashboard ()
 		{
 			InitializeComponent ();
-            Appointments.ItemsSource = AppointmentDashboardViewmodel.All;
+            Appointments.ItemsSource = AppointmentDashboardViewmodel.Pending;
 		}
-	}
+    }
 }

@@ -30,29 +30,54 @@ namespace GreenClean
 			InitializeComponent ();
             CardNumber.IsVisible = false;
             CardNumberText.Text = obj.PaymentDetail;
-            ExpiryDate.Text = obj.CardExpiry;
+            ExpiryMonth.Text = obj.CardInfo.ExpiryMonth.ToString();
+            ExpiryYear.Text = obj.CardInfo.ExpiryYear.ToString();
             SubmitButton.Text = "Update";
             payment = obj;
 		}
 
-        public void OnExecute(object sender, EventArgs args)
+        public async void OnExecute(object sender, EventArgs args)
         {
 
             if(payment != null)
             {
-                payment.CardExpiry = ExpiryDate.Text;
-                payment.CardCvv = CVV.Text;
-
+                payment.CardInfo.ExpiryMonth = ReturnNumeric(ExpiryMonth);
+                payment.CardInfo.ExpiryYear = ReturnNumeric(ExpiryYear);
+                payment.CardInfo.Cvc = ReturnNumeric(CVV);
+                await payment.UpdateAsync();
             }
             else
             {
-                var cardexp = ExpiryDate.Text;
-                var cvv = CVV.Text;
-                var cardnumber = CardNumber.Text;
-                payment = new PaymentModel(String.Empty, cardnumber, cardexp, cvv);
+                var card = new Card
+                {
+                    Number = ReturnNumeric(CardNumber),
+                    ExpiryMonth = ReturnNumeric(ExpiryMonth),
+                    ExpiryYear = ReturnNumeric(ExpiryYear),
+                    Cvc = ReturnNumeric(CVV)
+                };
+                payment = await PaymentModel.AddAsync(card).ConfigureAwait(false);
             }
 
-            DataSender(sender, new FormEvent() { Object = payment });
+            if (payment.isRequestSuccessful)
+            {
+                await DisplayAlert("Invalid card", "Please verify your details", "Try again");
+            }
+            else
+            {
+                DataSender(sender, new FormEvent() { Object = payment });
+            }
+        }
+
+        public int ReturnNumeric(Entry entry)
+        {
+            if(int.TryParse(entry.Text, out int result))
+            {
+                return int.Parse(entry.Text);
+            }
+            else
+            {
+                return 0;
+            }
         }
         
 	}

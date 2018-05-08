@@ -128,4 +128,10 @@
       <Name>GreenClean</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\star_rate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\star_rate_white.png" />
+  </ItemGroup>
 </Project>

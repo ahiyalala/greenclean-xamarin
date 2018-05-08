@@ -23,10 +23,13 @@ namespace GreenClean
             
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
-            if(AppointmentDashboardViewmodel.All.Count == 0)
+            if(!HasAppeared)
+                await AppointmentDashboardViewmodel.GetList();
+
+            if (AppointmentDashboardViewmodel.Pending.Count == 0)
             {
                 CurrentPage = Children[1];
             }
@@ -37,11 +40,8 @@ namespace GreenClean
             
             if (!HasAppeared)
             {
-                Task.Run(async () => {
-                    await PlacesModel.GetList();
-                    await DashboardViewModel.GetList();
-                    await AppointmentDashboardViewmodel.GetList();
-                });
+                await PlacesModel.GetList();
+                await DashboardViewModel.GetList();
                 HasAppeared = true;
             }
         }
