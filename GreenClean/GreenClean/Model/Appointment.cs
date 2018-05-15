@@ -66,7 +66,7 @@ namespace GreenClean.Model
 
             var response = await client.GetAsync(appointmentUri);
             var result = await response.Content.ReadAsStringAsync();
-            if (response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode && (AppointmentDashboardViewmodel.Pending.Count == 0 || AppointmentDashboardViewmodel.Finished.Count == 0))
             {
                 var appointmentsList = JsonConvert.DeserializeObject<List<Appointment>>(result);
                 foreach(var appointment in appointmentsList.Where(x => x.IsFinished == false || x.Rating == 0))

@@ -28,9 +28,10 @@ namespace GreenClean
 
         }
 
-		protected override void OnStart ()
+		protected async override void OnStart ()
 		{
-            
+            if (Application.Current.Properties.ContainsKey("token"))
+                await Customer.GetProfile();
         }
 
 		protected override void OnSleep ()
