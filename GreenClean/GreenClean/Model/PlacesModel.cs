@@ -102,7 +102,7 @@ namespace GreenClean.Model
             if (request.IsSuccessStatusCode)
             {
                 var place = JsonConvert.DeserializeObject<PlacesModel>(content);
-                PlacesList.Add(places);
+                PlacesList.Add(place);
 
                 return true;
             }

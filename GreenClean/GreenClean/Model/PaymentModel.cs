@@ -79,13 +79,16 @@ namespace GreenClean.Model
             try
             {
                 HttpClient client = new HttpClient();
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(
-                ASCIIEncoding.ASCII.GetBytes(
-                    string.Format("{0}:", "pk-6y2WX6WhWxfQOg8ezKIUuiJxa7gC4sDvOipn9NFXlwz"))));
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
-                var cardJson = JsonConvert.SerializeObject(card);
+                var cardJson = JsonConvert.SerializeObject(new {
+                    card = new {
+                        number = card.Number,
+                        expMonth = card.ExpiryMonth.ToString("D2"),
+                        expYear = card.ExpiryYear.ToString(),
+                        cvc = card.Cvc.ToString()
+                }
+                });
                 var postRequest = new StringContent(cardJson, Encoding.UTF8, "application/json");
-                var request = await client.PostAsync(new Uri("https://pg-sandbox.paymaya.com/payments/v1/payment-tokens"), postRequest).ConfigureAwait(false);
+                var request = await client.PostAsync("https://pg-sandbox.paymaya.com/payments/v1/payment-tokens", postRequest);
                 var content = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
                 if (request.IsSuccessStatusCode)
                 {

@@ -56,12 +56,12 @@ namespace GreenClean
             if (isSuccessful)
             {
                 appointmentRequest.Place = PlacesModel.PlacesList.FirstOrDefault();
+                await Navigation.PopAsync();
             }
             else
             {
                 await DisplayAlert("Oops", "Something went wrong", "Try again");
             }
-            await Navigation.PopAsync();
         }
 
 

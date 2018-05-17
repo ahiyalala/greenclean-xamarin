@@ -50,7 +50,7 @@ namespace GreenClean
             {
                 var card = new Card
                 {
-                    Number = ReturnNumeric(CardNumber),
+                    Number = CardNumber.Text,
                     ExpiryMonth = ReturnNumeric(ExpiryMonth),
                     ExpiryYear = ReturnNumeric(ExpiryYear),
                     Cvc = ReturnNumeric(CVV)

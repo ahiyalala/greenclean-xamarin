@@ -8,10 +8,10 @@ namespace GreenClean.Model
     [JsonObject("card")]
     public class Card
     {
-        [JsonProperty("payment_id")]
+        [JsonProperty("payment_id"),JsonIgnore]
         public string PaymentId { get; set; }
         [JsonProperty("number")]
-        public long Number { get; set; }
+        public string Number { get; set; }
         [JsonProperty("expMonth")]
         public int ExpiryMonth { get; set; }
         [JsonProperty("expYear")]
