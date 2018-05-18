@@ -34,8 +34,8 @@ namespace GreenClean.ViewModel
                     Place = PlacesModel.PlacesList.FirstOrDefault(),
                     Customer = Customer.Current,
                     Payment = PaymentModel.GetFirstPaymentData(),
-                    Date = DateTime.Now.ToString("yyyy-MM-dd"),
-                    Time = DateTime.Now.ToString("hh:00 tt")
+                    Date = null,
+                    Time = null
                 };
                 await Application.Current.MainPage.Navigation.PushAsync(new PreBooking(appointmentRequest));
             });

@@ -1,7 +1,13 @@
-﻿using GreenClean.Model;
+﻿using GreenClean.DependencyServices;
+using GreenClean.Model;
+using GreenClean.Utilities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -12,16 +18,36 @@ namespace GreenClean.ViewModel
         #region fields
         Appointment appointment;
         StarControl star;
+        bool enabled;
         #endregion
 
         public int Rating { get; set; }
         public ICommand Rate { get; set; }
+        
+        public INavigation Navigation { get; set; }
 
         public static PostJobViewModel Current { get; set; }
 
+        public ICommand SendRating { get; set; }
+        public bool IsEnabled {
+            get
+            {
+                return enabled;
+            }
+            set
+            {
+                enabled = value;
+                OnPropertyChanged("IsEnabled");
+            }
+        }
+        
+        public string Comment { get; set; }
+
         public PostJobViewModel()
         {
+            IsEnabled = true;
             Rating = 1;
+            SendRating = new Command(async () => await SendRatingAsync());
             Stars = new List<StarControl>(){
                     new StarControl(1){
                         Image = ImageSource.FromResource("GreenClean.Assets.star_rate_white.png")
@@ -52,6 +78,41 @@ namespace GreenClean.ViewModel
                 }
                 Rating = Stars[index].Rating;
             });
+        }
+
+        public async Task SendRatingAsync()
+        {
+            IsEnabled = false;
+            HttpClient client = new HttpClient();
+            var properties = Application.Current.Properties;
+
+            client.DefaultRequestHeaders.Add("Authentication", string.Format("{0} {1}", properties["email"], properties["token"]));
+            var feedback = new
+            {
+                service_cleaning_id = AppointmentData.BookingRequestId,
+                customer_id = Customer.Current.CustomerId,
+                housekeeper_id = AppointmentData.Housekeeper.HousekeeperId,
+                rating = Rating,
+                comment = Comment
+            };
+            var feedbackJson = JsonConvert.SerializeObject(feedback);
+            var postRequest = new StringContent(feedbackJson, Encoding.UTF8, "application/json");
+
+            var request = await client.PostAsync(string.Format("{0}/api/feedback/send", Constants.BaseUri), postRequest);
+
+            if (request.IsSuccessStatusCode)
+            {
+                DependencyService.Get<IMessage>().ShortAlert("Feedback sent!");
+                AppointmentDashboardViewmodel.Finished.Remove(AppointmentDashboardViewmodel.Finished.Where(x => x.appointment.BookingRequestId == AppointmentData.BookingRequestId).First());
+                await Navigation.PopAsync();
+            }
+            else
+            {
+                DependencyService.Get<IMessage>().ShortAlert(string.Format("{0}: Error sending feedback", request.StatusCode.ToString()));
+                IsEnabled = true;
+            }
+
+            
         }
 
         public Appointment AppointmentData

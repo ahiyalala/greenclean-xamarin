@@ -20,7 +20,10 @@ namespace GreenClean
 		{
             _appointmentId = appointmentId;
 			InitializeComponent ();
-            PostJobViewModel.Current = new PostJobViewModel();
+            PostJobViewModel.Current = new PostJobViewModel()
+            {
+                Navigation = Navigation
+            };
             BindingContext = PostJobViewModel.Current;
 		}
 

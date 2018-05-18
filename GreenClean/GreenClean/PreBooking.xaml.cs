@@ -70,8 +70,8 @@ namespace GreenClean
             prebooking.Add(new PreBookingViewModel("Service", appointmentRequest.Service.ServiceName, -1,false));
             prebooking.Add(new PreBookingViewModel("Place", appointmentRequest.Place.PlaceDetail, 0));
             prebooking.Add(new PreBookingViewModel("Price", appointmentRequest.Payment.PaymentDetail, 1));
-            prebooking.Add(new PreBookingViewModel("Date", appointmentRequest.Date, 2));
-            prebooking.Add(new PreBookingViewModel("Time", appointmentRequest.Time, 3));
+            prebooking.Add(new PreBookingViewModel("Date", "Select a date", 2));
+            prebooking.Add(new PreBookingViewModel("Time", "Select a time", 3));
         }
 
         public async void UpdatePlace(object sender, SelectedItemChangedEventArgs a)
@@ -84,7 +84,6 @@ namespace GreenClean
                 preBookingViewModel.OptionValue = appointmentRequest.Place.PlaceDetail;
                 await Navigation.PopAsync();
             }
-                
         }
 
         public async void UpdatePaymentType(object sender, SelectedItemChangedEventArgs a)
@@ -142,8 +141,19 @@ namespace GreenClean
 
         async void FindAnAppointment(object sender, EventArgs e)
         {
-            Navigation.InsertPageBefore(new BookMeUp(appointmentRequest), this);
-            await Navigation.PopAsync();
+            if(appointmentRequest.Time == null)
+            {
+                await DisplayAlert("Invalid request", "Select a time", "Try again");
+            }
+            else if(appointmentRequest.Date == null)
+            {
+                await DisplayAlert("Invalid request", "Select a date", "Try again");
+            }
+            else
+            {
+                Navigation.InsertPageBefore(new BookMeUp(appointmentRequest), this);
+                await Navigation.PopAsync();
+            }
         }
 
         

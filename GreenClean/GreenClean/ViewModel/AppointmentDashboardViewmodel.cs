@@ -19,7 +19,8 @@ namespace GreenClean.ViewModel
         public AppointmentDashboardViewmodel(Appointment appointmentargs)
         {
             appointment = appointmentargs;
-            Header = "[BOOKED] " + appointment.Service.ServiceName;
+            var status = (appointment.IsFinished)? "[NEEDS REVIEW]" : "[PENDING]";
+            Header = string.Format("{0} {1}",status,appointment.Service.ServiceName);
             Definition = string.Format("Household keeper: {0} \nLocation: {1} \nPrice: {2}", appointment.Housekeeper.FullName, appointment.Places.PlaceDetail, appointment.Service.Price);
             MicroText = string.Format("{0} {1}-{2}", appointment.ScheduleDate.ToString("yyyy-MM-dd"), appointment.ScheduleTimeStart.ToString("hh:00 tt"), appointment.ScheduleTimeEnd.ToString("hh:00 tt"));
             ButtonLabel = "View booking";

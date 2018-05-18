@@ -12,13 +12,14 @@
                 <Entry Placeholder="First Name" HorizontalOptions="FillAndExpand" x:Name="FirstName"/>
                 <Entry Placeholder="Last Name" HorizontalOptions="FillAndExpand" x:Name="LastName"/>
             </StackLayout>
-            <Entry Placeholder="+639 1234567" Text="+639 " x:Name="Mobile"/>
+            <Entry Placeholder="9171234567" Keyboard="Numeric" x:Name="Mobile"/>
             <Label Margin="5,0,0,-15">Birthday</Label>
             <DatePicker x:Name="BirthDate" Format="yyyy-MM-dd" />
-            <Entry Placeholder="your_email@example.com" x:Name="Email"/>
+            <Entry Placeholder="your_email@example.com" Keyboard="Email" x:Name="Email"/>
             <Entry Placeholder="Password" x:Name="Password" IsPassword="True" />
             <Entry Placeholder="Re-type password" x:Name="RetypePassword" IsPassword="True" />
             <Button x:Name="SubmitButton" Text="Submit" Clicked="SubmitForm"/>
+            <Label x:Name="InfoMessage" IsVisible="False" TextColor="Red"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

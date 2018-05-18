@@ -5,11 +5,11 @@
     <ContentPage.Content>
         <StackLayout>
             <Label x:Name="CardNumberText" HorizontalOptions="FillAndExpand" FontSize="Medium" />
-            <Entry x:Name="CardNumber" HorizontalOptions="FillAndExpand" Placeholder="Card number"/>
+            <Entry x:Name="CardNumber" Keyboard="Numeric" HorizontalOptions="FillAndExpand" Placeholder="Card number"/>
             <StackLayout Orientation="Horizontal">
-                <Entry x:Name="ExpiryMonth" HorizontalOptions="Start" Placeholder="MM"/>
-                <Entry x:Name="ExpiryYear" HorizontalOptions="Start" Placeholder="YYYY"/>
-                <Entry x:Name="CVV" HorizontalOptions="End" Placeholder="CVV"/>
+                <Entry x:Name="ExpiryMonth" Keyboard="Numeric" HorizontalOptions="Start" Placeholder="MM"/>
+                <Entry x:Name="ExpiryYear" Keyboard="Numeric" HorizontalOptions="Start" Placeholder="YYYY"/>
+                <Entry x:Name="CVV" Keyboard="Numeric" HorizontalOptions="End" Placeholder="CVV"/>
             </StackLayout>
             <Button x:Name="SubmitButton" VerticalOptions="End" Clicked="OnExecute"/>
         </StackLayout>

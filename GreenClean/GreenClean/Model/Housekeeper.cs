@@ -8,6 +8,8 @@ namespace GreenClean.Model
     [JsonObject("housekeeper")]
     public class Housekeeper
     {
+        [JsonProperty("housekeeper_id")]
+        public string HousekeeperId { get; set; }
         [JsonProperty("first_name")]
         public string FirstName { get; set; }
         [JsonProperty("middle_name")]
