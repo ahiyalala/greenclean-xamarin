@@ -45,7 +45,7 @@
                         </Image.GestureRecognizers>
                     </Image>
                 </StackLayout>
-                <Editor Placeholder="Tell us about our service" Text="{Binding Comment, Mode=TwoWay}" />
+                <Editor Text="{Binding Comment, Mode=TwoWay}" />
                 <Button Text="Submit" HorizontalOptions="FillAndExpand" Command="{Binding SendRating}" IsEnabled="{Binding IsEnabled,Mode=TwoWay}" />
             </StackLayout>
         </AbsoluteLayout>

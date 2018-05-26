@@ -42,10 +42,18 @@ namespace GreenClean
             }
             else if (PlacesModel.PlacesList.Count == 0)
             {
-                await DisplayAlert("No places available", "Go to Places and add a place", "Take me");
-                var placeform = new PlacesForm();
-                placeform.DataSender += AddList;
-                await Navigation.PushAsync(placeform);
+                var response = await DisplayAlert("No places available", "Go to Places and add a place", "Ok","Go back");
+                if (response)
+                {
+                    var placeform = new PlacesForm();
+                    placeform.DataSender += AddList;
+                    await Navigation.PushAsync(placeform);
+                }
+                else
+                {
+                    await Navigation.PopAsync();
+                }
+                
             }
         }
 

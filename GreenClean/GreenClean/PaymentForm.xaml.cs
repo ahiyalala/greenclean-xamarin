@@ -1,4 +1,5 @@
-﻿using GreenClean.Model;
+﻿using GreenClean.DependencyServices;
+using GreenClean.Model;
 using GreenClean.Utilities;
 using System;
 using System.Collections.Generic;
@@ -64,6 +65,7 @@ namespace GreenClean
             }
             else
             {
+                DependencyService.Get<IMessage>().ShortAlert("Successful!");
                 DataSender(sender, new FormEvent() { Object = payment });
             }
         }

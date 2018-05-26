@@ -1,7 +1,9 @@
-﻿using GreenClean.Model;
+﻿using GreenClean.DependencyServices;
+using GreenClean.Model;
 using GreenClean.ViewModel;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -13,32 +15,64 @@ namespace GreenClean
 	public partial class BookMeUp : ContentPage
 	{
         AppointmentRequest request;
-		public BookMeUp (AppointmentRequest obj)
+        CancellationTokenSource token;
+        public BookMeUp (AppointmentRequest obj)
 		{
 			InitializeComponent ();
+            token = new CancellationTokenSource();
             request = obj;
 		}
+
+
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
 
-            var appointment = await Appointment.BookAsync(request);
 
-            if(appointment == null)
+
+            for(int x = 3; x >= 1 && !token.IsCancellationRequested; x--)
             {
-                await DisplayAlert("Oops", "We can't find you a housekeeper", "Try again");
-                Navigation.InsertPageBefore(new PreBooking(request), this);
+                CancelBtn.Text = $"Cancel request {x.ToString()}";
+                await Task.Delay(1000);
+            }
+            if (token.IsCancellationRequested)
+            {
+                DependencyService.Get<IMessage>().ShortAlert("Search cancelled");
                 await Navigation.PopAsync();
+                
             }
             else
             {
-                Navigation.InsertPageBefore(new BookingDetailPage(appointment), this);
-                await Navigation.PopAsync();
+                var appointment = await Appointment.BookAsync(request);
+                
+                if (appointment == null)
+                {
+                    await DisplayAlert("Oops", "We can't find you a housekeeper", "Try again");
+                    Navigation.InsertPageBefore(new PreBooking(request), this);
+                    await Navigation.PopAsync();
+                }
+                else
+                {
+                    Navigation.InsertPageBefore(new BookingDetailPage(appointment), this);
+                    await Navigation.PopAsync();
+                }
             }
             
         }
 
-        
-	}
+        public void CancelBooking()
+        {
+            CancelBtn.IsEnabled = false;
+            token.Cancel();
+            
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            token.Cancel();
+        }
+
+    }
 }
