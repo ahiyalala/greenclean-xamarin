@@ -6,7 +6,9 @@
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <AbsoluteLayout>
+            <ActivityIndicator HorizontalOptions="Center" Color="White"/>
             <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" Text="Please wait while we try to find you a housekeeper" FontSize="Large" TextColor="White" FontAttributes="Bold"/>
+            <Button x:Name="CancelBtn" Clicked="CancelBooking" AbsoluteLayout.LayoutBounds="0,1,1,0.1" AbsoluteLayout.LayoutFlags="All" Text="Cancel request" />
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

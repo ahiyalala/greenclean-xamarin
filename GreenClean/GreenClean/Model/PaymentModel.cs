@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net;
 using System.Net.Http;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -79,6 +80,9 @@ namespace GreenClean.Model
             try
             {
                 HttpClient client = new HttpClient();
+                var properties = Application.Current.Properties;
+                client.DefaultRequestHeaders.Add("Authentication", string.Format("{0} {1}", properties["email"], properties["token"]));
+
                 var cardJson = JsonConvert.SerializeObject(new {
                     card = new {
                         number = card.Number,
@@ -88,30 +92,20 @@ namespace GreenClean.Model
                 }
                 });
                 var postRequest = new StringContent(cardJson, Encoding.UTF8, "application/json");
-                var request = await client.PostAsync("https://pg-sandbox.paymaya.com/payments/v1/payment-tokens", postRequest);
+                var request = await client.PostAsync(paymentUri + "/register_card_to_customer", postRequest);
                 var content = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
                 if (request.IsSuccessStatusCode)
                 {
-                    var properties = Application.Current.Properties;
-                    client.DefaultRequestHeaders.Remove("Authorization");
-                    client.DefaultRequestHeaders.Add("Authentication", string.Format("{0} {1}", properties["email"], properties["token"]));
-                    var gcPostRequest = new StringContent(content, Encoding.UTF8, "application/json");
-                    var gcRequest = await client.PostAsync(paymentUri + "/register_card_to_customer", gcPostRequest);
-                    var gcContent = await gcRequest.Content.ReadAsStringAsync();
-                    if (gcRequest.IsSuccessStatusCode)
+                    var cardResponse = JsonConvert.DeserializeObject<Card>(content);
+                    return new PaymentModel
                     {
-                        var cardResponse = JsonConvert.DeserializeObject<Card>(gcContent);
-                        return new PaymentModel
-                        {
-                            CardInfo = cardResponse,
-                            isRequestSuccessful = true,
-                        };
-                    }
+                        CardInfo = cardResponse,
+                        isRequestSuccessful = true,
+                    };
                 }
                 return new PaymentModel
                 {
                     isRequestSuccessful = false
-
                 };
             }
             catch(Exception e)

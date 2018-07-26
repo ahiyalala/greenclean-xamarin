@@ -81,9 +81,10 @@ namespace GreenClean
         {
             foreach(var control in controls)
             {
-                if (control.Text.Equals(string.Empty))
+                if (control.Text.Equals(string.Empty)) { 
                     control.BackgroundColor = Color.Red;
                     return true;
+                }
             }
             return false;
         }
