@@ -33,6 +33,7 @@ namespace GreenClean
             Customer customer = new Customer
             {
                 FirstName = FirstName.Text,
+                MiddleName = MiddleName.Text,
                 LastName = LastName.Text,
                 BirthDate = BirthDate.Date.ToString("yyyy-MM-dd"),
                 EmailAddress = Email.Text,

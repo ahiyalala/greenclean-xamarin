@@ -8,10 +8,9 @@
             <Label FontSize="Small">
                 Kindly fill out these sign-up form
             </Label>
-            <StackLayout Orientation="Horizontal">
-                <Entry Placeholder="First Name" HorizontalOptions="FillAndExpand" x:Name="FirstName"/>
-                <Entry Placeholder="Last Name" HorizontalOptions="FillAndExpand" x:Name="LastName"/>
-            </StackLayout>
+            <Entry Placeholder="First Name" x:Name="FirstName"/>
+            <Entry Placeholder="Middle Name" x:Name="MiddleName"/>
+            <Entry Placeholder="Last Name" x:Name="LastName"/>
             <Entry Placeholder="9171234567" Keyboard="Numeric" x:Name="Mobile"/>
             <Label Margin="5,0,0,-15">Birthday</Label>
             <DatePicker x:Name="BirthDate" Format="yyyy-MM-dd" />
