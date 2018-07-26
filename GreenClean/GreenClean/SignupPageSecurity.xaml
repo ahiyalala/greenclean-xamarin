@@ -11,6 +11,12 @@
             <Entry Placeholder="First Name" x:Name="FirstName"/>
             <Entry Placeholder="Middle Name" x:Name="MiddleName"/>
             <Entry Placeholder="Last Name" x:Name="LastName"/>
+            <Picker x:Name="Gender" Title="Gender">
+                <Picker.Items>
+                    <x:String>Male</x:String>
+                    <x:String>Female</x:String>
+                </Picker.Items>
+            </Picker>
             <Entry Placeholder="9171234567" Keyboard="Numeric" x:Name="Mobile"/>
             <Label Margin="5,0,0,-15">Birthday</Label>
             <DatePicker x:Name="BirthDate" Format="yyyy-MM-dd" />

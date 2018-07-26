@@ -12,6 +12,7 @@
                 <DataTemplate>
                     <ViewCell IsEnabled="{Binding IsEnabled}">
                         <Label Text="{Binding Payment.PaymentDetail}" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" FontSize="Medium"  />
+                        <Label Text="{Binding Payment.Status}" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" FontSize="Small" />
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

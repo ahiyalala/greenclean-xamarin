@@ -48,7 +48,7 @@ namespace GreenClean
                 
                 if (appointment == null)
                 {
-                    await DisplayAlert("Oops", "We can't find you a housekeeper", "Try again");
+                    await DisplayAlert("Booking failed", "All employees are completely booked, please select another time or date", "Try again");
                     Navigation.InsertPageBefore(new PreBooking(request), this);
                     await Navigation.PopAsync();
                 }

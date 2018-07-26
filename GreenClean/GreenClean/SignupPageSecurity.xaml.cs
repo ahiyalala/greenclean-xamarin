@@ -37,6 +37,7 @@ namespace GreenClean
                 LastName = LastName.Text,
                 BirthDate = BirthDate.Date.ToString("yyyy-MM-dd"),
                 EmailAddress = Email.Text,
+                Gender = Gender.Items[Gender.SelectedIndex],
                 Password = Bcr.BCrypt.HashPassword(Password.Text),
                 ContactNumber = Mobile.Text
             };

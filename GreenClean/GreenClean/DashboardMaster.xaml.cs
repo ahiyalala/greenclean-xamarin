@@ -33,6 +33,7 @@ namespace GreenClean
             {
                 MenuItems = new ObservableCollection<DashboardMenuItem>(new[]
                 {
+                    new DashboardMenuItem { Id = 3, Title = "Profile", TargetType = new Profile(), VerticalLayout="FillAndExpand" },
                     new DashboardMenuItem { Id = 0, Title = "Places", TargetType = new PlacesPage(), VerticalLayout="FillAndExpand" },
                     new DashboardMenuItem { Id = 1, Title = "Payments", TargetType = new PaymentPage(), VerticalLayout="FillAndExpand" },
                     new DashboardMenuItem {Id = 2, Title="Logout",TargetType = new MainPage(), VerticalLayout="End" }

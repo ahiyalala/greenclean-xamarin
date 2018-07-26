@@ -39,11 +39,17 @@ namespace GreenClean.Model
         [JsonProperty("contact_number")]
         public string ContactNumber { get; set; }
 
+        [JsonProperty("gender")]
+        public string Gender { get; set; }
+
         [JsonProperty("user_token")]
         public string UserToken { get; set; }
 
         [JsonIgnore]
         public static Customer Current { get; set; }
+
+        [JsonIgnore]
+        public static string FullName => string.Format("{0}, {1}", Current.LastName, Current.FirstName);
 
         static string loginUri = Constants.BaseUri+"/api/users/login";
         static string UriUsers = Constants.BaseUri + "/api/users";
@@ -60,6 +66,12 @@ namespace GreenClean.Model
             {
                 Current = JsonConvert.DeserializeObject<Customer>(content);
             }
+        }
+
+        public static async Task<bool> UpdateProfile()
+        {
+            await Task.Delay(2000);
+            return false;
         }
 
         public static async Task<bool> SignUpAsync(Customer customer)
