@@ -1,5 +1,8 @@
-﻿using System;
+﻿using GreenClean.Model;
+using GreenClean.ViewModel;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +34,11 @@ namespace GreenClean
             if(item.Id == 2)
             {
                 Application.Current.Properties.Clear();
+                AppointmentDashboardViewmodel.Finished = new ObservableCollection<AppointmentDashboardViewmodel>();
+                AppointmentDashboardViewmodel.Pending = new ObservableCollection<AppointmentDashboardViewmodel>();
+                DashboardViewModel.All = new ObservableCollection<DashboardViewModel>();
+                PlacesPage.HasAppeared = false;
+                PlacesModel.PlacesList = new List<PlacesModel>();
                 Navigation.InsertPageBefore(new MainPage(), this);
                 await Navigation.PopAsync();
             }

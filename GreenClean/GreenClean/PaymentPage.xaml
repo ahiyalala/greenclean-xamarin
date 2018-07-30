@@ -7,12 +7,22 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ListView x:Name="PaymentList"
-                    ItemSelected="OnItemSelect">
+                    ItemSelected="OnItemSelect"
+                  RowHeight="50">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell IsEnabled="{Binding IsEnabled}">
-                        <Label Text="{Binding Payment.PaymentDetail}" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" FontSize="Medium"  />
-                        <Label Text="{Binding Payment.Status}" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" FontSize="Small" />
+                        <Grid Padding="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="{Binding Detail}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" FontSize="Medium"  />
+                            <Label Grid.Column="1" Text="{Binding Status}" VerticalOptions="FillAndExpand"  HorizontalOptions="End" HorizontalTextAlignment="End" VerticalTextAlignment="End" FontSize="Small" />
+                        </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

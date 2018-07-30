@@ -25,7 +25,7 @@
           <Label
               Grid.Column="1"
               Grid.Row="2"
-              Text="{x:Static local:Customer.FullName}"
+              Text="{Binding FullName, Source={x:Static local:Customer.Current}}"
               Style="{DynamicResource SubtitleStyle}"/>
         </Grid>
       </ListView.Header>

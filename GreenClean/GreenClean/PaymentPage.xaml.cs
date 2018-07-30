@@ -12,7 +12,7 @@ namespace GreenClean
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class PaymentPage : ContentPage
 	{
-        ObservableCollection<PaymentViewModel> payments = new ObservableCollection<PaymentViewModel>();
+        public static ObservableCollection<PaymentViewModel> payments = new ObservableCollection<PaymentViewModel>();
         PaymentViewModel paymentViewModel;
         PaymentForm paymentForm;
         public static bool hasAppeared;

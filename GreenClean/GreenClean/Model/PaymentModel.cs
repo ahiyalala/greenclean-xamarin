@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
@@ -13,13 +14,13 @@ using Xamarin.Forms;
 namespace GreenClean.Model
 {
     [JsonObject("payment")]
-    public class PaymentModel
+    public class PaymentModel : INotifyPropertyChanged
     {
 
         static string paymentUri = Constants.BaseUri + "/api/payments";
 
         [JsonIgnore]
-        public int PaymentId { get; set; }
+        public string PaymentId { get; set; }
         [JsonIgnore]
         public Card CardInfo { get; set; }
         [JsonIgnore]
@@ -43,6 +44,7 @@ namespace GreenClean.Model
         public PaymentModel(Card card)
         {
             CardInfo = card;
+            PaymentId = CardInfo.PaymentId;
         }
 
         public PaymentModel()
@@ -58,7 +60,8 @@ namespace GreenClean.Model
         public async static Task GetList()
         {
             HttpClient client = new HttpClient();
-
+            var properties = Application.Current.Properties;
+            client.DefaultRequestHeaders.Add("Authentication", string.Format("{0} {1}", properties["email"], properties["token"]));
             var request = await client.GetAsync(paymentUri).ConfigureAwait(false);
 
             if (request.IsSuccessStatusCode)
@@ -92,7 +95,7 @@ namespace GreenClean.Model
                 }
                 });
                 var postRequest = new StringContent(cardJson, Encoding.UTF8, "application/json");
-                var request = await client.PostAsync(paymentUri + "/register_card_to_customer", postRequest);
+                var request = await client.PostAsync(paymentUri, postRequest);
                 var content = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
                 if (request.IsSuccessStatusCode)
                 {
@@ -122,6 +125,13 @@ namespace GreenClean.Model
         {
             await Task.Delay(0);
             isRequestSuccessful = false;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
     }

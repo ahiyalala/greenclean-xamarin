@@ -8,11 +8,13 @@ namespace GreenClean.ViewModel
     public class PaymentViewModel : ViewBaseModel
     {
         #region fields
-        PaymentModel payment;
+        string payment;
+        string status;
         #endregion
+        
+        public PaymentModel Payment { get; set; }
 
-        public PaymentModel Payment
-        {
+        public string Detail {
             get
             {
                 return payment;
@@ -20,7 +22,20 @@ namespace GreenClean.ViewModel
             set
             {
                 payment = value;
-                OnPropertyChanged("Places");
+                OnPropertyChanged("PaymentDetail");
+            }
+        }
+
+        public string Status
+        {
+            get
+            {
+                return status;
+            }
+            set
+            {
+                status = value;
+                OnPropertyChanged("Status");
             }
         }
 
@@ -28,6 +43,12 @@ namespace GreenClean.ViewModel
 
         public PaymentViewModel(PaymentModel obj,bool enabled = true){
             Payment = obj;
+            Detail = Payment.PaymentDetail;
+            if(Payment.CardInfo != null)
+            {
+                Status = Payment.CardInfo.Status;
+            }
+            
             IsEnabled = enabled;
         }
     }

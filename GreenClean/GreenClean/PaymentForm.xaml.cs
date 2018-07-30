@@ -59,14 +59,21 @@ namespace GreenClean
                 payment = await PaymentModel.AddAsync(card).ConfigureAwait(false);
             }
 
-            if (payment.isRequestSuccessful)
+            if (!payment.isRequestSuccessful)
             {
-                await DisplayAlert("Invalid card", "Please verify your details", "Try again");
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    DependencyService.Get<IMessage>().ShortAlert("Failed to add your card");
+                });
+                
             }
             else
             {
-                DependencyService.Get<IMessage>().ShortAlert("Successful!");
-                DataSender(sender, new FormEvent() { Object = payment });
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    DependencyService.Get<IMessage>().ShortAlert("Successful!");
+                    DataSender(sender, new FormEvent() { Object = payment });
+                });
             }
         }
 

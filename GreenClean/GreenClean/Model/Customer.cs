@@ -49,7 +49,7 @@ namespace GreenClean.Model
         public static Customer Current { get; set; }
 
         [JsonIgnore]
-        public static string FullName => string.Format("{0}, {1}", Current.LastName, Current.FirstName);
+        public string FullName => string.Format("{0}, {1}", this.LastName, this.FirstName);
 
         static string loginUri = Constants.BaseUri+"/api/users/login";
         static string UriUsers = Constants.BaseUri + "/api/users";

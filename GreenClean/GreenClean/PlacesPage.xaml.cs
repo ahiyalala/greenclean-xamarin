@@ -16,7 +16,7 @@ namespace GreenClean
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PlacesPage : ContentPage
     {
-        ObservableCollection<PlacesViewModel> places = new ObservableCollection<PlacesViewModel>();
+        public static ObservableCollection<PlacesViewModel> places = new ObservableCollection<PlacesViewModel>();
         PlacesViewModel placesViewModel;
         PlacesForm placeform;
         public static bool HasAppeared;
