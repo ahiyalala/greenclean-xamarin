@@ -21,13 +21,13 @@ namespace GreenClean.Model
         public int PlaceId { get; set; }
         [JsonProperty("customer_id")]
         public int CustomerId { get; set; }
-        [JsonProperty("name")]
+        [JsonProperty("location_type")]
         public string PlaceName { get; set; }
-        [JsonProperty("street_address")]
+        [JsonProperty("location_street")]
         public string StreetName { get; set; }
-        [JsonProperty("barangay")]
+        [JsonProperty("location_barangay")]
         public string Barangay { get; set; }
-        [JsonProperty("city_address")]
+        [JsonProperty("location_city")]
         public string City { get; set; }
         [JsonIgnore]
         public string PlaceDetail
