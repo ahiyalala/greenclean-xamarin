@@ -31,11 +31,17 @@ namespace GreenClean.Model
         [JsonProperty("payment_type")]
         public string PaymentType => GetType();
 
+        [JsonProperty("duration")]
+        public string Duration => Service.Duration;
+
         [JsonProperty("date")]
         public string Date { get; set; }
 
         [JsonProperty("start_time")]
         public string Time { get; set; }
+
+        [JsonProperty("number_of_housekeepers")]
+        public int Housekeepers { get; set; }
 
         private string GetServiceKey()
         {
@@ -50,7 +56,7 @@ namespace GreenClean.Model
             }
             else
             {
-                return "Credit";
+                return Payment.CardInfo.PaymentId;
             }
         }
     }

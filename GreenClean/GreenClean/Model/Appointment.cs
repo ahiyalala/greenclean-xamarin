@@ -36,26 +36,35 @@ namespace GreenClean.Model
         public bool IsFinished { get; set; }
         [JsonProperty("rating")]
         public float Rating { get; set; }
+        [JsonProperty("comment")]
+        public string Comment { get; set; }
 
         static string appointmentUri = Constants.BaseUri + "/api/appointments";
 
         public static async Task<Appointment> BookAsync(AppointmentRequest appointmentRequest)
         {
-            HttpClient client = new HttpClient();
-            var properties = Application.Current.Properties;
-            client.DefaultRequestHeaders.Add("Authentication", string.Format("{0} {1}", properties["email"], properties["token"]));
-            var requestJson = JsonConvert.SerializeObject(appointmentRequest);
-            var content = new StringContent(requestJson, Encoding.UTF8, "application/json");
-
-            var response = await client.PostAsync(appointmentUri, content);
-            var result = await response.Content.ReadAsStringAsync();
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var appointmentResult = JsonConvert.DeserializeObject<Appointment>(result);
-                AppointmentDashboardViewmodel.Pending.Add(new AppointmentDashboardViewmodel(appointmentResult));
-                return appointmentResult;
+                HttpClient client = new HttpClient();
+                var properties = Application.Current.Properties;
+                client.DefaultRequestHeaders.Add("Authentication", string.Format("{0} {1}", properties["email"], properties["token"]));
+                var requestJson = JsonConvert.SerializeObject(appointmentRequest);
+                var content = new StringContent(requestJson, Encoding.UTF8, "application/json");
+
+                var response = await client.PostAsync(appointmentUri, content);
+                var result = await response.Content.ReadAsStringAsync();
+                if (response.IsSuccessStatusCode)
+                {
+                    var appointmentResult = JsonConvert.DeserializeObject<Appointment>(result);
+                    AppointmentDashboardViewmodel.Pending.Add(new AppointmentDashboardViewmodel(appointmentResult));
+                    return appointmentResult;
+                }
+                return null;
             }
-            return null;
+            catch(Exception ex)
+            {
+                return null;
+            }
         }
 
         public static async Task GetAppointmentsAsync()

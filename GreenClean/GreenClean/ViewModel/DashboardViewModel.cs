@@ -34,6 +34,7 @@ namespace GreenClean.ViewModel
                     Place = PlacesModel.PlacesList.FirstOrDefault(),
                     Customer = Customer.Current,
                     Payment = PaymentModel.GetFirstPaymentData(),
+                    Housekeepers = 1,
                     Date = null,
                     Time = null
                 };

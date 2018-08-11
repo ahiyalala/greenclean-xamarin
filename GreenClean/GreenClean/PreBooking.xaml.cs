@@ -21,15 +21,29 @@ namespace GreenClean
         
         private AppointmentRequest appointmentRequest;
         private bool hasAppeared;
-
+        private float price;
+        
         public PreBooking(AppointmentRequest appointmentargs)
         {
             InitializeComponent();
+
+            ServiceImage.Source = string.Format("{0}/img/{1}",Constants.BaseUri, appointmentargs.Service.ServiceImage);
+            float.TryParse(appointmentargs.Service.Price, out price);
+            ServicePrice.BindingContext = appointmentargs.Service;
+            ServiceDescription.Text = appointmentargs.Service.ServiceName;
+
+            SelectedLocation.Text = appointmentargs.Place.PlaceDetail;
+            SelectedPayment.Text = appointmentargs.Payment.PaymentDetail;
+            SelectedTime.Text = "Pick a time";
+            SelectedDate.Text = "Pick a date";
+            HousekeeperCount.Text = appointmentargs.Housekeepers.ToString();
+            Sub.IsEnabled = false;
+            Add.IsEnabled = true;
+
             InvisibleDatePicker.SetValue(DatePicker.MinimumDateProperty, System.DateTime.Now);
             appointmentRequest = appointmentargs;
             hasAppeared = false;
             Title = "Set your booking details";
-            Options.ItemsSource = prebooking;
         }
 
         protected async override void OnAppearing()
@@ -75,7 +89,6 @@ namespace GreenClean
 
         public void ListOptions()
         {
-            prebooking.Add(new PreBookingViewModel("Service", appointmentRequest.Service.ServiceName, -1,false));
             prebooking.Add(new PreBookingViewModel("Place", appointmentRequest.Place.PlaceDetail, 0));
             prebooking.Add(new PreBookingViewModel("Price", appointmentRequest.Payment.PaymentDetail, 1));
             prebooking.Add(new PreBookingViewModel("Date", "Select a date", 2));
@@ -89,7 +102,7 @@ namespace GreenClean
             {
                 PlacesModel subpageData = a.SelectedItem as PlacesModel;
                 appointmentRequest.Place = subpageData;
-                preBookingViewModel.OptionValue = appointmentRequest.Place.PlaceDetail;
+                SelectedLocation.Text = appointmentRequest.Place.PlaceDetail;
                 await Navigation.PopAsync();
             }
         }
@@ -101,50 +114,83 @@ namespace GreenClean
             {
                 PaymentModel subpageData = a.SelectedItem as PaymentModel;
                 appointmentRequest.Payment = subpageData;
-                preBookingViewModel.OptionValue = appointmentRequest.Payment.PaymentDetail;
+                SelectedPayment.Text = appointmentRequest.Payment.PaymentDetail;
                 await Navigation.PopAsync();
             }
 
         }
 
-        private async void OnItemSelect(object sender, SelectedItemChangedEventArgs args)
+        private async void SelectPayment(object sender,EventArgs args)
         {
-            (sender as ListView).SelectedItem = null;
+            var payments = new Payments();
+            payments.DataSender += UpdatePaymentType;
+            await Navigation.PushAsync(payments);
+        }
 
-            if (args.SelectedItem != null)
+        private void SelectDate(object sender, EventArgs args)
+        {
+            InvisibleDatePicker.Focus();
+            InvisibleDatePicker.DateSelected += (sen, e) =>
             {
-                preBookingViewModel = args.SelectedItem as PreBookingViewModel;
-                switch (preBookingViewModel.OptionType)
-                {
-                    case 0:
-                        var places = new Places();
-                        places.DataSender += UpdatePlace;
-                        await Navigation.PushAsync(places);
-                        break;
-                    case 1:
-                        var payments = new Payments();
-                        payments.DataSender += UpdatePaymentType;
-                        await Navigation.PushAsync(payments);
-                        break;
-                    case 2:
-                        InvisibleDatePicker.Focus();
-                        InvisibleDatePicker.DateSelected += (sen, e) =>
-                        {
-                            appointmentRequest.Date = e.NewDate.ToString("yyyy-MM-dd");
-                            preBookingViewModel.OptionValue = appointmentRequest.Date;
-                        };
-                        break;
-                    case 3:
-                        InvisiblePicker.Focus();
-                        InvisiblePicker.SelectedIndexChanged += (sen, e) =>
-                        {
-                            appointmentRequest.Time = InvisiblePicker.SelectedItem.ToString();
-                            preBookingViewModel.OptionValue = appointmentRequest.Time;
-                        };
-                        break;
-                }
-            }
+            appointmentRequest.Date = e.NewDate.ToString("yyyy-MM-dd");
+            SelectedDate.Text = appointmentRequest.Date;
+            };
+        }
+
+        private void SelectTime(object sender, EventArgs args)
+        {
+            InvisiblePicker.Focus();
+            InvisiblePicker.SelectedIndexChanged += (sen, e) =>
+            {
+            appointmentRequest.Time = InvisiblePicker.SelectedItem.ToString();
+            SelectedTime.Text = appointmentRequest.Time;
+            };
+        }
+
+        private async void SelectLocation(object sender, EventArgs args)
+        {
+            var places = new Places();
+            places.DataSender += UpdatePlace;
+            await Navigation.PushAsync(places);
+                    
+        }
+
+        private void SubtractHousekeeper(object sender, EventArgs args)
+        {
+            appointmentRequest.Housekeepers--;
             
+            Enabler();
+
+        }
+
+        private void Enabler()
+        {
+            HousekeeperCount.Text = appointmentRequest.Housekeepers.ToString();
+            if (appointmentRequest.Housekeepers == 1)
+            {
+                Sub.IsEnabled = false;
+            }
+            else
+            {
+                Sub.IsEnabled = true;
+            }
+
+            if (appointmentRequest.Housekeepers == 3)
+            {
+                Add.IsEnabled = false;
+            }
+            else
+            {
+                Add.IsEnabled = true;
+            }
+        }
+
+        private void AddHousekeeper(object sender, EventArgs args)
+        {
+            appointmentRequest.Housekeepers++;
+
+            Enabler();
+
         }
 
         async void FindAnAppointment(object sender, EventArgs e)

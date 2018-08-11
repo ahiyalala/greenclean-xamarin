@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Windows.Input;
 
 namespace GreenClean.ViewModel
 {
@@ -34,8 +35,6 @@ namespace GreenClean.ViewModel
         }
         public int OptionType { get; set; }
         public bool IsEnabled { get; set; }
-
-
         
     }
 }

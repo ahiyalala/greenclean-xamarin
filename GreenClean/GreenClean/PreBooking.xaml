@@ -1,39 +1,147 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:GreenClean.ViewModel"
              x:Class="GreenClean.PreBooking"
              x:Name="PreBookingPage">
-    <StackLayout>
-        <DatePicker x:Name="InvisibleDatePicker" IsVisible="False"/>
-        <Picker x:Name="InvisiblePicker" IsVisible="False" >
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>7:00 AM</x:String>
-                    <x:String>8:00 AM</x:String>
-                    <x:String>9:00 AM</x:String>
-                    <x:String>10:00 AM</x:String>
-                    <x:String>11:00 AM</x:String>
-                    <x:String>12:00 PM</x:String>
-                    <x:String>1:00 PM</x:String>
-                    <x:String>2:00 PM</x:String>
-                    <x:String>3:00 PM</x:String>
-                    <x:String>4:00 PM</x:String>
-                    <x:String>5:00 PM</x:String>
-                    <x:String>6:00 PM</x:String>
-                    <x:String>7:00 PM</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
-        </Picker>
-        <ListView x:Name="Options"
-                      ItemSelected="OnItemSelect">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell x:Name="{Binding OptionName}" Text="{Binding OptionName}"
-                                  Detail="{Binding OptionValue}" IsEnabled="{Binding IsEnabled}" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <Button Text="Set appointment" Clicked="FindAnAppointment"/>
-    </StackLayout>
-    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0" Padding="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Frame OutlineColor="LightGray" WidthRequest="50" HeightRequest="50" CornerRadius="50">
+                <Image x:Name="ServiceImage" Grid.Column="0" Grid.Row="0"  />
+            </Frame>
+            <StackLayout Grid.Column="1" Grid.Row="0" VerticalOptions="Center">
+                <Label Text="You have selected" FontSize="Small" />
+                <Label x:Name="ServiceDescription" FontSize="Large" />
+                <Label x:Name="ServicePrice" Text="{Binding Price, StringFormat='Price: Php {0}'}" FontSize="Medium" />
+            </StackLayout>
+        </Grid>
+        <StackLayout Grid.Row="1">
+            <DatePicker x:Name="InvisibleDatePicker" IsVisible="False"/>
+            <Picker x:Name="InvisiblePicker" IsVisible="False" >
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>7:00 AM</x:String>
+                        <x:String>8:00 AM</x:String>
+                        <x:String>9:00 AM</x:String>
+                        <x:String>10:00 AM</x:String>
+                        <x:String>11:00 AM</x:String>
+                        <x:String>12:00 PM</x:String>
+                        <x:String>1:00 PM</x:String>
+                        <x:String>2:00 PM</x:String>
+                        <x:String>3:00 PM</x:String>
+                        <x:String>4:00 PM</x:String>
+                        <x:String>5:00 PM</x:String>
+                        <x:String>6:00 PM</x:String>
+                        <x:String>7:00 PM</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <StackLayout>
+                <Frame>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="SelectLocation" NumberOfTapsRequired="1" />
+                    </Frame.GestureRecognizers>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="50" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40" />
+                        </Grid.RowDefinitions>
+                        <StackLayout Grid.Column="0">
+                            <Label Text="Place" FontSize="Small" />
+                            <Label x:Name="SelectedLocation" FontSize="Medium" />
+                        </StackLayout>
+                        <Label Text=">" Grid.Column="1" FontSize="Large" HorizontalOptions="End" VerticalOptions="CenterAndExpand"/>
+                    </Grid>
+                </Frame>
+                <Frame>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="SelectPayment" NumberOfTapsRequired="1" />
+                    </Frame.GestureRecognizers>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="50" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40" />
+                        </Grid.RowDefinitions>
+                        <StackLayout Grid.Column="0">
+                            <Label Text="Payment" FontSize="Small" />
+                            <Label x:Name="SelectedPayment" FontSize="Medium" />
+                        </StackLayout>
+                        <Label Text=">" Grid.Column="1" FontSize="Large" HorizontalOptions="End" VerticalOptions="CenterAndExpand"/>
+                    </Grid>
+                </Frame>
+                <Frame>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="SelectDate" NumberOfTapsRequired="1" />
+                    </Frame.GestureRecognizers>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40" />
+                        </Grid.RowDefinitions>
+                        <StackLayout Grid.Column="0">
+                            <Label Text="Date" FontSize="Small" />
+                            <Label x:Name="SelectedDate" FontSize="Medium" />
+                        </StackLayout>
+                    </Grid>
+                </Frame>
+                <Frame>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="SelectTime" NumberOfTapsRequired="1" />
+                    </Frame.GestureRecognizers>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40" />
+                        </Grid.RowDefinitions>
+                        <StackLayout Grid.Column="0">
+                            <Label Text="Time" FontSize="Small" />
+                            <Label x:Name="SelectedTime" FontSize="Medium" />
+                        </StackLayout>
+                    </Grid>
+                </Frame>
+                <Frame>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40" />
+                        </Grid.RowDefinitions>
+                        <Label Text="No. of&#x0a;housekeepers" Grid.Column="0" FontSize="Medium" />
+                        <StackLayout Grid.Column="1" Orientation="Horizontal">
+                            <Button x:Name="Sub" Text="-" Clicked="SubtractHousekeeper" WidthRequest="50" HeightRequest="50" CornerRadius="50"/>
+                            <Label x:Name="HousekeeperCount" FontSize="Large" />
+                            <Button x:Name="Add"  Text="+" Clicked="AddHousekeeper" WidthRequest="50" HeightRequest="50" CornerRadius="50" />
+                        </StackLayout>
+                    </Grid>
+                </Frame>
+            </StackLayout>
+            <Button Text="Set appointment" Clicked="FindAnAppointment"/>
+        </StackLayout>
+    </Grid>
 </ContentPage>

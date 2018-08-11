@@ -70,6 +70,7 @@
     <Compile Include="Services\MessageAndroid.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidAsset Include="Assets\Font Awesome 5 Free-Regular-400.otf" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
