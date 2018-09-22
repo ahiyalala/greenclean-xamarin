@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GreenClean.Model;
+using GreenClean.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -23,6 +25,26 @@ namespace GreenClean
 
             BindingContext = new DashboardMasterViewModel();
             ListView = MenuItemsListView;
+        }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            var profileViewModel = new ProfileDashboardViewModel();
+            await profileViewModel.GetProfile();
+            ProfileLabel.BindingContext = profileViewModel;
+
+        }
+
+        class ProfileDashboardViewModel : ViewBaseModel
+        {
+           public string FullName { get; set; }
+
+            public async Task GetProfile()
+            {
+                await Customer.GetProfile();
+                FullName = Customer.Current.FullName;
+            }
         }
 
         class DashboardMasterViewModel : INotifyPropertyChanged

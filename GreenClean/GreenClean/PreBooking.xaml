@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:GreenClean.ViewModel"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              x:Class="GreenClean.PreBooking"
              x:Name="PreBookingPage">
     <Grid>
@@ -26,7 +27,7 @@
             <StackLayout Grid.Column="1" Grid.Row="0" VerticalOptions="Center">
                 <Label Text="You have selected" FontSize="Small" />
                 <Label x:Name="ServiceDescription" FontSize="Large" />
-                <Label x:Name="ServicePrice" Text="{Binding Price, StringFormat='Price: Php {0}'}" FontSize="Medium" />
+                <Label x:Name="ServicePrice" FontSize="Medium"/>
             </StackLayout>
         </Grid>
         <StackLayout Grid.Row="1">
@@ -50,97 +51,136 @@
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>
-            <StackLayout>
-                <Frame>
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="SelectLocation" NumberOfTapsRequired="1" />
-                    </Frame.GestureRecognizers>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="50" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="40" />
-                        </Grid.RowDefinitions>
-                        <StackLayout Grid.Column="0">
-                            <Label Text="Place" FontSize="Small" />
-                            <Label x:Name="SelectedLocation" FontSize="Medium" />
-                        </StackLayout>
-                        <Label Text=">" Grid.Column="1" FontSize="Large" HorizontalOptions="End" VerticalOptions="CenterAndExpand"/>
-                    </Grid>
-                </Frame>
-                <Frame>
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="SelectPayment" NumberOfTapsRequired="1" />
-                    </Frame.GestureRecognizers>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="50" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="40" />
-                        </Grid.RowDefinitions>
-                        <StackLayout Grid.Column="0">
-                            <Label Text="Payment" FontSize="Small" />
-                            <Label x:Name="SelectedPayment" FontSize="Medium" />
-                        </StackLayout>
-                        <Label Text=">" Grid.Column="1" FontSize="Large" HorizontalOptions="End" VerticalOptions="CenterAndExpand"/>
-                    </Grid>
-                </Frame>
-                <Frame>
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="SelectDate" NumberOfTapsRequired="1" />
-                    </Frame.GestureRecognizers>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="40" />
-                        </Grid.RowDefinitions>
-                        <StackLayout Grid.Column="0">
-                            <Label Text="Date" FontSize="Small" />
-                            <Label x:Name="SelectedDate" FontSize="Medium" />
-                        </StackLayout>
-                    </Grid>
-                </Frame>
-                <Frame>
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="SelectTime" NumberOfTapsRequired="1" />
-                    </Frame.GestureRecognizers>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="40" />
-                        </Grid.RowDefinitions>
-                        <StackLayout Grid.Column="0">
-                            <Label Text="Time" FontSize="Small" />
-                            <Label x:Name="SelectedTime" FontSize="Medium" />
-                        </StackLayout>
-                    </Grid>
-                </Frame>
-                <Frame>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="40" />
-                        </Grid.RowDefinitions>
-                        <Label Text="No. of&#x0a;housekeepers" Grid.Column="0" FontSize="Medium" />
-                        <StackLayout Grid.Column="1" Orientation="Horizontal">
-                            <Button x:Name="Sub" Text="-" Clicked="SubtractHousekeeper" WidthRequest="50" HeightRequest="50" CornerRadius="50"/>
-                            <Label x:Name="HousekeeperCount" FontSize="Large" />
-                            <Button x:Name="Add"  Text="+" Clicked="AddHousekeeper" WidthRequest="50" HeightRequest="50" CornerRadius="50" />
-                        </StackLayout>
-                    </Grid>
-                </Frame>
-            </StackLayout>
+            <ScrollView>
+                <StackLayout>
+                    <Frame>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="SelectLocation" NumberOfTapsRequired="1" />
+                        </Frame.GestureRecognizers>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="50" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                            </Grid.RowDefinitions>
+                            <StackLayout Grid.Column="0">
+                                <Label Text="Place" FontSize="Small" />
+                                <Label x:Name="SelectedLocation" FontSize="Medium" />
+                            </StackLayout>
+                            <ffimageloadingsvg:SvgCachedImage Grid.Column="1" HorizontalOptions="End" WidthRequest="20" HeightRequest="20" Source="resource://GreenClean.Assets.outline-arrow_right-24px.svg"/>
+                        </Grid>
+                    </Frame>
+                    <Frame>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="SelectPayment" NumberOfTapsRequired="1" />
+                        </Frame.GestureRecognizers>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="50" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                            </Grid.RowDefinitions>
+                            <StackLayout Grid.Column="0">
+                                <Label Text="Payment" FontSize="Small" />
+                                <Label x:Name="SelectedPayment" FontSize="Medium" />
+                            </StackLayout>
+                            <ffimageloadingsvg:SvgCachedImage Grid.Column="1" HorizontalOptions="End" WidthRequest="20" HeightRequest="20" Source="resource://GreenClean.Assets.outline-arrow_right-24px.svg"/>
+                        </Grid>
+                    </Frame>
+                    <Frame>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="SelectDate" NumberOfTapsRequired="1" />
+                        </Frame.GestureRecognizers>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                            </Grid.RowDefinitions>
+                            <StackLayout Grid.Column="0">
+                                <Label Text="Date" FontSize="Small" />
+                                <Label x:Name="SelectedDate" FontSize="Medium" />
+                            </StackLayout>
+                        </Grid>
+                    </Frame>
+                    <Frame>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="SelectTime" NumberOfTapsRequired="1" />
+                        </Frame.GestureRecognizers>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                            </Grid.RowDefinitions>
+                            <StackLayout Grid.Column="0">
+                                <Label Text="Time" FontSize="Small" />
+                                <Label x:Name="SelectedTime" FontSize="Medium" />
+                            </StackLayout>
+                        </Grid>
+                    </Frame>
+                    <Frame x:Name="HousekeeperStepper">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                            </Grid.RowDefinitions>
+                            <Label Text="No. of&#x0a;housekeepers" Grid.Column="0" FontSize="Medium" />
+                            <StackLayout Grid.Column="1" Orientation="Horizontal">
+                                <Frame Padding="0" HorizontalOptions="Start" VerticalOptions="Center" BorderColor="#4CAF50" x:Name="Sub" WidthRequest="30" HeightRequest="30" CornerRadius="15" HasShadow="False">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="SubtractHousekeeper" />
+                                    </Frame.GestureRecognizers>
+                                    <Label x:Name="SubSymbol" Margin="0" Text="-" TextColor="#4CAF50" FontSize="Medium" HorizontalTextAlignment="Center" HorizontalOptions="Center" VerticalOptions="Center"  />
+                                </Frame>
+                                <Label x:Name="HousekeeperCount" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Large" />
+                                <Frame Padding="0" HorizontalOptions="End" VerticalOptions="Center" BorderColor="#4CAF50"  x:Name="Add" WidthRequest="30" HeightRequest="30" CornerRadius="15" HasShadow="False">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="AddHousekeeper" />
+                                    </Frame.GestureRecognizers>
+                                    <Label x:Name="AddSymbol" Margin="0" Text="+" TextColor="#4CAF50" FontSize="Medium" HorizontalTextAlignment="Center" HorizontalOptions="Center" VerticalOptions="Center" />
+                                </Frame>
+                            </StackLayout>
+                        </Grid>
+                    </Frame>
+                    <Frame x:Name="AreaStepper">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                            </Grid.RowDefinitions>
+                            <Label Text="Location area (sqm)" VerticalOptions="Center" Grid.Column="0" FontSize="Medium" />
+                            <StackLayout Grid.Column="1" Orientation="Horizontal">
+                                <Frame Padding="0" HorizontalOptions="Start" VerticalOptions="Center" BorderColor="#4CAF50" x:Name="SubArea" WidthRequest="30" HeightRequest="30" CornerRadius="15" HasShadow="False">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="SubtractArea" />
+                                    </Frame.GestureRecognizers>
+                                    <Label x:Name="SubSymbolArea" Margin="0" Text="-" TextColor="#4CAF50" FontSize="Medium" HorizontalTextAlignment="Center" HorizontalOptions="Center" VerticalOptions="Center"  />
+                                </Frame>
+                                <Label x:Name="AreaCount" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Large" />
+                                <Frame Padding="0" HorizontalOptions="End" VerticalOptions="Center" BorderColor="#4CAF50"  x:Name="AddAreaFrame" WidthRequest="30" HeightRequest="30" CornerRadius="15" HasShadow="False">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="AddArea" />
+                                    </Frame.GestureRecognizers>
+                                    <Label x:Name="AddSymbolArea" Margin="0" Text="+" TextColor="#4CAF50" FontSize="Medium" HorizontalTextAlignment="Center" HorizontalOptions="Center" VerticalOptions="Center" />
+                                </Frame>
+                            </StackLayout>
+                        </Grid>
+                    </Frame>
+                </StackLayout>
+            </ScrollView>
             <Button Text="Set appointment" Clicked="FindAnAppointment"/>
         </StackLayout>
     </Grid>

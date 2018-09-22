@@ -17,7 +17,6 @@ namespace GreenClean.ViewModel
     {
         #region fields
         Appointment appointment;
-        StarControl star;
         bool enabled;
         #endregion
 
@@ -91,19 +90,19 @@ namespace GreenClean.ViewModel
             {
                 service_cleaning_id = AppointmentData.BookingRequestId,
                 customer_id = Customer.Current.CustomerId,
-                housekeeper_id = AppointmentData.Housekeeper.HousekeeperId,
+                housekeeper = AppointmentData.Housekeeper,
                 rating = Rating,
                 comment = Comment
             };
             var feedbackJson = JsonConvert.SerializeObject(feedback);
             var postRequest = new StringContent(feedbackJson, Encoding.UTF8, "application/json");
 
-            var request = await client.PostAsync(string.Format("{0}/api/feedback/send", Constants.BaseUri), postRequest);
+            var request = await client.PostAsync(string.Format("{0}/api/feedback/", Constants.BaseUri), postRequest);
 
             if (request.IsSuccessStatusCode)
             {
                 DependencyService.Get<IMessage>().ShortAlert("Feedback sent!");
-                AppointmentDashboardViewmodel.Finished.Remove(AppointmentDashboardViewmodel.Finished.Where(x => x.appointment.BookingRequestId == AppointmentData.BookingRequestId).First());
+                AppointmentDashboardViewmodel.isOrigin = true;
                 await Navigation.PopAsync();
             }
             else

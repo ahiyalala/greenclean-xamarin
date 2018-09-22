@@ -42,6 +42,8 @@ namespace GreenClean.Model
 
         [JsonProperty("number_of_housekeepers")]
         public int Housekeepers { get; set; }
+        [JsonProperty("location_area")]
+        public int Area { get; set; }
 
         private string GetServiceKey()
         {

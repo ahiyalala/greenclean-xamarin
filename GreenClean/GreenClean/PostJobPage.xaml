@@ -1,52 +1,55 @@
 ﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:local="clr-namespace:GreenClean"
-             x:Class="GreenClean.PostJobPage">
+             x:Class="GreenClean.PostJobPage"
+             Title="How did we do?"
+             >
     <ContentPage.Content>
-        <AbsoluteLayout BackgroundColor="Yellow"
+        <AbsoluteLayout BackgroundColor="#FAED2C"
                         HorizontalOptions="FillAndExpand"
                         VerticalOptions="FillAndExpand">
-            <Frame x:Name="Indicator" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+            <Frame x:Name="Indicator" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" BackgroundColor="#FAED2C">
                 <ActivityIndicator  Color="Green" IsRunning="True" IsVisible="True"
                               HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
             </Frame>
-            
+
             <StackLayout x:Name="Info" IsVisible="False" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
-                <Label Text="How did we do?"
-                HorizontalOptions="CenterAndExpand" FontSize="Medium" Margin="0,20,0,0"/>
                 <Frame HorizontalOptions="Center" CornerRadius="50" WidthRequest="100" Margin="0,20,0,0" HeightRequest="100" Padding="0,0,0,0">
-                    <Image Source="http://via.placeholder.com/100x100" Aspect="AspectFill" Margin="0,0,0,0" />
+                    <Image x:Name="ServiceImage" Aspect="AspectFill" Margin="0,0,0,0" />
                 </Frame>
-                <Label Text="{Binding AppointmentData.Housekeeper.FullName}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
+                <Label x:Name="ServiceType"
+                HorizontalOptions="CenterAndExpand" FontSize="Medium" Margin="0,20,0,0"/>
+                <Label x:Name="ServiceDescription" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" HeightRequest="30">
-                    <Image Source="{Binding Stars[0].Image, Mode=TwoWay}" BackgroundColor="Black" WidthRequest="50">
+                    <Image Source="{Binding Stars[0].Image, Mode=TwoWay}" WidthRequest="50">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding Rate}" CommandParameter="0" />
                         </Image.GestureRecognizers>
                     </Image>
-                    <Image Source="{Binding Stars[1].Image, Mode=TwoWay}" BackgroundColor="Black" WidthRequest="50">
+                    <Image Source="{Binding Stars[1].Image, Mode=TwoWay}" WidthRequest="50">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding Rate}" CommandParameter="1" />
                         </Image.GestureRecognizers>
                     </Image>
-                    <Image Source="{Binding Stars[2].Image, Mode=TwoWay}" BackgroundColor="Black" WidthRequest="50">
+                    <Image Source="{Binding Stars[2].Image, Mode=TwoWay}" WidthRequest="50">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding Rate}" CommandParameter="2" />
                         </Image.GestureRecognizers>
                     </Image>
-                    <Image Source="{Binding Stars[3].Image, Mode=TwoWay}" BackgroundColor="Black" WidthRequest="50">
+                    <Image Source="{Binding Stars[3].Image, Mode=TwoWay}" WidthRequest="50">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding Rate}" CommandParameter="3" />
                         </Image.GestureRecognizers>
                     </Image>
-                    <Image Source="{Binding Stars[4].Image, Mode=TwoWay}" BackgroundColor="Black" WidthRequest="50">
+                    <Image Source="{Binding Stars[4].Image, Mode=TwoWay}" WidthRequest="50">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding Rate}" CommandParameter="4" />
                         </Image.GestureRecognizers>
                     </Image>
                 </StackLayout>
-                <Editor Text="{Binding Comment, Mode=TwoWay}" />
-                <Button Text="Submit" HorizontalOptions="FillAndExpand" Command="{Binding SendRating}" IsEnabled="{Binding IsEnabled,Mode=TwoWay}" />
+                <Label Text="Write us a comment" Margin="20,20,20,0" />
+                <Editor Text="{Binding Comment, Mode=TwoWay}" HeightRequest="100" Margin="20,0,20,0" />
+                <Button Text="Submit" HorizontalOptions="FillAndExpand" Margin="20,0,20,0" Command="{Binding SendRating}" IsEnabled="{Binding IsEnabled,Mode=TwoWay}" />
             </StackLayout>
         </AbsoluteLayout>
     </ContentPage.Content>

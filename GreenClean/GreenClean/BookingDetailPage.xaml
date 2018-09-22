@@ -2,35 +2,66 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GreenClean.BookingDetailPage"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             Title="Booking details"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="We got you an appointment"
-                HorizontalOptions="CenterAndExpand" FontSize="Medium" Margin="0,20,0,0"/>
-            <Frame HorizontalOptions="Center" CornerRadius="50" WidthRequest="100" Margin="0,20,0,0" HeightRequest="100" Padding="0,0,0,0">
-                <Image Source="http://via.placeholder.com/100x100" Aspect="AspectFill" Margin="0,0,0,0" />
-            </Frame>
-            <Label x:Name="HousekeeperName" HorizontalOptions="Center" FontSize="Medium" Margin="0,10,20,0"  />
-            <Frame BackgroundColor="Black" Margin="0,10,0,0" Padding="10,10,10,10">
-                <Label TextColor="White" VerticalTextAlignment="Center" Text="Booking Details"/>
-            </Frame>
-
-            <Label Text="Date" />
-            <Label x:Name="ServiceDate" FontSize="Medium" Margin="0,0,0,20" />
-
-            <Label Text="Service type" />
-            <Label x:Name="ServiceType" FontSize="Medium" Margin="0,0,0,20" />
-
-            <Label Text="Place" />
-            <Label x:Name="PlaceName" FontSize="Medium" Margin="0,0,0,20" />
-
-            <Label Text="Payment" />
-            <Label x:Name="PaymentType" FontSize="Medium" Margin="0,0,0,20" />
-
-            <Label Text="Amount due" />
-            <Label x:Name="PaymentDue" FontSize="Medium" Margin="0,0,0,20" />
-
-            <Button Text="Go back" Margin="10,10,10,10" VerticalOptions="End" Clicked="GoToHome"/>
-        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0" Padding="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Column="0" Grid.Row="0" VerticalOptions="Center">
+                    <Label x:Name="ServiceDescription" FontSize="Large" />
+                    <Label x:Name="ServicePrice" FontSize="Medium"/>
+                </StackLayout>
+            </Grid>
+            <ListView Grid.Row="1" x:Name="EmployeeList" ItemSelected="ContactHousekeeper" SeparatorVisibility="None" RowHeight="140">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame HeightRequest="150">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="50" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="100"/>
+                                    </Grid.RowDefinitions>
+                                    <Frame Grid.Column="0" Padding="0" Margin="0" WidthRequest="100" HeightRequest="100" CornerRadius="50" HorizontalOptions="Center">
+                                        <Image Source="http://via.placeholder.com/100x100" />
+                                    </Frame>
+                                    <StackLayout Grid.Column="1" VerticalOptions="Center">
+                                        <Label Text="{Binding FullName}" FontSize="Medium"/>
+                                        <Label Text="{Binding Rating, StringFormat='{0} &#xf005;'}" FontSize="Small">
+                                            <Label.FontFamily>
+                                                <OnPlatform 
+                                                     x:TypeArguments="x:String"
+                                                     Android="Font Awesome 5 Free-Regular-400.otf#Font Awesome 5 Free Regular" 
+                                                     iOS="Font Awesome 5 Free" 
+                                                     WinPhone="Assets/Font Awesome 5 Free-Regular-400.otf#Font Awesome 5 Free" />
+                                            </Label.FontFamily>
+                                        </Label>
+                                    </StackLayout>
+                                    <ffimageloadingsvg:SvgCachedImage Grid.Column="2" HorizontalOptions="End" WidthRequest="20" HeightRequest="20" Source="resource://GreenClean.Assets.baseline-phone-24px.svg"/>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -1,21 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GreenClean.Profile">
+             x:Class="GreenClean.Profile"
+             Title="Edit your profile">
     <ContentPage.Content>
-        <StackLayout>
-            <Label FontSize="Medium" Text="Let's get started"/>
-            <Label FontSize="Small">
-                Kindly fill out these sign-up form
-            </Label>
-            <Entry Placeholder="First Name" Text="{Binding Profile.FirstName, Mode=TwoWay}"/>
-            <Entry Placeholder="Middle Name" Text="{Binding Profile.MiddleName, Mode=TwoWay}"/>
-            <Entry Placeholder="Last Name" Text="{Binding Profile.LastName, Mode=TwoWay}"/>
-            <Entry Placeholder="9171234567" Keyboard="Numeric" Text="{Binding Profile.ContactNumber, Mode=TwoWay}"/>
-            <Label x:Name="Gender" />
-            <Label x:Name="Birthday" />
-            <Label x:Name="Email" />
-            <Button Text="Update" Command="{Binding Update}" />
-        </StackLayout>
+        <ScrollView>
+            <AbsoluteLayout HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                <Frame x:Name="Indicator" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                    <ActivityIndicator  Color="Green" IsRunning="True" IsVisible="True"
+                                      HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                </Frame>
+                <StackLayout x:Name="Form" IsVisible="False" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                    <Entry Placeholder="First Name" Text="{Binding Profile.FirstName, Mode=TwoWay}"/>
+                    <Entry Placeholder="Middle Name" Text="{Binding Profile.MiddleName, Mode=TwoWay}"/>
+                    <Entry Placeholder="Last Name" Text="{Binding Profile.LastName, Mode=TwoWay}"/>
+                    <Entry Placeholder="9171234567" Keyboard="Numeric" Text="{Binding Profile.ContactNumber, Mode=TwoWay}"/>
+                    <Label x:Name="Gender" />
+                    <Label x:Name="Birthday" />
+                    <Label x:Name="Email" />
+                    <Button Text="Update" Command="{Binding Update}" />
+                </StackLayout>
+            </AbsoluteLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

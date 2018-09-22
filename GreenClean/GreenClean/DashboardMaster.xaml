@@ -10,7 +10,7 @@
               HasUnevenRows="true"
               ItemsSource="{Binding MenuItems}">
       <ListView.Header>
-        <Grid BackgroundColor="#03A9F4">
+        <Grid BackgroundColor="#8ab66b">
           <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="*"/>
@@ -22,10 +22,11 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="10"/>
           </Grid.RowDefinitions>
-          <Label
+          <Label x:Name="ProfileLabel"
               Grid.Column="1"
               Grid.Row="2"
-              Text="{Binding FullName, Source={x:Static local:Customer.Current}}"
+              Text="{Binding FullName}"
+              TextColor="White"
               Style="{DynamicResource SubtitleStyle}"/>
         </Grid>
       </ListView.Header>

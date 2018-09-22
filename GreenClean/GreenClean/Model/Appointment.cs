@@ -20,8 +20,8 @@ namespace GreenClean.Model
         public Services Service { get; set; }
         [JsonProperty("location")]
         public PlacesModel Places { get; set; }
-        [JsonProperty("housekeeper")]
-        public Housekeeper Housekeeper { get; set; }
+        [JsonProperty("housekeepers")]
+        public List<Housekeeper> Housekeeper { get; set; }
         [JsonProperty("date")]
         public DateTime ScheduleDate { get; set; }
         [JsonProperty("start_time")]
@@ -30,6 +30,8 @@ namespace GreenClean.Model
         public DateTime ScheduleTimeEnd { get; set; }
         [JsonProperty("payment_type")]
         public string PaymentType { get; set; }
+        [JsonProperty("total_price")]
+        public int Price { get; set; }
         [JsonProperty("is_paid")]
         public bool IsPaid { get; set; }
         [JsonProperty("is_finished")]
@@ -73,10 +75,15 @@ namespace GreenClean.Model
             var properties = Application.Current.Properties;
             client.DefaultRequestHeaders.Add("Authentication", string.Format("{0} {1}", properties["email"], properties["token"]));
 
+            AppointmentDashboardViewmodel.Pending = null;
+            AppointmentDashboardViewmodel.Finished = null;
+
             var response = await client.GetAsync(appointmentUri);
             var result = await response.Content.ReadAsStringAsync();
-            if (response.IsSuccessStatusCode && (AppointmentDashboardViewmodel.Pending.Count == 0 && AppointmentDashboardViewmodel.Finished.Count == 0))
+            if (response.IsSuccessStatusCode)
             {
+                AppointmentDashboardViewmodel.Pending = new ObservableCollection<AppointmentDashboardViewmodel>();
+                AppointmentDashboardViewmodel.Finished = new ObservableCollection<AppointmentDashboardViewmodel>();
                 var appointmentsList = JsonConvert.DeserializeObject<List<Appointment>>(result);
                 foreach(var appointment in appointmentsList.Where(x => x.IsFinished == false || x.Rating == 0))
                 {

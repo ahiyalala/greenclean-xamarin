@@ -51,7 +51,10 @@ namespace GreenClean.Model
         [JsonIgnore]
         public string FullName => string.Format("{0}, {1}", this.LastName, this.FirstName);
 
+        [JsonIgnore]
         static string loginUri = Constants.BaseUri+"/api/users/login";
+
+        [JsonIgnore]
         static string UriUsers = Constants.BaseUri + "/api/users";
 
         public async static Task GetProfile()
@@ -67,11 +70,33 @@ namespace GreenClean.Model
                 Current = JsonConvert.DeserializeObject<Customer>(content);
             }
         }
-
-        public static async Task<bool> UpdateProfile()
+        
+        public static async Task<bool> UpdateProfile(Customer customer)
         {
-            await Task.Delay(2000);
-            return false;
+
+            HttpClient client = new HttpClient();
+
+            var properties = Application.Current.Properties;
+            client.DefaultRequestHeaders.Add("Authentication", string.Format("{0} {1}", properties["email"], properties["token"]));
+            var item = JsonConvert.SerializeObject(customer);
+            var method = new HttpMethod("PATCH");
+
+            var request = new HttpRequestMessage(method, UriUsers)
+            {
+                Content = new StringContent(
+                                JsonConvert.SerializeObject(customer),
+                                Encoding.UTF8, "application/json")
+            };
+
+            var response = await client.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public static async Task<bool> SignUpAsync(Customer customer)

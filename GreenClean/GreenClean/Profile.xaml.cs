@@ -17,7 +17,18 @@ namespace GreenClean
 		public Profile ()
 		{
 			InitializeComponent ();
-            BindingContext = new ProfileViewModel();
 		}
-	}
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            await ProfileViewModel.GetProfile();
+            BindingContext = new ProfileViewModel()
+            {
+                Navigation = Navigation
+            };
+            Form.IsVisible = true;
+            Indicator.IsVisible = false;
+        }
+    }
 }

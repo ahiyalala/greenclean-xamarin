@@ -3,28 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GreenClean.SignupPageSecurity">
     <ContentPage.Content>
-        <StackLayout>
-            <Label FontSize="Medium" Text="Let's get started"/>
-            <Label FontSize="Small">
-                Kindly fill out these sign-up form
-            </Label>
-            <Entry Placeholder="First Name" x:Name="FirstName"/>
-            <Entry Placeholder="Middle Name" x:Name="MiddleName"/>
-            <Entry Placeholder="Last Name" x:Name="LastName"/>
-            <Picker x:Name="Gender" Title="Gender">
-                <Picker.Items>
-                    <x:String>Male</x:String>
-                    <x:String>Female</x:String>
-                </Picker.Items>
-            </Picker>
-            <Entry Placeholder="9171234567" Keyboard="Numeric" x:Name="Mobile"/>
-            <Label Margin="5,0,0,-15">Birthday</Label>
-            <DatePicker x:Name="BirthDate" Format="yyyy-MM-dd" />
-            <Entry Placeholder="your_email@example.com" Keyboard="Email" x:Name="Email"/>
-            <Entry Placeholder="Password" x:Name="Password" IsPassword="True" />
-            <Entry Placeholder="Re-type password" x:Name="RetypePassword" IsPassword="True" />
-            <Button x:Name="SubmitButton" Text="Submit" Clicked="SubmitForm"/>
-            <Label x:Name="InfoMessage" IsVisible="False" TextColor="Red"/>
-        </StackLayout>
+        <ScrollView>
+            <StackLayout>
+                <Label FontSize="Medium" Text="Let's get started"/>
+                <Label FontSize="Small">
+                    Kindly fill out these sign-up form
+                </Label>
+                <Entry Placeholder="First Name" x:Name="FirstName"/>
+                <Entry Placeholder="Middle Name" x:Name="MiddleName"/>
+                <Entry Placeholder="Last Name" x:Name="LastName"/>
+                <Picker x:Name="Gender" Title="Gender">
+                    <Picker.Items>
+                        <x:String>Male</x:String>
+                        <x:String>Female</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Entry Placeholder="9171234567" Keyboard="Numeric" x:Name="Mobile"/>
+                <Label Margin="5,0,0,-15">Birthday</Label>
+                <DatePicker x:Name="BirthDate" Format="yyyy-MM-dd" />
+                <Entry Placeholder="your_email@example.com" Keyboard="Email" x:Name="Email"/>
+                <Entry Placeholder="Password" x:Name="Password" IsPassword="True" />
+                <Entry Placeholder="Re-type password" x:Name="RetypePassword" IsPassword="True" />
+                <Button x:Name="SubmitButton" Text="Submit" Clicked="SubmitForm"/>
+                <Label x:Name="InfoMessage" IsVisible="False" TextColor="Red"/>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

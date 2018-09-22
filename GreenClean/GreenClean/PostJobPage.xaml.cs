@@ -1,4 +1,5 @@
 ﻿using GreenClean.Model;
+using GreenClean.Utilities;
 using GreenClean.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -25,12 +26,17 @@ namespace GreenClean
                 Navigation = Navigation
             };
             BindingContext = PostJobViewModel.Current;
+
 		}
 
         protected async override void OnAppearing()
         {
             base.OnAppearing();
             PostJobViewModel.Current.AppointmentData = await Appointment.GetSpecificAppointmentAsync(_appointmentId);
+            var appointmentData = PostJobViewModel.Current.AppointmentData;
+            ServiceType.Text = appointmentData.Service.ServiceName;
+            ServiceImage.Source = string.Format("{0}/img/{1}", Constants.BaseUri, appointmentData.Service.ServiceImage);
+            ServiceDescription.Text = string.Format("Php {0} with {1} housekeepers", appointmentData.Price, appointmentData.Housekeeper.Count);
             Indicator.IsVisible = false;
             Info.IsVisible = true;
         }

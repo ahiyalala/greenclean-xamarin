@@ -9,6 +9,8 @@ using Android.Widget;
 using Android.OS;
 using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms;
+using FFImageLoading.Svg.Forms;
+using FFImageLoading.Forms.Droid;
 
 namespace GreenClean.Droid
 {
@@ -24,6 +26,8 @@ namespace GreenClean.Droid
             // then call base.OnCreate and the Xamarin.Forms methods
             base.OnCreate(bundle);
             Forms.Init(this, bundle);
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
+            var ignore = typeof(SvgCachedImage);
             LoadApplication(new App());
         }
     }

@@ -6,12 +6,14 @@
              NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical" VerticalOptions="Center">
-            <Label x:Name="Message" HorizontalTextAlignment="Center" />
-            <Entry WidthRequest="300" x:Name="Username" Placeholder="Email-address" Keyboard="Email" HorizontalTextAlignment="Center" HorizontalOptions="Center"></Entry>
-            <Entry WidthRequest="300" x:Name="Password" Placeholder="Password" HorizontalTextAlignment="Center" HorizontalOptions="Center" IsPassword="True"></Entry>
-            <Button x:Name="LoginButton" Text="Login" HorizontalOptions="Center" WidthRequest="300" Clicked="OnLogin"></Button>
-            <Button x:Name="SignUpButton" Text="Sign up" HorizontalOptions="Center" WidthRequest="300" Clicked="ToSignUp"></Button>
-        </StackLayout>
+        <ScrollView>
+            <StackLayout Orientation="Vertical" VerticalOptions="Center">
+                <Label x:Name="Message" HorizontalTextAlignment="Center" />
+                <Entry WidthRequest="300" x:Name="Username" Placeholder="Email-address" Keyboard="Email" HorizontalTextAlignment="Center" HorizontalOptions="Center"></Entry>
+                <Entry WidthRequest="300" x:Name="Password" Placeholder="Password" HorizontalTextAlignment="Center" HorizontalOptions="Center" IsPassword="True"></Entry>
+                <Button x:Name="LoginButton" Text="Login" HorizontalOptions="Center" WidthRequest="300" Clicked="OnLogin"></Button>
+                <Button x:Name="SignUpButton" Text="Sign up" HorizontalOptions="Center" WidthRequest="300" Clicked="ToSignUp"></Button>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

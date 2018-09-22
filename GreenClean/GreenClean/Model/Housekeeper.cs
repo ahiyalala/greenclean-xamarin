@@ -26,6 +26,8 @@ namespace GreenClean.Model
         public string ContactNumber { get; set; }
         [JsonProperty("gender")]
         public string Gender { get; set; }
+        [JsonProperty("rating")]
+        public string Rating { get; set; }
         
         private string GetFullName()
         {

@@ -13,10 +13,42 @@ namespace GreenClean
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AppointmentsDashboard : ContentPage
 	{
+        public bool isInitial;
 		public AppointmentsDashboard ()
 		{
 			InitializeComponent ();
-            Appointments.ItemsSource = AppointmentDashboardViewmodel.Pending;
+            isInitial = true;
 		}
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            if (AppointmentDashboardViewmodel.isOrigin)
+            {
+                Indicator.IsVisible = true;
+                Appointments.IsVisible = false;
+                Appointments.ItemsSource = null;
+                await AppointmentDashboardViewmodel.GetList();
+                Appointments.ItemsSource = AppointmentDashboardViewmodel.Pending;
+            }
+            else if(isInitial)
+            {
+                await AppointmentDashboardViewmodel.GetList();
+                Appointments.ItemsSource = AppointmentDashboardViewmodel.Pending;
+            }
+            if(AppointmentDashboardViewmodel.Finished.Count == 0 && AppointmentDashboardViewmodel.Pending.Count == 0)
+            {
+                NullText.IsVisible = true;
+            }
+            else
+            {
+                NullText.IsVisible = false;
+            }
+            Indicator.IsVisible = false;
+            Appointments.IsVisible = true;
+
+            AppointmentDashboardViewmodel.isOrigin = false;
+            isInitial = false;
+        }
     }
 }

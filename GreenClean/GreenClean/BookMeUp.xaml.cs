@@ -54,7 +54,7 @@ namespace GreenClean
                 }
                 else
                 {
-                    Navigation.InsertPageBefore(new BookingDetailPage(appointment), this);
+                    Navigation.InsertPageBefore(new BookingDetailPage(appointment, true), this);
                     await Navigation.PopAsync();
                 }
             }
