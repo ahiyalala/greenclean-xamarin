@@ -24,7 +24,7 @@ namespace GreenClean.ViewModel
             service = serviceargs;
             Header = service.ServiceName;
             Definition = service.Description;
-            MicroText = service.Price;
+            MicroText = string.Format("Starts at Php {0}",service.Price);
             ButtonLabel = "Book now";
             SelectTile = new Command(async () =>
             {

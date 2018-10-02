@@ -67,7 +67,7 @@
                             </Grid.RowDefinitions>
                             <StackLayout Grid.Column="0">
                                 <Label Text="Place" FontSize="Small" />
-                                <Label x:Name="SelectedLocation" FontSize="Medium" />
+                                <Label x:Name="SelectedLocation" FontSize="Medium" LineBreakMode="TailTruncation" />
                             </StackLayout>
                             <ffimageloadingsvg:SvgCachedImage Grid.Column="1" HorizontalOptions="End" WidthRequest="20" HeightRequest="20" Source="resource://GreenClean.Assets.outline-arrow_right-24px.svg"/>
                         </Grid>

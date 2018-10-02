@@ -49,6 +49,8 @@ namespace GreenClean.ViewModel
 
         public ICommand SelectTile { protected set; get; }
 
+        public ICommand RefreshCommand { get; set; }
+
         public static ObservableCollection<AppointmentDashboardViewmodel> Pending = new ObservableCollection<AppointmentDashboardViewmodel>();
         public static ObservableCollection<AppointmentDashboardViewmodel> Finished = new ObservableCollection<AppointmentDashboardViewmodel>();
         public async static Task GetList()

@@ -23,6 +23,9 @@ namespace GreenClean
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+
+            
+            
             if (AppointmentDashboardViewmodel.isOrigin)
             {
                 Indicator.IsVisible = true;
@@ -36,7 +39,7 @@ namespace GreenClean
                 await AppointmentDashboardViewmodel.GetList();
                 Appointments.ItemsSource = AppointmentDashboardViewmodel.Pending;
             }
-            if(AppointmentDashboardViewmodel.Finished.Count == 0 && AppointmentDashboardViewmodel.Pending.Count == 0)
+            if(AppointmentDashboardViewmodel.Pending.Count == 0)
             {
                 NullText.IsVisible = true;
             }
@@ -49,6 +52,15 @@ namespace GreenClean
 
             AppointmentDashboardViewmodel.isOrigin = false;
             isInitial = false;
+        }
+
+        private async void Refresher(object sender, EventArgs args)
+        {
+            Appointments.IsRefreshing = true;
+            await AppointmentDashboardViewmodel.GetList();
+            Appointments.ItemsSource = AppointmentDashboardViewmodel.Pending;
+
+            Appointments.IsRefreshing = false;
         }
     }
 }

@@ -77,7 +77,6 @@ namespace GreenClean.Model
 
             AppointmentDashboardViewmodel.Pending = null;
             AppointmentDashboardViewmodel.Finished = null;
-
             var response = await client.GetAsync(appointmentUri);
             var result = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
@@ -85,11 +84,11 @@ namespace GreenClean.Model
                 AppointmentDashboardViewmodel.Pending = new ObservableCollection<AppointmentDashboardViewmodel>();
                 AppointmentDashboardViewmodel.Finished = new ObservableCollection<AppointmentDashboardViewmodel>();
                 var appointmentsList = JsonConvert.DeserializeObject<List<Appointment>>(result);
-                foreach(var appointment in appointmentsList.Where(x => x.IsFinished == false || x.Rating == 0))
+                foreach(var appointment in appointmentsList.OrderByDescending(a => a.IsFinished).Where(x => x.IsFinished == false || x.Rating == 0))
                 {
                     AppointmentDashboardViewmodel.Pending.Add(new AppointmentDashboardViewmodel(appointment));
                 }
-                foreach(var appointment in appointmentsList.Where(x=>x.IsFinished == true || x.Rating > 0))
+                foreach(var appointment in appointmentsList.Where(x=>x.IsFinished == true && x.Rating > 0))
                 {
                     AppointmentDashboardViewmodel.Finished.Add(new AppointmentDashboardViewmodel(appointment));
                 }

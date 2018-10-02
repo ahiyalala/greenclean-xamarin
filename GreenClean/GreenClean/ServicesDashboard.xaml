@@ -4,11 +4,11 @@
              x:Class="GreenClean.ServicesDashboard"
              Title="Services">
     <ContentPage.Content>
-        <ListView x:Name="Services" HasUnevenRows="True" SeparatorVisibility="None">
+        <ListView x:Name="Services" HasUnevenRows="True" SelectionMode="None" SeparatorVisibility="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Frame HasShadow="True" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="400" BackgroundColor="White" Padding="0,0,0,0">
+                        <Frame Margin="5,5,5,5" Padding="5,5,5,5" HasShadow="True" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="400" BackgroundColor="White">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="3*"/>

@@ -4670,6 +4670,9 @@ namespace GreenClean.Droid
 			// aapt resource value: 0x7f0b000e
 			public const int CardView_Light = 2131427342;
 			
+			// aapt resource value: 0x7f0b019b
+			public const int ListViewStyle_Light = 2131427739;
+			
 			// aapt resource value: 0x7f0b0199
 			public const int MyTheme = 2131427737;
 			
