@@ -3,14 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:GreenClean.Model"
              x:Class="GreenClean.DashboardMaster"
-             Title="Master">
+             NavigationPage.HasNavigationBar="False">
   <StackLayout>
     <ListView x:Name="MenuItemsListView"
               SeparatorVisibility="None"
               HasUnevenRows="true"
+              SelectionMode="None"
               ItemsSource="{Binding MenuItems}">
       <ListView.Header>
-        <Grid BackgroundColor="#8ab66b">
+          <Grid BackgroundColor="#FAED2C">
           <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="*"/>
@@ -34,6 +35,9 @@
         <DataTemplate>
           <ViewCell>
             <StackLayout Padding="15,10" HorizontalOptions="FillAndExpand">
+              <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenPage}"/>
+              </StackLayout.GestureRecognizers>
               <Label VerticalOptions="{Binding VerticalLayout}" 
                     VerticalTextAlignment="Center" 
                     Text="{Binding Title}" 
@@ -43,5 +47,6 @@
         </DataTemplate>
       </ListView.ItemTemplate>
     </ListView>
-  </StackLayout>
+    <Button Text="Logout" HorizontalOptions="Center" Clicked="LogoutEvent"/>
+    </StackLayout>
 </ContentPage>

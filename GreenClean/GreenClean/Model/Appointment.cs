@@ -95,6 +95,24 @@ namespace GreenClean.Model
             }
         }
 
+        public static async Task<List<Appointment>> GetFinishedList()
+        {
+            HttpClient client = new HttpClient();
+            var properties = Application.Current.Properties;
+            client.DefaultRequestHeaders.Add("Authentication", string.Format("{0} {1}", properties["email"], properties["token"]));
+
+            var response = await client.GetAsync(appointmentUri);
+            var result = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                var appointmentsList = JsonConvert.DeserializeObject<List<Appointment>>(result);
+
+                return appointmentsList.Where(x => x.IsFinished == true && x.Rating > 0).ToList() ;
+            }
+
+            return null;
+        }
+
         public static async Task<Appointment> GetSpecificAppointmentAsync(string id)
         {
             HttpClient client = new HttpClient();

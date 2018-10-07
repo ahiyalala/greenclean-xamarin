@@ -50,7 +50,16 @@ namespace GreenClean
             float.TryParse(appointmentargs.Service.Price, out price);
             ServiceDescription.Text = appointmentargs.Service.ServiceName;
 
-            SelectedLocation.Text = appointmentargs.Place.PlaceDetail;
+            if(PlacesModel.PlacesList.Count != 0)
+            {
+                SelectedLocation.Text = appointmentargs.Place.PlaceDetail;
+            }
+            else
+            {
+                SelectedLocation.Text = "No places available";
+            }
+                
+
             SelectedPayment.Text = appointmentargs.Payment.PaymentDetail;
             SelectedTime.Text = "Pick a time";
             SelectedDate.Text = "Pick a date";
@@ -94,15 +103,19 @@ namespace GreenClean
                 }
                 
             }
-
-            AreaEnabler();
-            Enabler();
-
-            if(appointmentRequest.Date != null && appointmentRequest.Time != null && appointmentRequest.Place != null)
+            else
             {
-                SelectedDate.Text = appointmentRequest.Date;
-                SelectedTime.Text = appointmentRequest.Time;
-                SelectedLocation.Text = appointmentRequest.Place.PlaceDetail;
+
+                AreaEnabler();
+                Enabler();
+
+                if (appointmentRequest.Date != null && appointmentRequest.Time != null && appointmentRequest.Place != null)
+                {
+                    SelectedDate.Text = appointmentRequest.Date;
+                    SelectedTime.Text = appointmentRequest.Time;
+                    SelectedLocation.Text = appointmentRequest.Place.PlaceDetail;
+                }
+
             }
         }
 

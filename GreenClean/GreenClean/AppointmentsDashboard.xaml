@@ -2,9 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GreenClean.AppointmentsDashboard"
-             Title="Appointments">
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <AbsoluteLayout 
+        <AbsoluteLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
                         HorizontalOptions="FillAndExpand"
                         VerticalOptions="FillAndExpand">
             <Frame x:Name="Indicator" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">

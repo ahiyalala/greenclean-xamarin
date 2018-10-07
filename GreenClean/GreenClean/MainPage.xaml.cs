@@ -44,7 +44,7 @@ namespace GreenClean
                 Customer.Current = JsonConvert.DeserializeObject<Customer>(result);
                 Application.Current.Properties.Add("token",Customer.Current.UserToken);
                 Application.Current.Properties.Add("email",Customer.Current.EmailAddress);
-                Navigation.InsertPageBefore(new Dashboard(), this);
+                Navigation.InsertPageBefore(new DashboardDetail(), this);
                 await Navigation.PopAsync();
             }
             else

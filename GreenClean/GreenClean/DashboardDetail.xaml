@@ -2,7 +2,11 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:GreenClean"
-             x:Class="GreenClean.DashboardDetail">
-    <local:AppointmentsDashboard/>
-    <local:ServicesDashboard/>
+             x:Class="GreenClean.DashboardDetail"
+            NavigationPage.HasNavigationBar="False"
+            BarBackgroundColor="#FAED2C"
+            BarTextColor="White"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            android:TabbedPage.IsSwipePagingEnabled="False">
 </TabbedPage>

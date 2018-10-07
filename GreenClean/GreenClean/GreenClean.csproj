@@ -7,6 +7,8 @@
   <ItemGroup>
     <None Remove="Assets\baseline-phone-24px.svg" />
     <None Remove="Assets\chevron-right.svg" />
+    <None Remove="Assets\ic_access_alarms.png" />
+    <None Remove="Assets\ic_person.png" />
     <None Remove="Assets\line-awesome.ttf" />
     <None Remove="Assets\outline-arrow_right-24px.svg" />
     <None Remove="Assets\star_rate.png" />
@@ -15,6 +17,8 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Assets\baseline-phone-24px.svg" />
+    <EmbeddedResource Include="Assets\ic_access_alarms.png" />
+    <EmbeddedResource Include="Assets\ic_person.png" />
     <EmbeddedResource Include="Assets\line-awesome.ttf" />
     <EmbeddedResource Include="Assets\outline-arrow_right-24px.svg" />
     <EmbeddedResource Include="Assets\star_rate.png" />
@@ -23,9 +27,9 @@
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="2.1.3" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.3.840" />
-    <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
+    <PackageReference Include="Xamarin.Forms" Version="3.2.0.871581" />
   </ItemGroup>
 
   <ItemGroup>
@@ -50,13 +54,13 @@
     <EmbeddedResource Update="BookMeUp.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Dashboard.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="DashboardDetail.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="DashboardMaster.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="History.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="PaymentForm.xaml">

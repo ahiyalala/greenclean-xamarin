@@ -61,7 +61,7 @@ namespace GreenClean
             
         }
 
-        public void CancelBooking()
+        public void CancelBooking(object obj, ClickedEventArgs args)
         {
             CancelBtn.IsEnabled = false;
             token.Cancel();

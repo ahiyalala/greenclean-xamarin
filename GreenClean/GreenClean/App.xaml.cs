@@ -21,7 +21,7 @@ namespace GreenClean
             }
             else
             {
-                MainPage = new NavigationPage(new Dashboard());
+                MainPage = new NavigationPage(new DashboardDetail());
             }
 
             //MainPage = new NavigationPage(new SplashScreen());

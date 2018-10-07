@@ -31,7 +31,7 @@ namespace GreenClean
             else
             {
                 await Customer.GetProfile();
-                Navigation.InsertPageBefore(new Dashboard(), this);
+                Navigation.InsertPageBefore(new DashboardDetail(), this);
                 await Navigation.PopAsync();
             }
         }

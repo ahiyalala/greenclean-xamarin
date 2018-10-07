@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GreenClean.History">
+    <ContentPage.Content>
+        <AbsoluteLayout VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand">
+            <Frame x:Name="Indicator" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <ActivityIndicator  Color="Green" IsRunning="True" IsVisible="True"
+                                  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            </Frame>
+            <Frame x:Name="EmptyTextMessage" IsVisible="False" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout
+                    HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                    <Label Text="&#xf207;" FontSize="72" HorizontalTextAlignment="Center">
+                        <Label.FontFamily>
+                            <OnPlatform 
+                                 x:TypeArguments="x:String"
+                                 Android="line-awesome.ttf#LineAwesome" 
+                                 iOS="line-awesome" />
+                        </Label.FontFamily>
+                    </Label>
+                    <Label Text="You don't have any finished appointments" FontSize="Small" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+            </Frame>
+            <ListView x:Name="AppointmentListView" SeparatorVisibility="None" SelectionMode="None"
+                      AbsoluteLayout.LayoutFlags="All" HasUnevenRows="True" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame Margin="5,5,5,10" BackgroundColor="White" HasShadow="True" CornerRadius="5" MinimumHeightRequest="250" >
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectAppointment}" />
+                                </Frame.GestureRecognizers>
+                                <StackLayout>
+                                    <Label Text="{Binding Service}" FontSize="Medium" />
+                                    <Label Text="{Binding RatingAndPrice, StringFormat='{0} &#xf318;'}" FontSize="Medium">
+                                        <Label.FontFamily>
+                                            <OnPlatform 
+                                             x:TypeArguments="x:String"
+                                             Android="line-awesome.ttf#LineAwesome" 
+                                             iOS="line-awesome" />
+                                        </Label.FontFamily>
+                                    </Label>
+                                    <Label Text="{Binding Schedule}" FontSize="Small" />
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -22,8 +22,24 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <StackLayout Grid.Column="0" Grid.Row="0" VerticalOptions="Center">
-                    <Label x:Name="ServiceDescription" FontSize="Large" />
+                    <Label >
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span x:Name="ServiceDescription" FontSize="Large"/>
+                                <Span x:Name="ServiceRating" FontSize="Medium" />
+                                <Span x:Name="StarIcon" Text="&#xf318;" FontSize="Medium">
+                                    <Span.FontFamily>
+                                        <OnPlatform 
+                                             x:TypeArguments="x:String"
+                                             Android="line-awesome.ttf#LineAwesome" 
+                                             iOS="line-awesome" />
+                                    </Span.FontFamily>
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                     <Label x:Name="ServicePrice" FontSize="Medium"/>
+                    <Label x:Name="ServiceSchedule" FontSize="Small"/>
                 </StackLayout>
             </Grid>
             <ListView Grid.Row="1" x:Name="EmployeeList" ItemSelected="ContactHousekeeper" SeparatorVisibility="None" RowHeight="140">
@@ -45,17 +61,16 @@
                                     </Frame>
                                     <StackLayout Grid.Column="1" VerticalOptions="Center">
                                         <Label Text="{Binding FullName}" FontSize="Medium"/>
-                                        <Label Text="{Binding Rating, StringFormat='{0} &#xf005;'}" FontSize="Small">
+                                        <Label Text="{Binding Rating, StringFormat='{0} &#xf318;'}" FontSize="Small">
                                             <Label.FontFamily>
                                                 <OnPlatform 
                                                      x:TypeArguments="x:String"
-                                                     Android="Font Awesome 5 Free-Regular-400.otf#Font Awesome 5 Free Regular" 
-                                                     iOS="Font Awesome 5 Free" 
-                                                     WinPhone="Assets/Font Awesome 5 Free-Regular-400.otf#Font Awesome 5 Free" />
+                                                     Android="line-awesome.ttf#LineAwesome" 
+                                                     iOS="line-awesome" />
                                             </Label.FontFamily>
                                         </Label>
                                     </StackLayout>
-                                    <ffimageloadingsvg:SvgCachedImage Grid.Column="2" HorizontalOptions="End" WidthRequest="20" HeightRequest="20" Source="resource://GreenClean.Assets.baseline-phone-24px.svg"/>
+                                    <ffimageloadingsvg:SvgCachedImage x:Name="ContactImage" Grid.Column="2" HorizontalOptions="End" WidthRequest="20" HeightRequest="20" Source="resource://GreenClean.Assets.baseline-phone-24px.svg"/>
                                 </Grid>
                             </Frame>
                         </ViewCell>

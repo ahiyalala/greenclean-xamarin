@@ -18,13 +18,17 @@ namespace GreenClean
     public partial class DashboardMaster : ContentPage
     {
         public ListView ListView;
-
+        public event EventHandler<ClickedEventArgs> Logout;
         public DashboardMaster()
         {
             InitializeComponent();
 
-            BindingContext = new DashboardMasterViewModel();
+            BindingContext = new DashboardMasterViewModel(this.Navigation);
             ListView = MenuItemsListView;
+        }
+
+        public void LogoutEvent(object sender, ClickedEventArgs args) {
+            Logout(sender, args);
         }
 
         protected override async void OnAppearing()
@@ -51,13 +55,13 @@ namespace GreenClean
         {
             public ObservableCollection<DashboardMenuItem> MenuItems { get; set; }
             
-            public DashboardMasterViewModel()
+            public DashboardMasterViewModel(INavigation navigator)
             {
                 MenuItems = new ObservableCollection<DashboardMenuItem>(new[]
                 {
-                    new DashboardMenuItem { Id = 3, Title = "Profile", TargetType = new Profile(), VerticalLayout="FillAndExpand" },
-                    new DashboardMenuItem { Id = 0, Title = "Places", TargetType = new PlacesPage(), VerticalLayout="FillAndExpand" },
-                    new DashboardMenuItem {Id = 2, Title="Logout",TargetType = new MainPage(), VerticalLayout="End" }
+                    new DashboardMenuItem(navigator) { Id = 3, Title = "Profile", TargetType = new Profile(), VerticalLayout="FillAndExpand" },
+                    new DashboardMenuItem(navigator)  { Id = 0, Title = "Places", TargetType = new PlacesPage(), VerticalLayout="FillAndExpand" },
+                    new DashboardMenuItem(navigator)  { Id = 4, Title = "History", TargetType = new History(), VerticalLayout="FillAndExpand"}
                 });
             }
             

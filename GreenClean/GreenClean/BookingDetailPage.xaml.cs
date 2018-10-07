@@ -1,4 +1,5 @@
-﻿using GreenClean.Model;
+﻿using FFImageLoading.Svg.Forms;
+using GreenClean.Model;
 using GreenClean.Utilities;
 using GreenClean.ViewModel;
 using System;
@@ -16,15 +17,26 @@ namespace GreenClean
 	public partial class BookingDetailPage : ContentPage
 	{
         private bool displayAlerts = false;
+        private Appointment _appointment;
 
         public BookingDetailPage(Appointment appointment, bool isFromBooking = false)
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, true);
             ServiceDescription.Text = string.Format("{0}", appointment.Service.ServiceName);
+            if(appointment.Rating > 0)
+            {
+                ServiceRating.Text = string.Format(" | Rated {0}", appointment.Rating);
+            }
+            else
+            {
+                StarIcon.Text = "";
+            }
             ServicePrice.Text = string.Format("Php {0} with {1} housekeepers", appointment.Price.ToString(), appointment.Housekeeper.Count.ToString());
+            ServiceSchedule.Text = string.Format("{0} {1}-{2}", appointment.ScheduleDate.ToString("yyyy-MM-dd"), appointment.ScheduleTimeStart.ToString("hh:mm tt"), appointment.ScheduleTimeEnd.ToString("hh:mm tt"));
             EmployeeList.ItemsSource = appointment.Housekeeper;
             displayAlerts = isFromBooking;
+            _appointment = appointment;
         }
 
         protected override void OnAppearing()
@@ -39,7 +51,7 @@ namespace GreenClean
 
         public async void ContactHousekeeper(object sender, SelectedItemChangedEventArgs e)
         {
-            if (e == null || e.SelectedItem == null) return;
+            if (e == null || e.SelectedItem == null || _appointment.Rating > 0) return;
             
             var housekeeper = (Housekeeper)e.SelectedItem;
             var contactNumber = housekeeper.ContactNumber;
