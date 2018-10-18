@@ -27,11 +27,12 @@ namespace GreenClean
             dashboardpage.Logout += Logout;
             var optionsPage = new NavigationPage(dashboardpage);
             optionsPage.Title = "Options";
+            optionsPage.Icon = "ic_person.png";
+            appointmentPage.Icon =  "ic_access_alarms.png";
+            BarTextColor = Color.White;
             Children.Add(appointmentPage);
             Children.Add(optionsPage);
         }
-
-
 
         public async void Logout(object sender, ClickedEventArgs args)
         {

@@ -20,6 +20,11 @@ namespace GreenClean
             isInitial = true;
 		}
 
+        public async void OpenBooking(object sender, TappedEventArgs args)
+        {
+            await Navigation.PushAsync(new ServicesDashboard(),false);
+        }
+
         protected override async void OnAppearing()
         {
             base.OnAppearing();

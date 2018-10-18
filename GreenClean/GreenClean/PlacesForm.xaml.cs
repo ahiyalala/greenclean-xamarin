@@ -17,12 +17,17 @@ namespace GreenClean
 	{
         public event EventHandler<FormEvent> DataSender;
         PlacesModel places;
+        public List<Entry> Fields;
 
 		public PlacesForm ()
 		{
 			InitializeComponent ();
             Send.Text = "Add";
-		}
+            Fields = new List<Entry>
+            {
+                PlaceName,StreetAddress,Barangay,City
+            };
+        }
 
         public PlacesForm(PlacesModel obj)
         {
@@ -33,15 +38,40 @@ namespace GreenClean
             City.Text = obj.City;
             Send.Text = "Update";
             places = obj;
+            Fields = new List<Entry>
+            {
+                PlaceName,StreetAddress,Barangay,City
+            };
 
         }
 
-        public void OnClick(object sender, EventArgs a)
+        public void OnFocus(object sender, FocusEventArgs args)
+        {
+            (sender as Entry).PlaceholderColor = Color.Default;
+        }
+
+        public async void OnClick(object sender, EventArgs a)
         {
             var placename = PlaceName.Text;
             var streetaddress = StreetAddress.Text;
             var barangay = Barangay.Text;
             var city = City.Text;
+            var isValid = true;
+            foreach(var field in Fields)
+            {
+                if(field.Text == "" || field.Text == null)
+                {
+                    field.PlaceholderColor = Color.Red;
+                    isValid = false;
+                }
+            }
+
+            if (!isValid)
+            {
+                await DisplayAlert("Invalid input", "Fields cannot be empty", "Got it");
+                return;
+            }
+
             if (places != null)
             {
                 places.PlaceName = placename;

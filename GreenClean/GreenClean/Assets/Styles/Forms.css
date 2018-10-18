@@ -1,0 +1,17 @@
+﻿Entry{
+    height: 50;
+    margin-bottom:10;
+}
+
+.submit_btn {
+    border-radius: 10;
+    background-color: #ffffff;
+    border-color: #ffe600;
+    color:#ffe600;
+    border-width:1;
+}
+
+
+.PlacesStack{
+    padding: 20;
+}

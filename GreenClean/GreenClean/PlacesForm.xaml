@@ -1,14 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GreenClean.PlacesForm">
+             x:Class="GreenClean.PlacesForm"
+             BackgroundColor="White">
+    <ContentPage.Resources>
+        <StyleSheet Source="Assets/Styles/Forms.css" />
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Entry x:Name="PlaceName" Placeholder="Name"/>
-            <Entry x:Name="StreetAddress" Placeholder="Street Address"/>
-            <Entry x:Name="Barangay" Placeholder="Barangay"/>
-            <Entry x:Name="City" Placeholder="City"/>
-            <Button x:Name="Send" Clicked="OnClick" />
+        <StackLayout StyleClass="PlacesStack">
+            <Label StyleClass="Title" Text="Add a place" FontSize="Large" TextColor="Black" FontAttributes="Bold"/>
+            <Label StyleClass="Subtext" Text="Fill the form below" TextColor="Black" FontSize="Medium" />
+            <StackLayout>
+                <Entry x:Name="PlaceName" Focused="OnFocus" Placeholder="Name" StyleClass="field"/>
+                <Entry x:Name="StreetAddress" Focused="OnFocus" Placeholder="Street Address" StyleClass="field"/>
+                <Entry x:Name="Barangay" Focused="OnFocus" Placeholder="Barangay" StyleClass="field"/>
+                <Entry x:Name="City" Focused="OnFocus" Placeholder="City" StyleClass="field"/>
+                <Frame StyleClass="submit_btn">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnClick" />
+                    </Frame.GestureRecognizers>
+                    <Label x:Name="Send"  HorizontalTextAlignment="Center" FontSize="Medium" />
+                </Frame>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

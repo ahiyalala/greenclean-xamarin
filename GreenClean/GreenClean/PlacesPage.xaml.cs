@@ -23,7 +23,7 @@ namespace GreenClean
         public PlacesPage ()
 		{
 			InitializeComponent ();
-            PlacesList.ItemsSource = places;
+            PlacesList.ItemsSource = null;
             HasAppeared = false;
         }
 
@@ -33,6 +33,7 @@ namespace GreenClean
             if (!HasAppeared)
             {
                 var placeslist = PlacesViewModel.GetCollectionList(PlacesModel.PlacesList);
+                PlacesList.ItemsSource = places;
                 foreach(var place in placeslist)
                 {
                     places.Add(place);
