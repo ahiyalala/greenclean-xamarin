@@ -3,50 +3,73 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:GreenClean.Model"
              x:Class="GreenClean.DashboardMaster"
+             BackgroundColor="White"
              NavigationPage.HasNavigationBar="False">
   <StackLayout>
-    <ListView x:Name="MenuItemsListView"
+        <ListView x:Name="MenuItemsListView"
               SeparatorVisibility="None"
               HasUnevenRows="true"
               SelectionMode="None"
+              BackgroundColor="White"
               ItemsSource="{Binding MenuItems}">
-      <ListView.Header>
-          <Grid BackgroundColor="#FAED2C">
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="10"/>
-          </Grid.ColumnDefinitions>
-          <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="80"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="10"/>
-          </Grid.RowDefinitions>
-          <Label x:Name="ProfileLabel"
-              Grid.Column="1"
-              Grid.Row="2"
-              Text="{Binding FullName}"
-              TextColor="White"
-              Style="{DynamicResource SubtitleStyle}"/>
-        </Grid>
-      </ListView.Header>
-      <ListView.ItemTemplate>
-        <DataTemplate>
-          <ViewCell>
-            <StackLayout Padding="15,10" HorizontalOptions="FillAndExpand">
-              <StackLayout.GestureRecognizers>
+            <ListView.Header>
+                <Grid BackgroundColor="#FAED2C">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="10"/>
+                    </Grid.RowDefinitions>
+                    <Label x:Name="ProfileLabel"
+                   Grid.Column="1"
+                   Grid.Row="2"
+                   Text="{Binding FullName}"
+                   TextColor="White"
+                   Style="{DynamicResource SubtitleStyle}"/>
+                </Grid>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="15,10" HorizontalOptions="FillAndExpand">
+                            <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding OpenPage}"/>
-              </StackLayout.GestureRecognizers>
-              <Label VerticalOptions="{Binding VerticalLayout}" 
+                            </StackLayout.GestureRecognizers>
+                            <Label VerticalOptions="{Binding VerticalLayout}" 
                     VerticalTextAlignment="Center" 
                     Text="{Binding Title}" 
                     FontSize="24"/>
-            </StackLayout>
-          </ViewCell>
-        </DataTemplate>
-      </ListView.ItemTemplate>
-    </ListView>
-    <Button Text="Logout" HorizontalOptions="Center" Clicked="LogoutEvent"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Label Margin="20,0,0,10" Text="Privacy Policy" TextColor="#FAED2C" FontSize="Small">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OpenPrivacyPolicy"/>
+            </Label.GestureRecognizers>
+        </Label>
+        <Label Margin="20,0,0,10" Text="Terms and Conditions" TextColor="#FAED2C" FontSize="Small">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OpenTnC"/>
+            </Label.GestureRecognizers>
+        </Label>
+        <Label Margin="20,0,0,10" Text="Contact Us" TextColor="#FAED2C" FontSize="Small">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OpenContactUs"/>
+            </Label.GestureRecognizers>
+        </Label>
+        <Frame Padding="20,40,20,40">
+            <Label Text="Logout" TextColor="Red" FontAttributes="Bold">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="LogoutEvent" />
+                </Label.GestureRecognizers>
+            </Label>
+        </Frame>
     </StackLayout>
 </ContentPage>

@@ -71,27 +71,35 @@ namespace GreenClean.Model
 
         public static async Task GetAppointmentsAsync()
         {
-            HttpClient client = new HttpClient();
-            var properties = Application.Current.Properties;
-            client.DefaultRequestHeaders.Add("Authentication", string.Format("{0} {1}", properties["email"], properties["token"]));
+            try
+            {
+                HttpClient client = new HttpClient();
+                var properties = Application.Current.Properties;
+                client.DefaultRequestHeaders.Add("Authentication", string.Format("{0} {1}", properties["email"], properties["token"]));
 
-            AppointmentDashboardViewmodel.Pending = null;
-            AppointmentDashboardViewmodel.Finished = null;
-            var response = await client.GetAsync(appointmentUri);
-            var result = await response.Content.ReadAsStringAsync();
-            if (response.IsSuccessStatusCode)
+                AppointmentDashboardViewmodel.Pending = null;
+                AppointmentDashboardViewmodel.Finished = null;
+                var response = await client.GetAsync(appointmentUri);
+                var result = await response.Content.ReadAsStringAsync();
+                if (response.IsSuccessStatusCode)
+                {
+                    AppointmentDashboardViewmodel.Pending = new ObservableCollection<AppointmentDashboardViewmodel>();
+                    AppointmentDashboardViewmodel.Finished = new ObservableCollection<AppointmentDashboardViewmodel>();
+                    var appointmentsList = JsonConvert.DeserializeObject<List<Appointment>>(result);
+                    foreach (var appointment in appointmentsList.OrderByDescending(a => a.IsFinished).Where(x => x.IsFinished == false || x.Rating == 0))
+                    {
+                        AppointmentDashboardViewmodel.Pending.Add(new AppointmentDashboardViewmodel(appointment));
+                    }
+                    foreach (var appointment in appointmentsList.Where(x => x.IsFinished == true && x.Rating > 0))
+                    {
+                        AppointmentDashboardViewmodel.Finished.Add(new AppointmentDashboardViewmodel(appointment));
+                    }
+                }
+            }
+            catch(Exception ex)
             {
                 AppointmentDashboardViewmodel.Pending = new ObservableCollection<AppointmentDashboardViewmodel>();
                 AppointmentDashboardViewmodel.Finished = new ObservableCollection<AppointmentDashboardViewmodel>();
-                var appointmentsList = JsonConvert.DeserializeObject<List<Appointment>>(result);
-                foreach(var appointment in appointmentsList.OrderByDescending(a => a.IsFinished).Where(x => x.IsFinished == false || x.Rating == 0))
-                {
-                    AppointmentDashboardViewmodel.Pending.Add(new AppointmentDashboardViewmodel(appointment));
-                }
-                foreach(var appointment in appointmentsList.Where(x=>x.IsFinished == true && x.Rating > 0))
-                {
-                    AppointmentDashboardViewmodel.Finished.Add(new AppointmentDashboardViewmodel(appointment));
-                }
             }
         }
 
@@ -111,6 +119,20 @@ namespace GreenClean.Model
             }
 
             return null;
+        }
+
+        public static async Task<bool> CancelAppointment(string transaction_id)
+        {
+            HttpClient client = new HttpClient();
+            var properties = Application.Current.Properties;
+            client.DefaultRequestHeaders.Add("Authentication", string.Format("{0} {1}", properties["email"], properties["token"]));
+
+            var response = await client.DeleteAsync(string.Format("{0}/cancel/{1}",appointmentUri,transaction_id));
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            return false;
         }
 
         public static async Task<Appointment> GetSpecificAppointmentAsync(string id)

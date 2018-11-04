@@ -99,7 +99,7 @@ namespace GreenClean.Model
             }
         }
 
-        public static async Task<bool> SignUpAsync(Customer customer)
+        public static async Task<int> SignUpAsync(Customer customer)
         {
             HttpClient client = new HttpClient();
 
@@ -107,15 +107,17 @@ namespace GreenClean.Model
             var content = new StringContent(item, Encoding.UTF8, "application/json");
 
             var response = await client.PostAsync(UriUsers, content);
-            var result = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
             {
 
-                return true;
+                return 200;
             }
             else
             {
-                return false;
+                if((int)response.StatusCode == 400)
+                    return 400;
+
+                return 500;
             }
         }
 

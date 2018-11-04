@@ -69,7 +69,8 @@ namespace GreenClean
             Sub.BorderColor = SubSymbol.TextColor = Color.LightGray;
             Add.IsEnabled = true;
 
-            InvisibleDatePicker.SetValue(DatePicker.MinimumDateProperty, System.DateTime.Today);
+            InvisibleDatePicker.SetValue(DatePicker.MinimumDateProperty, System.DateTime.Today.AddDays(7));
+            InvisibleDatePicker.SetValue(DatePicker.MinimumDateProperty, System.DateTime.Today.AddDays(7).AddMonths(3));
             appointmentRequest = appointmentargs;
             
             if (appointmentRequest.Service.ServiceName.Contains("Commercial"))

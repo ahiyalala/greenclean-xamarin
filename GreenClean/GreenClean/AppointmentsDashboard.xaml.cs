@@ -14,15 +14,24 @@ namespace GreenClean
 	public partial class AppointmentsDashboard : ContentPage
 	{
         public bool isInitial;
+        public event EventHandler<TappedEventArgs> OpenBookingPage;
 		public AppointmentsDashboard ()
 		{
 			InitializeComponent ();
             isInitial = true;
+            ImageBanner.Source = ImageSource.FromResource("GreenClean.Assets.plantspray.jpg");
 		}
 
         public async void OpenBooking(object sender, TappedEventArgs args)
         {
-            await Navigation.PushAsync(new ServicesDashboard(),false);
+            if(AppointmentDashboardViewmodel.Pending.Count < 3)
+            {
+                OpenBookingPage(sender, args);
+            }
+            else
+            {
+                await DisplayAlert("Cannot add new booking", "You've reached the maximum allowed number of appointments", "OK");
+            }
         }
 
         protected override async void OnAppearing()

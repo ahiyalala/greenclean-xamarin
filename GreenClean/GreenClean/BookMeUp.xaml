@@ -2,13 +2,22 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GreenClean.BookMeUp"
-             BackgroundColor="#4CAF50"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <AbsoluteLayout>
-            <ActivityIndicator HorizontalOptions="Center" Color="White"/>
-            <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" Text="Please wait while we try to find you a housekeeper" FontSize="Large" TextColor="White" FontAttributes="Bold"/>
-            <Button x:Name="CancelBtn" Clicked="CancelBooking" AbsoluteLayout.LayoutBounds="0,1,1,0.1" AbsoluteLayout.LayoutFlags="All" Text="Cancel request" />
+            <Frame AbsoluteLayout.LayoutBounds="0.5,0.5,1,1" Padding="20,20,20,20" AbsoluteLayout.LayoutFlags="All" 
+                   BackgroundColor="#FAED2C">
+                <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                    <ActivityIndicator HorizontalOptions="Center" Color="Black" IsRunning="True" IsVisible="True"/>
+                    <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="Please wait while we try to find you a housekeeper" FontSize="Large" TextColor="Black" FontAttributes="Bold"/>
+                </StackLayout>
+            </Frame>
+            <Frame AbsoluteLayout.LayoutBounds="0,1,1,0.1" Padding="10,10,10,10" AbsoluteLayout.LayoutFlags="All" BackgroundColor="Black">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="CancelBooking"/>
+                </Frame.GestureRecognizers>
+                <Label x:Name="CancelBtn" TextColor="White" HorizontalTextAlignment="Center" FontSize="Medium"/>
+            </Frame>
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

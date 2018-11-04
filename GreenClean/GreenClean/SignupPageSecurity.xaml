@@ -4,28 +4,51 @@
              x:Class="GreenClean.SignupPageSecurity">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout>
-                <Label FontSize="Medium" Text="Let's get started"/>
-                <Label FontSize="Small">
+            <StackLayout Padding="10,10,10,10">
+                <Label FontSize="Medium" Text="Let's get started" TextColor="Black"/>
+                <Label FontSize="Small" Margin="0,0,0,10" TextColor="Black">
                     Kindly fill out these sign-up form
                 </Label>
-                <Entry Placeholder="First Name" x:Name="FirstName"/>
-                <Entry Placeholder="Middle Name" x:Name="MiddleName"/>
-                <Entry Placeholder="Last Name" x:Name="LastName"/>
+                <Entry Placeholder="First Name" x:Name="FirstName" ReturnType="Next" Unfocused="ResetView"/>
+                <Entry Placeholder="Middle Name" x:Name="MiddleName" ReturnType="Next" Unfocused="ResetView"/>
+                <Entry Placeholder="Last Name" x:Name="LastName" ReturnType="Next" Unfocused="ResetView"/>
                 <Picker x:Name="Gender" Title="Gender">
                     <Picker.Items>
                         <x:String>Male</x:String>
                         <x:String>Female</x:String>
                     </Picker.Items>
                 </Picker>
-                <Entry Placeholder="9171234567" Keyboard="Numeric" x:Name="Mobile"/>
+                <Entry Placeholder="9171234567" Keyboard="Numeric" x:Name="Mobile" ReturnType="Next" Unfocused="ResetView"/>
                 <Label Margin="5,0,0,-15">Birthday</Label>
                 <DatePicker x:Name="BirthDate" Format="yyyy-MM-dd" />
-                <Entry Placeholder="your_email@example.com" Keyboard="Email" x:Name="Email"/>
-                <Entry Placeholder="Password" x:Name="Password" IsPassword="True" />
-                <Entry Placeholder="Re-type password" x:Name="RetypePassword" IsPassword="True" />
-                <Button x:Name="SubmitButton" Text="Submit" Clicked="SubmitForm"/>
-                <Label x:Name="InfoMessage" IsVisible="False" TextColor="Red"/>
+                <Entry Placeholder="your_email@example.com" Keyboard="Email" x:Name="Email" ReturnType="Next" Unfocused="ResetView"/>
+                <Entry Placeholder="Password" x:Name="Password" IsPassword="True" ReturnType="Next" />
+                <Entry Placeholder="Re-type password" x:Name="RetypePassword" IsPassword="True" ReturnType="Done" Unfocused="ResetView" />
+                <Label TextColor="Black" Margin="0,20,0,10" FontSize="Medium">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Submitting the form would signify that you've read and agreed to the " />
+                            <Span Text="Terms and Conditions" TextColor="#FAED2C">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OpenTnC"/>
+                                </Span.GestureRecognizers>
+                            </Span>
+                            <Span Text=" and " />
+                            <Span Text="Privacy Policy" TextColor="#FAED2C">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OpenPrivacyPolicy"/>
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Frame x:Name="SubmitButton" HasShadow="False" IsEnabled="True"  HorizontalOptions="FillAndExpand" Padding="5,10,5,10" BackgroundColor="#FAED2C" >
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="SubmitForm" />
+                    </Frame.GestureRecognizers>
+                    <Label Text="Submit" TextColor="White" HorizontalTextAlignment="Center" />
+                </Frame>
+                <Label x:Name="InfoMessage" IsVisible="False" TextColor="Red" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

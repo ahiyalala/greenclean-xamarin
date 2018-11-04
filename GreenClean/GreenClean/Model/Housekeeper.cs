@@ -28,6 +28,8 @@ namespace GreenClean.Model
         public string Gender { get; set; }
         [JsonProperty("rating")]
         public string Rating { get; set; }
+        [JsonProperty("image")]
+        public string Image { get; set; }
         
         private string GetFullName()
         {

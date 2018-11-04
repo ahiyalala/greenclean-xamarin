@@ -7,20 +7,26 @@
   <ItemGroup>
     <None Remove="Assets\baseline-phone-24px.svg" />
     <None Remove="Assets\chevron-right.svg" />
+    <None Remove="Assets\cleaninglady.jpg" />
+    <None Remove="Assets\homelogo.png" />
     <None Remove="Assets\ic_access_alarms.png" />
     <None Remove="Assets\ic_person.png" />
     <None Remove="Assets\line-awesome.ttf" />
     <None Remove="Assets\outline-arrow_right-24px.svg" />
+    <None Remove="Assets\plantspray.jpg" />
     <None Remove="Assets\star_rate.png" />
     <None Remove="Assets\star_rate_white.png" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Assets\baseline-phone-24px.svg" />
+    <EmbeddedResource Include="Assets\cleaninglady.jpg" />
+    <EmbeddedResource Include="Assets\homelogo.png" />
     <EmbeddedResource Include="Assets\ic_access_alarms.png" />
     <EmbeddedResource Include="Assets\ic_person.png" />
     <EmbeddedResource Include="Assets\line-awesome.ttf" />
     <EmbeddedResource Include="Assets\outline-arrow_right-24px.svg" />
+    <EmbeddedResource Include="Assets\plantspray.jpg" />
     <EmbeddedResource Include="Assets\star_rate.png" />
     <EmbeddedResource Include="Assets\star_rate_white.png" />
   </ItemGroup>
@@ -54,10 +60,16 @@
     <EmbeddedResource Update="BookMeUp.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="ContactUs.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="DashboardDetail.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="DashboardMaster.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Faq.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="History.xaml">
@@ -87,6 +99,9 @@
     <EmbeddedResource Update="PreBooking.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="PrivacyPolicy.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Profile.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -97,6 +112,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="SplashScreen.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="TermsAndConditions.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

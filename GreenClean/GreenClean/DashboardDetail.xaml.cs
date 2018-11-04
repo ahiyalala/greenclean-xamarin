@@ -21,9 +21,11 @@ namespace GreenClean
         {
             InitializeComponent();
             HasAppeared = false;
-            var appointmentPage = new NavigationPage(new AppointmentsDashboard());
+            var _appointmentPage = new AppointmentsDashboard();
+            _appointmentPage.OpenBookingPage += OpenBooking;
+            var appointmentPage = new NavigationPage(_appointmentPage);
             appointmentPage.Title = "Appointments";
-            var dashboardpage = new DashboardMaster();
+            var dashboardpage = new DashboardMaster(this.Navigation);
             dashboardpage.Logout += Logout;
             var optionsPage = new NavigationPage(dashboardpage);
             optionsPage.Title = "Options";
@@ -34,8 +36,17 @@ namespace GreenClean
             Children.Add(optionsPage);
         }
 
-        public async void Logout(object sender, ClickedEventArgs args)
+
+        public async void OpenBooking(object sender, TappedEventArgs args)
         {
+            await Navigation.PushAsync(new ServicesDashboard(), false);
+        }
+
+        public async void Logout(object sender, EventArgs args)
+        {
+            var logout = await DisplayAlert("Logging out", "Are you sure?", "Yes", "No");
+            if (!logout) return;
+
             Application.Current.Properties.Clear();
             AppointmentDashboardViewmodel.Finished = new ObservableCollection<AppointmentDashboardViewmodel>();
             AppointmentDashboardViewmodel.Pending = new ObservableCollection<AppointmentDashboardViewmodel>();

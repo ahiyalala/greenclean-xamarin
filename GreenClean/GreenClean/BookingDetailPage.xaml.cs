@@ -1,4 +1,5 @@
 ﻿using FFImageLoading.Svg.Forms;
+using GreenClean.DependencyServices;
 using GreenClean.Model;
 using GreenClean.Utilities;
 using GreenClean.ViewModel;
@@ -24,6 +25,7 @@ namespace GreenClean
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, true);
             ServiceDescription.Text = string.Format("{0}", appointment.Service.ServiceName);
+            
             if(appointment.Rating > 0)
             {
                 ServiceRating.Text = string.Format(" | Rated {0}", appointment.Rating);
@@ -37,6 +39,26 @@ namespace GreenClean
             EmployeeList.ItemsSource = appointment.Housekeeper;
             displayAlerts = isFromBooking;
             _appointment = appointment;
+            if (isFromBooking)
+            {
+                CancelationFrame.IsVisible = false;
+            }
+            else
+            {
+                if ((_appointment.ScheduleDate.Date - DateTime.Now.Date).TotalDays < 1)
+                {
+                    CancelText.Text = "Cancellation period over";
+                    CancelText.TextColor = Color.FromHex("a5a5a5");
+                    CancelButton.BorderColor = Color.FromHex("dddddd");
+                    CancelButton.BackgroundColor = Color.FromHex("dddddd");
+                    CancelButton.IsEnabled = false;
+                    PolicyText.IsVisible = false;
+                }
+                else
+                {
+                    CancellationPolicy.Text = string.Format("You can cancel this appointment until {0}", _appointment.ScheduleDate.AddDays(-1).ToString("yyyy-MM-dd"));
+                }
+            }
         }
 
         protected override void OnAppearing()
@@ -55,12 +77,12 @@ namespace GreenClean
             
             var housekeeper = (Housekeeper)e.SelectedItem;
             var contactNumber = housekeeper.ContactNumber;
-            var call = await DisplayAlert("Contact Housekeeper", string.Format("Call {0} or send a message? {1}", housekeeper.FirstName, contactNumber), "Call", "SMS");
-            if (call)
+            var contact = await DisplayActionSheet(string.Format("Call {0} or send a message? {1}", housekeeper.FirstName, contactNumber),"Cancel", null , "Call", "SMS");
+            if (contact == "Call")
             {
                 Device.OpenUri(new Uri(string.Format("tel:+63{0}", contactNumber)));
             }
-            else
+            else if(contact == "SMS")
             {
                 Device.OpenUri(new Uri(string.Format("sms:+63{0}", contactNumber)));
             }
@@ -68,9 +90,22 @@ namespace GreenClean
             EmployeeList.SelectedItem = null;
         }
 
-        async void GoToHome(object sender, EventArgs e)
+        async void CancelBooking(object sender, EventArgs e)
         {
-            await Navigation.PopAsync();
+            var proceed = await DisplayAlert("Cancel appointment", "Do you want to cancel?", "Yes","No");
+            if (!proceed) return;
+
+            var cancel_status = await Appointment.CancelAppointment(_appointment.BookingRequestId);
+            if (cancel_status)
+            {
+                AppointmentDashboardViewmodel.isOrigin = true;
+                DependencyService.Get<IMessage>().ShortAlert("Appointment cancelled");
+                await Navigation.PopAsync(false);
+            }
+            else
+            {
+                DependencyService.Get<IMessage>().ShortAlert("Cancellation failed");
+            }
         }
 
 

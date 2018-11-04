@@ -181,7 +181,12 @@
                     </Frame>
                 </StackLayout>
             </ScrollView>
-            <Button Text="Set appointment" Clicked="FindAnAppointment"/>
+            <Frame Grid.Row="1" IsEnabled="True"  HorizontalOptions="FillAndExpand" Padding="5,10,5,10" BackgroundColor="#FAED2C" >
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="FindAnAppointment" />
+                </Frame.GestureRecognizers>
+                <Label Text="Set appointment" VerticalTextAlignment="Center" WidthRequest="300" TextColor="White" HorizontalTextAlignment="Center" />
+            </Frame>
         </StackLayout>
     </Grid>
 </ContentPage>

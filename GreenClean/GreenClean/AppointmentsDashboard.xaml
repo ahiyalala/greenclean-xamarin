@@ -12,7 +12,7 @@
                 <ActivityIndicator  Color="Green" IsRunning="True" IsVisible="True"
                                   HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
             </Frame>
-            <Label x:Name="NullText" TextColor="#C8C8C8" Text="You don't have any pending appointments" AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
+            <Label x:Name="NullText" TextColor="#C8C8C8" Text="You don't have any active appointments" AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
                     AbsoluteLayout.LayoutFlags="PositionProportional" />
             <ListView x:Name="Appointments" SelectionMode="None" RowHeight="250" SeparatorVisibility="None" IsVisible="False" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,1,1,0.75"
                       IsPullToRefreshEnabled="True"
@@ -39,10 +39,8 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Frame AbsoluteLayout.LayoutBounds="0,0,1,0.25" Padding="0,0,0,0" AbsoluteLayout.LayoutFlags="All">
-                <StackLayout Margin="0,0,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                    <Image Source="http://www.salayapavilion.com/websph/images/stories/Interns/Housekeeping.JPG" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill" Grid.Row="0"/>
-                </StackLayout>
+            <Frame AbsoluteLayout.LayoutBounds="0,0,1,0.25" Padding="0,0,0,0" AbsoluteLayout.LayoutFlags="All" BackgroundColor="#fff675">
+                <Image x:Name="ImageBanner"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill" Grid.Row="0"/>
             </Frame>
             <Frame
                 AbsoluteLayout.LayoutBounds="0.5,0.23,0.5,50" Padding="0,0,0,0" BackgroundColor="#FAED2C" CornerRadius="20" AbsoluteLayout.LayoutFlags="XProportional,YProportional,WidthProportional">

@@ -8,10 +8,12 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace GreenClean
 {
-	public partial class MainPage : ContentPage
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class MainPage : ContentPage
 	{
         string UriUsers = Constants.BaseUri + "/api/users/login";
         HttpClient client;
@@ -19,7 +21,9 @@ namespace GreenClean
 		{
 			InitializeComponent();
             client = new HttpClient();
-
+            BannerLogin.Source = ImageSource.FromResource("GreenClean.Assets.cleaninglady.jpg");
+            Logo.Source = ImageSource.FromResource("GreenClean.Assets.homelogo.png");
+            OverlayFrame.BackgroundColor = Color.FromRgba(255, 255, 255, 0.5);
 		}
         
         async void OnLogin(object sender, EventArgs e)
@@ -49,7 +53,7 @@ namespace GreenClean
             }
             else
             {
-                await DisplayAlert("Login failed", result, "Try again");
+                await DisplayAlert("Login failed", "Invalid login", "Try again");
                 LoginButton.IsEnabled = true;
                 SignUpButton.IsEnabled = true;
             }

@@ -15,11 +15,11 @@
                 <Entry x:Name="StreetAddress" Focused="OnFocus" Placeholder="Street Address" StyleClass="field"/>
                 <Entry x:Name="Barangay" Focused="OnFocus" Placeholder="Barangay" StyleClass="field"/>
                 <Entry x:Name="City" Focused="OnFocus" Placeholder="City" StyleClass="field"/>
-                <Frame StyleClass="submit_btn">
+                <Frame x:Name="SubmitButton" HasShadow="False" IsEnabled="True"  HorizontalOptions="FillAndExpand" Padding="5,10,5,10" BackgroundColor="#FAED2C" >
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnClick" />
                     </Frame.GestureRecognizers>
-                    <Label x:Name="Send"  HorizontalTextAlignment="Center" FontSize="Medium" />
+                    <Label x:Name="Send" TextColor="White"  HorizontalTextAlignment="Center" FontSize="Medium" />
                 </Frame>
             </StackLayout>
         </StackLayout>
