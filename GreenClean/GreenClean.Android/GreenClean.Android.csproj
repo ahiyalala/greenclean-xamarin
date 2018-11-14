@@ -116,9 +116,6 @@
     <AndroidResource Include="Resources\drawable\star_rate_white.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\greenklean.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\ic_access_alarms.png" />
   </ItemGroup>
   <ItemGroup>

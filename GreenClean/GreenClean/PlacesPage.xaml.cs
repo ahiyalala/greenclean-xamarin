@@ -30,17 +30,14 @@ namespace GreenClean
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            if (!HasAppeared)
+            PlacesList.ItemsSource = null;
+            var placeslist = PlacesViewModel.GetCollectionList(PlacesModel.PlacesList);
+            var _places = new ObservableCollection<PlacesViewModel>();
+            foreach (var place in placeslist)
             {
-                var placeslist = PlacesViewModel.GetCollectionList(PlacesModel.PlacesList);
-                PlacesList.ItemsSource = places;
-                foreach(var place in placeslist)
-                {
-                    places.Add(place);
-                }
-                HasAppeared = true;
+                _places.Add(place);
             }
-                
+            PlacesList.ItemsSource = _places;
         }
 
 

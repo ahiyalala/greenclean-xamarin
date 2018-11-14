@@ -11,10 +11,12 @@
             <Label StyleClass="Title" Text="Add a place" FontSize="Large" TextColor="Black" FontAttributes="Bold"/>
             <Label StyleClass="Subtext" Text="Fill the form below" TextColor="Black" FontSize="Medium" />
             <StackLayout>
-                <Entry x:Name="PlaceName" Focused="OnFocus" Placeholder="Name" StyleClass="field"/>
+                <Entry x:Name="PlaceName" Focused="OnFocus" Placeholder="Type of Property" StyleClass="field"/>
                 <Entry x:Name="StreetAddress" Focused="OnFocus" Placeholder="Street Address" StyleClass="field"/>
-                <Entry x:Name="Barangay" Focused="OnFocus" Placeholder="Barangay" StyleClass="field"/>
-                <Entry x:Name="City" Focused="OnFocus" Placeholder="City" StyleClass="field"/>
+                <Picker x:Name="City" Title="City" StyleClass="field" SelectedIndexChanged="OnCitySelect" />
+                <Picker x:Name="Barangay" Title="Barangay" IsEnabled="False" StyleClass="field" SelectedIndexChanged="OnBarangaySelect"  />
+                <Entry x:Name="BarangayText" IsEnabled="False" StyleClass="field" />
+                <Entry x:Name="CityText" IsEnabled="False" StyleClass="field" />
                 <Frame x:Name="SubmitButton" HasShadow="False" IsEnabled="True"  HorizontalOptions="FillAndExpand" Padding="5,10,5,10" BackgroundColor="#FAED2C" >
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnClick" />

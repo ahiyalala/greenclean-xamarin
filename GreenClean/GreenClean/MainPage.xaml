@@ -8,7 +8,7 @@
 
     <ContentPage.Content>
         <AbsoluteLayout>
-            <Frame AbsoluteLayout.LayoutBounds="0,0,1,0.5" Padding="0,0,0,0" AbsoluteLayout.LayoutFlags="All" HasShadow="False" BackgroundColor="#fff675">
+            <Frame AbsoluteLayout.LayoutBounds="0,0,1,1" Padding="0,0,0,0" AbsoluteLayout.LayoutFlags="All" HasShadow="False" BackgroundColor="#fff675">
                 <Image x:Name="BannerLogin" Aspect="AspectFill" />
             </Frame>
             <Frame x:Name="OverlayFrame" AbsoluteLayout.LayoutBounds="0,0,1,0.5" Padding="0,0,0,0" AbsoluteLayout.LayoutFlags="All" HasShadow="False">

@@ -59,11 +59,11 @@ namespace GreenClean
             {
                 Password.TextColor = Color.Red;
                 RetypePassword.TextColor = Color.Red;
-                await DisplayAlert("Oops", "Password does not match", "Ok");
+                await DisplayAlert("Error", "Password does not match", "Ok");
             }
             else if(!Regex.Match(Email.Text, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$").Success)
             {
-                await DisplayAlert("Oops", "Invalid email", "Ok");
+                await DisplayAlert("Error", "Invalid email", "Ok");
                 Email.TextColor = Color.Red;
             }
             else
@@ -85,13 +85,13 @@ namespace GreenClean
 
                 if (response == 200)
                 {
-                    await DisplayAlert("Yay", "Successful", "Oki");
+                    await DisplayAlert("Message", "Registration successful", "Ok");
                     await Navigation.PopAsync();
                 }
                 else
                 {
-                    var message = (response == 400) ? "This email is already registered" : "Something went wrong with your sign up :(";
-                    await DisplayAlert("Oops", message, "Try again");
+                    var message = (response == 400) ? "This email is already registered" : "Something went wrong with your sign up";
+                    await DisplayAlert("Error", message, "Try again");
                 }
             }
             SubmitButton.IsEnabled = true;

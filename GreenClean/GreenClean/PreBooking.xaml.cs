@@ -45,8 +45,7 @@ namespace GreenClean
         public PreBooking(AppointmentRequest appointmentargs)
         {
             InitializeComponent();
-
-            ServiceImage.Source = string.Format("{0}/img/{1}",Constants.BaseUri, appointmentargs.Service.ServiceImage);
+            
             float.TryParse(appointmentargs.Service.Price, out price);
             ServiceDescription.Text = appointmentargs.Service.ServiceName;
 
@@ -219,7 +218,7 @@ namespace GreenClean
                 Sub.BorderColor = SubSymbol.TextColor = Color.FromHex("#4CAF50");
             }
 
-            if (appointmentRequest.Housekeepers == 3)
+            if (appointmentRequest.Housekeepers == 5)
             {
                 Add.IsEnabled = false;
                 Add.BorderColor = AddSymbol.TextColor = Color.LightGray;

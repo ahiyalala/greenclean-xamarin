@@ -14,7 +14,7 @@ using FFImageLoading.Forms.Droid;
 
 namespace GreenClean.Droid
 {
-    [Activity(Label = "Greenklean", Icon = "@drawable/greenklean", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Greenklean", Icon = "@drawable/icon", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)

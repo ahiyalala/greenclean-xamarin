@@ -18,13 +18,9 @@
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Frame OutlineColor="LightGray" WidthRequest="50" HeightRequest="50" CornerRadius="50">
-                <Image x:Name="ServiceImage" Grid.Column="0" Grid.Row="0"  />
-            </Frame>
-            <StackLayout Grid.Column="1" Grid.Row="0" VerticalOptions="Center">
+            <StackLayout Grid.Column="0" Grid.Row="0" VerticalOptions="Center">
                 <Label Text="You have selected" FontSize="Small" />
                 <Label x:Name="ServiceDescription" FontSize="Large" />
                 <Label x:Name="ServicePrice" FontSize="Medium"/>
