@@ -81,6 +81,10 @@
     <ProguardConfiguration Include="proguard.cfg">
       <Generator>ResXFileCodeGenerator</Generator>
     </ProguardConfiguration>
+    <AndroidAsset Include="Assets\PT_Sans-Web-Bold.ttf" />
+    <AndroidAsset Include="Assets\PT_Sans-Web-BoldItalic.ttf" />
+    <AndroidAsset Include="Assets\PT_Sans-Web-Italic.ttf" />
+    <AndroidAsset Include="Assets\PT_Sans-Web-Regular.ttf" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>

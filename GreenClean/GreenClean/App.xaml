@@ -7,7 +7,52 @@
             <Setter Property="BarBackgroundColor" Value="{DynamicResource NavColor}" />
             <Setter Property="BarTextColor" Value="{DynamicResource NavTextColor}" />
         </Style>
-		<!-- Application resource dictionary -->
+        <Style TargetType="Label">
+            <Setter Property="FontFamily">
+                <Setter.Value>
+                    <OnPlatform
+                        x:TypeArguments="x:String"
+                        Android="PT_Sans-Web-Regular.ttf#PT_Sans-Web-Regular"
+                        iOS="PT_Sans-Web-Regular">
+                    </OnPlatform>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TextColor" Value="Black" />
+        </Style>
+        <Style TargetType="Entry">
+            <Setter Property="FontFamily">
+                <Setter.Value>
+                    <OnPlatform
+                        x:TypeArguments="x:String"
+                        Android="PT_Sans-Web-Regular.ttf#PT_Sans-Web-Regular"
+                        iOS="PT_Sans-Web-Regular">
+                    </OnPlatform>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Picker">
+            <Setter Property="FontFamily">
+                <Setter.Value>
+                    <OnPlatform
+                        x:TypeArguments="x:String"
+                        Android="PT_Sans-Web-Regular.ttf#PT_Sans-Web-Regular"
+                        iOS="PT_Sans-Web-Regular">
+                    </OnPlatform>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontFamily">
+                <Setter.Value>
+                    <OnPlatform
+                        x:TypeArguments="x:String"
+                        Android="PT_Sans-Web-Regular.ttf#PT_Sans-Web-Regular"
+                        iOS="PT_Sans-Web-Regular">
+                    </OnPlatform>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- Application resource dictionary -->
 
 	</Application.Resources>
 </Application>

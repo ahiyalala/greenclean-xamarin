@@ -7,11 +7,17 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ListView x:Name="PlacesList"
-                    ItemSelected="OnItemSelect">
+                    ItemSelected="OnItemSelect" HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Places.PlaceName}"
-                                  Detail="{Binding Places.PlaceDetail}" />
+                    <ViewCell>
+                        <Frame>
+                            <StackLayout>
+                                <Label Text="{Binding Places.PlaceName}" FontSize="Small" TextColor="Black" />
+                                <Label Text="{Binding Places.PlaceDetail}" FontSize="Medium" TextColor="Black" LineBreakMode="TailTruncation" />
+                            </StackLayout>
+                        </Frame>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

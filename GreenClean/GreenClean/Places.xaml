@@ -5,11 +5,17 @@
              BackgroundColor="White">
     <ContentPage.Content>
         <ListView x:Name="Options"
-                    ItemSelected="OnItemSelect">
+                    ItemSelected="OnItemSelect" HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding PlaceName}"
-                                  Detail="{Binding PlaceDetail}" />
+                    <ViewCell>
+                        <Frame>
+                            <StackLayout>
+                                <Label Text="{Binding PlaceName}" FontSize="Small" TextColor="Black" />
+                                <Label Text="{Binding PlaceDetail}" FontSize="Medium" TextColor="Black" LineBreakMode="TailTruncation" />
+                            </StackLayout>
+                        </Frame>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

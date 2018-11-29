@@ -22,6 +22,7 @@ namespace GreenClean.Droid
             // set the layout resources first
             FormsAppCompatActivity.ToolbarResource = Resource.Layout.Toolbar;
             FormsAppCompatActivity.TabLayoutResource = Resource.Layout.Tabbar;
+            
 
             // then call base.OnCreate and the Xamarin.Forms methods
             base.OnCreate(bundle);
