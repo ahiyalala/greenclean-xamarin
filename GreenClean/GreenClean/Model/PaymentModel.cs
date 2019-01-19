@@ -84,8 +84,7 @@ namespace GreenClean.Model
             {
                 HttpClient client = new HttpClient();
                 var properties = Application.Current.Properties;
-                //client.DefaultRequestHeaders.Add("Authentication", string.Format("{0} {1}", properties["email"], properties["token"]));
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(ASCIIEncoding.ASCII.GetBytes(string.Format("{0}:", "pk-6y2WX6WhWxfQOg8ezKIUuiJxa7gC4sDvOipn9NFXlwz"))));
+                client.DefaultRequestHeaders.Add("Authentication", string.Format("{0} {1}", properties["email"], properties["token"]));
                 var cardJson = JsonConvert.SerializeObject(new {
                     card = new {
                         number = card.Number,
@@ -95,10 +94,10 @@ namespace GreenClean.Model
                 }
                 });
                 var postRequest = new StringContent(cardJson, Encoding.UTF8, "application/json");
-                var request = await client.PostAsync(paymayaUri, postRequest);
-                var content = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
+                var request = await client.PostAsync(paymentUri, postRequest);
                 if (request.IsSuccessStatusCode)
                 {
+                    var content = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var cardResponse = JsonConvert.DeserializeObject<Card>(content);
                     return new PaymentModel
                     {

@@ -77,6 +77,7 @@ namespace GreenClean
                 {
                     new DashboardMenuItem(navigator) { Id = 3, Title = "Profile", TargetType = new Profile(), VerticalLayout="FillAndExpand" },
                     new DashboardMenuItem(navigator)  { Id = 0, Title = "Places", TargetType = new PlacesPage(), VerticalLayout="FillAndExpand" },
+                    new DashboardMenuItem(navigator)  { Id = 0, Title = "Payments", TargetType = new PaymentPage(), VerticalLayout="FillAndExpand" },
                     new DashboardMenuItem(navigator)  { Id = 4, Title = "History", TargetType = new History(), VerticalLayout="FillAndExpand"},
                     new DashboardMenuItem(navigator)  { Id = 5, Title = "FAQ", TargetType = new Faq(), VerticalLayout="FillAndExpand"}
                 });
