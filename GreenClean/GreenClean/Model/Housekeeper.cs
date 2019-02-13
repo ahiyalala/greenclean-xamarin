@@ -30,6 +30,20 @@ namespace GreenClean.Model
         public string Rating { get; set; }
         [JsonProperty("image")]
         public string Image { get; set; }
+
+        [JsonIgnore]
+        public string RatingText => GetRatingText();
+
+        private string GetRatingText()
+        {
+            int _rating = 0;
+            if(int.TryParse(Rating, out _rating))
+            {
+                return (_rating == 0) ? "N/A" : _rating.ToString();
+            }
+
+            return "N/A";
+        }
         
         private string GetFullName()
         {

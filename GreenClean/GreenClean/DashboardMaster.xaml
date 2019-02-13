@@ -5,12 +5,18 @@
              x:Class="GreenClean.DashboardMaster"
              BackgroundColor="White"
              NavigationPage.HasNavigationBar="False">
-  <StackLayout>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
         <ListView x:Name="MenuItemsListView"
               SeparatorVisibility="None"
               HasUnevenRows="true"
               SelectionMode="None"
               BackgroundColor="White"
+              Grid.Row="0"
+              MinimumHeightRequest="75"
               ItemsSource="{Binding MenuItems}">
             <ListView.Header>
                 <Grid BackgroundColor="#FAED2C">
@@ -49,27 +55,29 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Label Margin="20,0,0,10" Text="Privacy Policy" TextColor="#FAED2C" FontSize="Small">
-            <Label.GestureRecognizers>
-                <TapGestureRecognizer Tapped="OpenPrivacyPolicy"/>
-            </Label.GestureRecognizers>
-        </Label>
-        <Label Margin="20,0,0,10" Text="Terms and Conditions" TextColor="#FAED2C" FontSize="Small">
-            <Label.GestureRecognizers>
-                <TapGestureRecognizer Tapped="OpenTnC"/>
-            </Label.GestureRecognizers>
-        </Label>
-        <Label Margin="20,0,0,10" Text="Contact Us" TextColor="#FAED2C" FontSize="Small">
-            <Label.GestureRecognizers>
-                <TapGestureRecognizer Tapped="OpenContactUs"/>
-            </Label.GestureRecognizers>
-        </Label>
-        <Frame Padding="20,40,20,40">
-            <Label Text="Logout" TextColor="Red" FontAttributes="Bold">
+        <StackLayout Grid.Row="1">
+            <Label Margin="20,0,0,10" Text="Privacy Policy" TextColor="#FAED2C" FontSize="Small">
                 <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="LogoutEvent" />
+                    <TapGestureRecognizer Tapped="OpenPrivacyPolicy"/>
                 </Label.GestureRecognizers>
             </Label>
-        </Frame>
-    </StackLayout>
+            <Label Margin="20,0,0,10" Text="Terms and Conditions" TextColor="#FAED2C" FontSize="Small">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OpenTnC"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Margin="20,0,0,10" Text="Contact Us" TextColor="#FAED2C" FontSize="Small">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OpenContactUs"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Frame Padding="20,40,20,40">
+                <Label Text="Logout" TextColor="Red" FontAttributes="Bold">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="LogoutEvent" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Frame>
+        </StackLayout>
+    </Grid>
 </ContentPage>

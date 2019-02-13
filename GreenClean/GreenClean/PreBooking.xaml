@@ -15,12 +15,12 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" Grid.Column="0" Padding="10">
             <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <StackLayout Grid.Column="0" Grid.Row="0" VerticalOptions="Center">
+            <StackLayout Grid.Column="0" Grid.Row="0" MinimumHeightRequest="100" VerticalOptions="Center">
                 <Label Text="You have selected" FontSize="Small" />
                 <Label x:Name="ServiceDescription" FontSize="Large" />
                 <Label x:Name="ServicePrice" FontSize="Medium"/>
@@ -130,7 +130,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="50" />
                             </Grid.RowDefinitions>
-                            <Label Text="No. of&#x0a;housekeepers" Grid.Column="0" FontSize="Medium" />
+                            <Label Text="Housekeepers" Grid.Column="0" FontSize="Medium" />
                             <StackLayout Grid.Column="1" Orientation="Horizontal">
                                 <Frame Padding="0" HorizontalOptions="Start" VerticalOptions="Center" BorderColor="#4CAF50" x:Name="Sub" WidthRequest="30" HeightRequest="30" CornerRadius="15" HasShadow="False">
                                     <Frame.GestureRecognizers>
