@@ -45,11 +45,6 @@ namespace GreenClean
 
                 SmsCommand = new Command(() =>
                 {
-                    Device.OpenUri(new Uri(string.Format("sms:{0}", Mobile)));
-                });
-
-                LandlineCommand = new Command(() =>
-                {
                     Device.OpenUri(new Uri(string.Format("tel:{0}", Mobile)));
                 });
             }

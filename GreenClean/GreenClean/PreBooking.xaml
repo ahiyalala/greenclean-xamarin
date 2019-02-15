@@ -130,7 +130,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="50" />
                             </Grid.RowDefinitions>
-                            <Label Text="Housekeepers" Grid.Column="0" FontSize="Medium" />
+                            <Label Text="Housekeeper" Grid.Column="0" FontSize="Medium" />
                             <StackLayout Grid.Column="1" Orientation="Horizontal">
                                 <Frame Padding="0" HorizontalOptions="Start" VerticalOptions="Center" BorderColor="#4CAF50" x:Name="Sub" WidthRequest="30" HeightRequest="30" CornerRadius="15" HasShadow="False">
                                     <Frame.GestureRecognizers>
