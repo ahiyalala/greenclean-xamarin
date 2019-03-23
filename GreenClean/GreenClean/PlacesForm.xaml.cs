@@ -54,7 +54,7 @@ namespace GreenClean
             StreetAddress.Text = obj.StreetName;
             BarangayText.Text = obj.Barangay;
             CityText.Text = obj.City;
-            Send.Text = "Update";
+            Send.IsVisible = false;
             places = obj;
             Fields = new List<Entry>
             {
@@ -64,6 +64,8 @@ namespace GreenClean
             City.IsVisible = false;
             BarangayText.IsVisible = true;
             CityText.IsVisible = true;
+            PlaceName.IsEnabled = false;
+            StreetAddress.IsEnabled = false;
         }
 
         public void OnFocus(object sender, FocusEventArgs args)
