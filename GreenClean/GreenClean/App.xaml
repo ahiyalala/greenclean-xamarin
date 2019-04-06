@@ -1,8 +1,16 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GreenClean.App">
 	<Application.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow">
+                <Setter.Value>
+                    <OnPlatform iOS="False"
+                                Android="True" x:TypeArguments="x:Boolean" />
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style TargetType="NavigationPage">
             <Setter Property="BarBackgroundColor" Value="{DynamicResource NavColor}" />
             <Setter Property="BarTextColor" Value="{DynamicResource NavTextColor}" />

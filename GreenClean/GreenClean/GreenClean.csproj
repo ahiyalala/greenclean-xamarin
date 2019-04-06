@@ -19,6 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Remove="Assets\Styles\Forms %28copy%29.css" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Assets\baseline-phone-24px.svg" />
     <EmbeddedResource Include="Assets\cleaninglady.jpg" />
     <EmbeddedResource Include="Assets\homelogo.png" />

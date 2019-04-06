@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:GreenClean"
@@ -15,7 +15,7 @@
                 
             </Frame>
             <StackLayout AbsoluteLayout.LayoutBounds="0.5,0.3,350,500"  AbsoluteLayout.LayoutFlags="PositionProportional" >
-                <Frame HorizontalOptions="CenterAndExpand" Margin="0,0,0,20" HeightRequest="80" BackgroundColor="Transparent" Padding="0,0,0,0">
+                <Frame HorizontalOptions="CenterAndExpand" Margin="0,0,0,20" HeightRequest="80" BackgroundColor="Transparent" Padding="0,0,0,0" HasShadow="false">
                     <Image x:Name="Logo" HorizontalOptions="Center" />
                 </Frame>
                 <Frame Padding="20,20,20,40">
