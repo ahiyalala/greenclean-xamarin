@@ -3,22 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:GreenClean"
              x:Class="GreenClean.MainPage"
-             BackgroundColor="#FAED2C"
+             BackgroundColor="#FFFFFF"
              NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Content>
         <AbsoluteLayout>
-            <Frame AbsoluteLayout.LayoutBounds="0,0,1,1" Padding="0,0,0,0" AbsoluteLayout.LayoutFlags="All" HasShadow="False" BackgroundColor="#fff675">
-                <Image x:Name="BannerLogin" Aspect="AspectFill" />
-            </Frame>
-            <Frame x:Name="OverlayFrame" AbsoluteLayout.LayoutBounds="0,0,1,0.5" Padding="0,0,0,0" AbsoluteLayout.LayoutFlags="All" HasShadow="False">
-                
-            </Frame>
             <StackLayout AbsoluteLayout.LayoutBounds="0.5,0.3,350,500"  AbsoluteLayout.LayoutFlags="PositionProportional" >
                 <Frame HorizontalOptions="CenterAndExpand" Margin="0,0,0,20" HeightRequest="80" BackgroundColor="Transparent" Padding="0,0,0,0" HasShadow="false">
                     <Image x:Name="Logo" HorizontalOptions="Center" />
                 </Frame>
-                <Frame Padding="20,20,20,40">
+                <Frame Padding="20,20,20,40" HasShadow="False">
                     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                         <Label x:Name="Message" HorizontalTextAlignment="Center" />
                         <Entry WidthRequest="300" x:Name="Username" Placeholder="Email-address" Keyboard="Email" HorizontalTextAlignment="Center" HorizontalOptions="Center"></Entry>

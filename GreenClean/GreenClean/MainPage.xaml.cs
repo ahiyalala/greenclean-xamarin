@@ -21,9 +21,7 @@ namespace GreenClean
 		{
 			InitializeComponent();
             client = new HttpClient();
-            BannerLogin.Source = ImageSource.FromResource("GreenClean.Assets.cleaninglady.jpg");
             Logo.Source = ImageSource.FromResource("GreenClean.Assets.homelogo.png");
-            OverlayFrame.BackgroundColor = Color.FromRgba(255, 255, 255, 0.5);
 		}
         
         async void OnLogin(object sender, EventArgs e)
