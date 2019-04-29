@@ -30,6 +30,12 @@
                             </Frame.GestureRecognizers>
                             <Label Text="Sign up" WidthRequest="300" TextColor="#FAED2C" HorizontalTextAlignment="Center" />
                         </Frame>
+                        <Label Margin="0,20,0,10" HorizontalOptions="Center">
+                            <Label.Text>Forgot password?</Label.Text>
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ToForgotPassword" />
+                            </Label.GestureRecognizers>
+                        </Label>
                     </StackLayout>
                 </Frame>
             </StackLayout>

@@ -99,12 +99,12 @@ namespace GreenClean
 
         private async void OpenTnC(object sender, EventArgs args)
         {
-            await Navigation.PushModalAsync(new TermsAndConditions(), false);
+            await Navigation.PushAsync(new TermsAndConditions(), false);
         }
 
         private async void OpenPrivacyPolicy(object sender, EventArgs args)
         {
-            await Navigation.PushModalAsync(new PrivacyPolicy(), false);
+            await Navigation.PushAsync(new PrivacyPolicy(), false);
         }
 
         bool CheckIfThereIsNull()

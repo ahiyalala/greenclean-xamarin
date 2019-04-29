@@ -62,5 +62,10 @@ namespace GreenClean
         {
             await Navigation.PushAsync(new SignupPageSecurity(),true);
         }
+
+        async void ToForgotPassword(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ForgotPassword(), true);
+        }
 	}
 }
