@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GreenClean.SignupPageSecurity">
@@ -16,11 +16,10 @@
                     <Picker.Items>
                         <x:String>Male</x:String>
                         <x:String>Female</x:String>
+                        <x:String>Doesn't prefer to specify</x:String>
                     </Picker.Items>
                 </Picker>
                 <Entry Placeholder="9171234567" Keyboard="Numeric" x:Name="Mobile" ReturnType="Next" Unfocused="ResetView"/>
-                <Label Margin="5,0,0,-15">Birthday</Label>
-                <DatePicker x:Name="BirthDate" Format="yyyy-MM-dd" />
                 <Entry Placeholder="your_email@example.com" Keyboard="Email" x:Name="Email" ReturnType="Next" Unfocused="ResetView"/>
                 <Entry Placeholder="Password" x:Name="Password" IsPassword="True" ReturnType="Next" />
                 <Entry Placeholder="Re-type password" x:Name="RetypePassword" IsPassword="True" ReturnType="Done" Unfocused="ResetView" />

@@ -19,7 +19,6 @@ namespace GreenClean
 		public SignupPageSecurity ()
 		{
             InitializeComponent ();
-            BirthDate.SetValue(DatePicker.MaximumDateProperty, DateTime.Now.AddYears(-10));
             controls = new List<Entry>
             {
                 FirstName,LastName,Email,Password,Mobile
@@ -43,12 +42,6 @@ namespace GreenClean
         {
             SubmitButton.IsEnabled = false;
             InfoMessage.IsVisible = false;
-            if(Gender.SelectedIndex < 0)
-            {
-                await DisplayAlert("Required field", "Select a gender", "OK");
-                SubmitButton.IsEnabled = true;
-                return;
-            }
 
 
             if (CheckIfThereIsNull())
@@ -74,8 +67,8 @@ namespace GreenClean
                     FirstName = FirstName.Text,
                     MiddleName = MiddleName.Text,
                     LastName = LastName.Text,
-                    BirthDate = BirthDate.Date.ToString("yyyy-MM-dd"),
                     EmailAddress = Email.Text,
+                    BirthDate = null,
                     Gender = Gender.Items[Gender.SelectedIndex],
                     Password = Bcr.BCrypt.HashPassword(Password.Text),
                     ContactNumber = Mobile.Text
