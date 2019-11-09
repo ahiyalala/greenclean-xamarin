@@ -26,7 +26,7 @@ namespace GreenClean
 
             FirstName.Completed += (sender, e) => MiddleName.Focus();
             MiddleName.Completed += (sender, e) => LastName.Focus();
-            LastName.Completed += (s, e) => Gender.Focus();
+            LastName.Completed += (s, e) => Mobile.Focus();
             Mobile.Completed += (s, e) => Email.Focus();
             Email.Completed += (s, e) => Password.Focus();
             Password.Completed += (s, e) => RetypePassword.Focus();
@@ -42,11 +42,6 @@ namespace GreenClean
         {
             SubmitButton.IsEnabled = false;
             InfoMessage.IsVisible = false;
-            int SelectedIndex = 2;
-            if (Gender.SelectedIndex >= 0)
-            {
-                SelectedIndex = Gender.SelectedIndex;
-            }
 
 
             if (CheckIfThereIsNull())
@@ -74,7 +69,6 @@ namespace GreenClean
                     LastName = LastName.Text,
                     EmailAddress = Email.Text,
                     BirthDate = null,
-                    Gender = Gender.Items[SelectedIndex],
                     Password = Bcr.BCrypt.HashPassword(Password.Text),
                     ContactNumber = Mobile.Text
                 };

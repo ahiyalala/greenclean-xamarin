@@ -28,7 +28,6 @@ namespace GreenClean
             {
                 Navigation = Navigation
             };
-            Birthday.Text = Customer.Current.BirthDate;
             Email.Text = Customer.Current.EmailAddress;
             Form.IsVisible = true;
             Indicator.IsVisible = false;

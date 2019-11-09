@@ -12,13 +12,6 @@
                 <Entry Placeholder="First Name" x:Name="FirstName" ReturnType="Next" Unfocused="ResetView"/>
                 <Entry Placeholder="Middle Name" x:Name="MiddleName" ReturnType="Next" Unfocused="ResetView"/>
                 <Entry Placeholder="Last Name" x:Name="LastName" ReturnType="Next" Unfocused="ResetView"/>
-                <Picker x:Name="Gender" Title="Gender">
-                    <Picker.Items>
-                        <x:String>Male</x:String>
-                        <x:String>Female</x:String>
-                        <x:String>Doesn't prefer to specify</x:String>
-                    </Picker.Items>
-                </Picker>
                 <Entry Placeholder="9171234567" Keyboard="Numeric" x:Name="Mobile" ReturnType="Next" Unfocused="ResetView"/>
                 <Entry Placeholder="your_email@example.com" Keyboard="Email" x:Name="Email" ReturnType="Next" Unfocused="ResetView"/>
                 <Entry Placeholder="Password" x:Name="Password" IsPassword="True" ReturnType="Next" />
